@@ -1,5 +1,8 @@
 using System.Data.Entity.ModelConfiguration.Conventions;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using SportData.Data.Entities;
+using SportData.Data.Entities.Identity;
 
 namespace SportData.Data
 {
@@ -7,13 +10,23 @@ namespace SportData.Data
     using System.Data.Entity;
     using System.Linq;
 
-    public class SportDataContext : DbContext
+    public class SportDataContext : IdentityDbContext<ApplicationUser, ApplicationRole, long, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>
     {
         public SportDataContext()
             : base("name=SportDataContext")
         {
         }
 
+        public static SportDataContext Create()
+        {
+            return new SportDataContext();
+        }
+
+        public DbSet<ApplicationUserLogin> UserLogins { get; set; }
+
+        public DbSet<ApplicationUserClaim> UserClaims { get; set; }
+
+        public DbSet<ApplicationUserRole> UserRoles { get; set; }
 
         public virtual DbSet<Match> Matches { get; set; }
 
@@ -47,13 +60,29 @@ namespace SportData.Data
 
         public virtual DbSet<Season> Seasons { get; set; }
 
-        public virtual DbSet<UserAccount> UserAccounts { get; set; }
+        public virtual DbSet<CultureDescription> CultureDescription { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<OneToOneConstraintIntroductionConvention>();
+
+            modelBuilder.Entity<ApplicationUser>().ToTable("IdentityUsers");
+            modelBuilder.Entity<ApplicationUser>().Property(u => u.PasswordHash).HasMaxLength(500);
+            modelBuilder.Entity<ApplicationUser>().Property(u => u.SecurityStamp).HasMaxLength(500);
+            modelBuilder.Entity<ApplicationUser>().Property(u => u.PhoneNumber).HasMaxLength(50);
+
+            modelBuilder.Entity<ApplicationRole>().ToTable("IdentityRoles");
+            modelBuilder.Entity<ApplicationUserRole>().ToTable("IdentityUsersRoles");
+            modelBuilder.Entity<ApplicationUserLogin>().ToTable("IdentityUsersLogins");
+            modelBuilder.Entity<ApplicationUserClaim>().ToTable("IdentityUsersClaims");
+            modelBuilder.Entity<ApplicationUserClaim>().Property(u => u.ClaimType).HasMaxLength(150);
+            modelBuilder.Entity<ApplicationUserClaim>().Property(u => u.ClaimValue).HasMaxLength(500);
+
+
             //modelBuilder.Entity<MatchEvent>()
             //            .Property(p=>p.MatchId)
             //            .

@@ -11,7 +11,7 @@ namespace SportData.Data.Entities
         public int TeamId { get; set; }
 
         [Column(Order = 1), Key]
-        public string Culture { get; set; }
+        public int CultureId { get; set; }
 
         [Required]
         [MaxLength(250)]
@@ -23,5 +23,7 @@ namespace SportData.Data.Entities
         public DateTime CDate { get; set; }
 
         public virtual FootballTeam Team { get; set; }
+
+        public virtual CultureDescription Culture { get; set; }
     }
 }

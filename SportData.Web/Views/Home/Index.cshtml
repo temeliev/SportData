@@ -1,31 +1,422 @@
-﻿@{
+﻿@model SportData.Web.Models.HomeViewModel
+@{
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<div class="col-lg-12">
+    <div class="jumbotron">
+        <h1>Online Football Results</h1>
+        <p class="lead"></p>
+        <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <div class="col-lg-2">
+
+        <ul class="nav nav-tabs nav-stacked">
+            <li>@Html.ActionLink("Team1", "Index", "Home")</li>
+            <li>@Html.ActionLink("Team2", "About", "Home")</li>
+            <li>@Html.ActionLink("Team3", "Contact", "Home")</li>
+        </ul>
+
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+
+
+    @*<div class="col-lg-2">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav nav-tabs nav-stacked">
+                            <li>@Html.ActionLink("Team1", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Team2", "About", "Home")</li>
+                            <li>@Html.ActionLink("Team3", "Contact", "Home")</li>
+                        </ul>
+                    </div>
+                </div>
+
+
+        </div>*@
+    
+    <div class="col-lg-8">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+            <li><a href="#profile" data-toggle="tab">Profile</a></li>
+            <li class="disabled"><a>Disabled</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="home">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Page</th>
+                                <th>Visits</th>
+                                <th>% New Visits</th>
+                                <th>Revenue</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>/index.html</td>
+                                <td>1265</td>
+                                <td>32.3%</td>
+                                <td>$321.33</td>
+                            </tr>
+                            <tr>
+                                <td>/about.html</td>
+                                <td>261</td>
+                                <td>33.3%</td>
+                                <td>$234.12</td>
+                            </tr>
+                            <tr>
+                                <td>/sales.html</td>
+                                <td>665</td>
+                                <td>21.3%</td>
+                                <td>$16.34</td>
+                            </tr>
+                            <tr>
+                                <td>/blog.html</td>
+                                <td>9516</td>
+                                <td>89.3%</td>
+                                <td>$1644.43</td>
+                            </tr>
+                            <tr>
+                                <td>/404.html</td>
+                                <td>23</td>
+                                <td>34.3%</td>
+                                <td>$23.52</td>
+                            </tr>
+                            <tr>
+                                <td>/services.html</td>
+                                <td>421</td>
+                                <td>60.3%</td>
+                                <td>$724.32</td>
+                            </tr>
+                            <tr>
+                                <td>/blog/post.html</td>
+                                <td>1233</td>
+                                <td>93.2%</td>
+                                <td>$126.34</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="profile">
+                <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+            </div>
+            <div class="tab-pane fade" id="dropdown1">
+                <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>
+            </div>
+            <div class="tab-pane fade" id="dropdown2">
+                <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.</p>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+
+    <ul class="nav nav-pills nav-stacked col-lg-2">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Profile</a></li>
+        <li class="disabled"><a href="#">Disabled</a></li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                Dropdown <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+            </ul>
+        </li>
+    </ul>
 </div>
+@*<div id="wrapper">
+
+    
+    <div id="page-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Dashboard <small>Statistics Overview</small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li class="active">
+                            <i class="fa fa-dashboard"></i> Dashboard
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="alert alert-info alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <i class="fa fa-info-circle"></i>  <strong>Like SB Admin?</strong> Try out <a href="http://startbootstrap.com/template-overviews/sb-admin-2" class="alert-link">SB Admin 2</a> for additional features!
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-comments fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">26</div>
+                                    <div>New Comments!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-tasks fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">12</div>
+                                    <div>New Tasks!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-shopping-cart fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">124</div>
+                                    <div>New Orders!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-support fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">13</div>
+                                    <div>Support Tickets!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Area Chart</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div id="morris-area-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-long-arrow-right fa-fw"></i> Donut Chart</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div id="morris-donut-chart"></div>
+                            <div class="text-right">
+                                <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Tasks Panel</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item">
+                                    <span class="badge">just now</span>
+                                    <i class="fa fa-fw fa-calendar"></i> Calendar updated
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <span class="badge">4 minutes ago</span>
+                                    <i class="fa fa-fw fa-comment"></i> Commented on a post
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <span class="badge">23 minutes ago</span>
+                                    <i class="fa fa-fw fa-truck"></i> Order 392 shipped
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <span class="badge">46 minutes ago</span>
+                                    <i class="fa fa-fw fa-money"></i> Invoice 653 has been paid
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <span class="badge">1 hour ago</span>
+                                    <i class="fa fa-fw fa-user"></i> A new user has been added
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <span class="badge">2 hours ago</span>
+                                    <i class="fa fa-fw fa-check"></i> Completed task: "pick up dry cleaning"
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <span class="badge">yesterday</span>
+                                    <i class="fa fa-fw fa-globe"></i> Saved the world
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <span class="badge">two days ago</span>
+                                    <i class="fa fa-fw fa-check"></i> Completed task: "fix error on sales page"
+                                </a>
+                            </div>
+                            <div class="text-right">
+                                <a href="#">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Transactions Panel</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Order #</th>
+                                            <th>Order Date</th>
+                                            <th>Order Time</th>
+                                            <th>Amount (USD)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>3326</td>
+                                            <td>10/21/2013</td>
+                                            <td>3:29 PM</td>
+                                            <td>$321.33</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3325</td>
+                                            <td>10/21/2013</td>
+                                            <td>3:20 PM</td>
+                                            <td>$234.34</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3324</td>
+                                            <td>10/21/2013</td>
+                                            <td>3:03 PM</td>
+                                            <td>$724.17</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3323</td>
+                                            <td>10/21/2013</td>
+                                            <td>3:00 PM</td>
+                                            <td>$23.71</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3322</td>
+                                            <td>10/21/2013</td>
+                                            <td>2:49 PM</td>
+                                            <td>$8345.23</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3321</td>
+                                            <td>10/21/2013</td>
+                                            <td>2:23 PM</td>
+                                            <td>$245.12</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3320</td>
+                                            <td>10/21/2013</td>
+                                            <td>2:15 PM</td>
+                                            <td>$5663.54</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3319</td>
+                                            <td>10/21/2013</td>
+                                            <td>2:13 PM</td>
+                                            <td>$943.45</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-right">
+                                <a href="#">View All Transactions <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>*@
+<!-- /#wrapper -->

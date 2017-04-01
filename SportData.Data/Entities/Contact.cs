@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using SportData.Data.Entities.Identity;
 
 namespace SportData.Data.Entities
 {
@@ -10,7 +11,7 @@ namespace SportData.Data.Entities
     {
         public Contact()
         {
-            this.UserAccounts = new List<UserAccount>();
+            this.UserAccounts = new List<ApplicationUser>();
         }
 
         [Key]
@@ -42,12 +43,10 @@ namespace SportData.Data.Entities
 
         public DateTime DateOfBirth { get; set; }
 
-        [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime CDate { get; set; }
+        public DateTime? CDate { get; set; }
 
         public virtual AddressInfo AddressInfo { get; set; }
 
-        public ICollection<UserAccount> UserAccounts { get; set; }
+        public ICollection<ApplicationUser> UserAccounts { get; set; }
     }
 }
