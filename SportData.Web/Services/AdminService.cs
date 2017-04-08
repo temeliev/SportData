@@ -1,11 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
+using SportData.Data;
 using SportData.Data.Entities;
 using SportData.Data.Enums;
 using SportData.Web.Interfaces;
+using SportData.Web.Models;
 using SportData.Web.Models.Admin;
 
 namespace SportData.Web.Services
@@ -18,7 +22,7 @@ namespace SportData.Web.Services
 
         public IEnumerable<CountryViewModel> GetCountries()
         {
-            return UnitOfWork.LocationCultures.Where(x => x.Location.ParentId != null).ProjectTo<CountryViewModel>().AsEnumerable();
+            return UnitOfWork.Locations.Where(x => x.ParentId != null).ProjectTo<CountryViewModel>().AsEnumerable();
         }
 
         public List<SelectListItem> GetMainLocations()
@@ -39,6 +43,113 @@ namespace SportData.Web.Services
                     Text = s.Name,
                     Value = s.Id.ToString()
                 }).ToList();
+        }
+
+        public CountryViewModel GetCountryViewById(int countryId)
+        {
+            var countryFromDb = UnitOfWork.Locations.FirstOrDefault(x => x.Id == countryId);
+            if (countryFromDb == null)
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            var vm = AutoMapper.Mapper.Map<CountryViewModel>(countryFromDb);
+
+            return vm;
+        }
+
+        public CountryCultureViewModel GetCountryCultureViewById(int countryId, int cultureId)
+        {
+            var countryFromDb = UnitOfWork.LocationCultures.FirstOrDefault(x => x.LocationId == countryId && x.CultureId == cultureId);
+            if (countryFromDb == null)
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            var vm = AutoMapper.Mapper.Map<CountryCultureViewModel>(countryFromDb);
+
+            return vm;
+        }
+
+        public void UpdateCountry(CountryViewModel model)
+        {
+            var countryFromDb = UnitOfWork.Locations.FirstOrDefault(x => x.Id == model.Id);
+
+            if (countryFromDb == null)
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            countryFromDb.Name = model.Name;
+            countryFromDb.LocationImageUrl = model.LocationImageUrl;
+            countryFromDb.ParentId = model.ParentId;
+            countryFromDb.Abbreviation = model.Abbreviation;
+
+            UnitOfWork.SaveChanges();
+        }
+
+        public void UpdateCountryCulture(CountryCultureViewModel model)
+        {
+            var countryCultureFromDb =
+                UnitOfWork.LocationCultures.FirstOrDefault(
+                    x => x.LocationId == model.CountryId && x.CultureId == model.CultureId);
+
+            if (countryCultureFromDb == null)
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            countryCultureFromDb.Name = model.CountryName;
+            //countryCultureFromDb.CultureId = model.CultureId;
+
+            UnitOfWork.SaveChanges();
+        }
+
+        public int AddCountry(CountryViewModel model)
+        {
+            Location location = AutoMapper.Mapper.Map<Location>(model);
+            UnitOfWork.Locations.Add(location);
+            UnitOfWork.SaveChanges();
+            return location.Id;
+        }
+
+        public void AddCountryCulture(CountryCultureViewModel model)
+        {
+            LocationCulture location = AutoMapper.Mapper.Map<LocationCulture>(model);
+            location.CDate = DateTime.Now;
+            UnitOfWork.LocationCultures.Add(location);
+            UnitOfWork.SaveChanges();
+            UnitOfWork.ReloadContext();
+        }
+
+        public void DeleteCountry(int countryId)
+        {
+            var location = UnitOfWork.Locations.FirstOrDefault(s => s.Id == countryId);
+            if (location == null)
+            {
+                throw new ArgumentNullException("There is no such item in database");
+            }
+
+            if (location.Cultures.Count > 0)
+            {
+                UnitOfWork.LocationCultures.RemoveRange(location.Cultures);
+            }
+
+            UnitOfWork.Locations.Remove(location);
+
+            UnitOfWork.SaveChanges();
+        }
+
+        public void DeleteCountryCulture(int countryId, int cultureId)
+        {
+            var countryCulture = UnitOfWork.LocationCultures.FirstOrDefault(culture => culture.LocationId == countryId && culture.CultureId == cultureId);
+            if (countryCulture == null)
+            {
+                throw new ArgumentNullException("There is no such item in database");
+            }
+
+            UnitOfWork.LocationCultures.Remove(countryCulture);
+            UnitOfWork.SaveChanges();
         }
     }
 }

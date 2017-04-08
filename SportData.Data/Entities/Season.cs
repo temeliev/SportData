@@ -7,11 +7,6 @@ namespace SportData.Data.Entities
     [Table("Seasons")]
     public class Season
     {
-        public Season()
-        {
-            this.Matches = new HashSet<Match>();
-        }
-
         [Key]
         public int Id { get; set; }
 
@@ -20,6 +15,6 @@ namespace SportData.Data.Entities
         [Column(TypeName = "nvarchar")]
         public string Name { get; set; }
 
-        public ICollection<Match> Matches { get; set; }
+        public virtual ICollection<Match> Matches { get; set; }
     }
 }

@@ -9,6 +9,6 @@ namespace SportData.Web.Services
             this.UnitOfWork = unitOfWork;
         }
 
-        protected IUnitOfWork UnitOfWork { get; }
+        protected IUnitOfWork UnitOfWork { get; set; }
     }
 }

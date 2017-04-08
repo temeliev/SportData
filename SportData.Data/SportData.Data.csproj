@@ -90,6 +90,7 @@
     <Compile Include="Enums\CultureType.cs" />
     <Compile Include="Enums\MatchStatus.cs" />
     <Compile Include="Entities\Identity\ApplicationUser.cs" />
+    <Compile Include="Extensions\DbContextExtensions.cs" />
     <Compile Include="Migrations\201703181045565_Initial.cs" />
     <Compile Include="Migrations\201703181045565_Initial.Designer.cs">
       <DependentUpon>201703181045565_Initial.cs</DependentUpon>
@@ -117,6 +118,10 @@
     <Compile Include="Migrations\201704011102521_CDateTest.cs" />
     <Compile Include="Migrations\201704011102521_CDateTest.Designer.cs">
       <DependentUpon>201704011102521_CDateTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704020836580_PropertyNameAdd.cs" />
+    <Compile Include="Migrations\201704020836580_PropertyNameAdd.Designer.cs">
+      <DependentUpon>201704020836580_PropertyNameAdd.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -147,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704011102521_CDateTest.resx">
       <DependentUpon>201704011102521_CDateTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704020836580_PropertyNameAdd.resx">
+      <DependentUpon>201704020836580_PropertyNameAdd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

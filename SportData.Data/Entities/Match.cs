@@ -8,11 +8,6 @@ namespace SportData.Data.Entities
     [Table("Matches")]
     public class Match
     {
-        public Match()
-        {
-            this.Events = new HashSet<MatchEvent>();
-        }
-
         [Key]
         public long Id { get; set; }
 
@@ -52,6 +47,6 @@ namespace SportData.Data.Entities
 
         public virtual Season Season { get; set; }
 
-        public ICollection<MatchEvent> Events { get; set; }
+        public virtual ICollection<MatchEvent> Events { get; set; }
     }
 }

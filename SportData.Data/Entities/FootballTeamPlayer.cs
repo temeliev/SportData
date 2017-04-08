@@ -24,8 +24,8 @@ namespace SportData.Data.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime CDate { get; set; }
 
-        public FootballTeam Team { get; set; }
+        public virtual FootballTeam Team { get; set; }
 
-        public FootballPlayer Player { get; set; }
+        public virtual FootballPlayer Player { get; set; }
     }
 }

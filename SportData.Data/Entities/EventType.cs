@@ -7,11 +7,6 @@ namespace SportData.Data.Entities
     [Table("EventTypes")]
     public class EventType
     {
-        public EventType()
-        {
-            this.MatchEvents = new HashSet<MatchEvent>();
-        }
-
         [Key]
         public int Id { get; set; }
 
@@ -20,6 +15,6 @@ namespace SportData.Data.Entities
         [Required]
         public string Name { get; set; }
 
-        public ICollection<MatchEvent> MatchEvents { get; set; }
+        public virtual ICollection<MatchEvent> MatchEvents { get; set; }
     }
 }

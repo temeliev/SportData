@@ -8,15 +8,22 @@ namespace SportData.Data.Entities
     [Table("FootballPlayers")]
     public class FootballPlayer
     {
-        public FootballPlayer()
-        {
-            this.MainPlayerEvents = new HashSet<MatchEvent>();
-            this.SecondaryPlayerEvents = new HashSet<MatchEvent>();
-            this.TeamsHistory = new HashSet<FootballTeamPlayer>();
-        }
-
         [Key]
         public int Id { get; set; }
+
+        [Required]
+        [MaxLength(250)]
+        [Column(TypeName = "nvarchar")]
+        public string FirstName { get; set; }
+
+        [MaxLength(250)]
+        [Column(TypeName = "nvarchar")]
+        public string SecondName { get; set; }
+
+        [Required]
+        [MaxLength(250)]
+        [Column(TypeName = "nvarchar")]
+        public string LastName { get; set; }
 
         public int NationalityId { get; set; }
 
@@ -31,11 +38,11 @@ namespace SportData.Data.Entities
         public virtual Location Nationality { get; set; }
 
         [InverseProperty("MainPlayer")]
-        public ICollection<MatchEvent> MainPlayerEvents { get; set; }
+        public virtual ICollection<MatchEvent> MainPlayerEvents { get; set; }
 
         [InverseProperty("SecondaryPlayer")]
-        public ICollection<MatchEvent> SecondaryPlayerEvents { get; set; }
+        public virtual ICollection<MatchEvent> SecondaryPlayerEvents { get; set; }
 
-        public ICollection<FootballTeamPlayer> TeamsHistory { get; set; }
+        public virtual ICollection<FootballTeamPlayer> TeamsHistory { get; set; }
     }
 }

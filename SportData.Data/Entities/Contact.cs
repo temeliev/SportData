@@ -9,11 +9,6 @@ namespace SportData.Data.Entities
     [Table("Contacts")]
     public class Contact
     {
-        public Contact()
-        {
-            this.UserAccounts = new List<ApplicationUser>();
-        }
-
         [Key]
         public long Id { get; set; }
 
@@ -47,6 +42,6 @@ namespace SportData.Data.Entities
 
         public virtual AddressInfo AddressInfo { get; set; }
 
-        public ICollection<ApplicationUser> UserAccounts { get; set; }
+        public virtual ICollection<ApplicationUser> UserAccounts { get; set; }
     }
 }

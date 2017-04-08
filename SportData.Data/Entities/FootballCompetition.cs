@@ -7,14 +7,13 @@ namespace SportData.Data.Entities
     [Table("FootballCompetitions")]
     public class FootballCompetition
     {
-        public FootballCompetition()
-        {
-            this.Cultures = new HashSet<FootballCompetitionCulture>();
-            this.Matches = new HashSet<Match>();
-        }
-
         [Key]
         public int Id { get; set; }
+
+        [Required]
+        [MaxLength(250)]
+        [Column(TypeName = "nvarchar")]
+        public string Name { get; set; }
 
         public int? OriginalCompetitionId { get; set; }
 
@@ -28,8 +27,8 @@ namespace SportData.Data.Entities
 
         public virtual Location Location { get; set; }
 
-        public ICollection<FootballCompetitionCulture> Cultures { get; set; }
+        public virtual ICollection<FootballCompetitionCulture> Cultures { get; set; }
 
-        public ICollection<Match> Matches { get; set; }
+        public virtual ICollection<Match> Matches { get; set; }
     }
 }

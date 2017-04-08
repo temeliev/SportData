@@ -1,0 +1,74 @@
+﻿@model SportData.Web.Models.Admin.CountryViewModel
+@{
+    ViewBag.Title = "EditCountry";
+}
+
+<div class="row" Id="test">
+    @Html.Partial("_AdminList")
+    <div class="col-lg-8 col-md-8 col-sm-7">
+        @using (Html.BeginForm("EditCountry", "Admin", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+        {
+            <fieldset>
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(x => x.Id)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.EditorFor(x => x.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Наименование" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputImageUrl" class="col-lg-2 control-label">Иконка</label>
+                    <div class="col-lg-10">
+                        <input type="url" class="form-control" id="inputImageUrl" placeholder="Линк">
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Abbreviation, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.EditorFor(x => x.Abbreviation, new { htmlAttributes = new { @class = "form-control", @placeholder = "Наименование" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="location" class="col-lg-2 control-label">Локация</label>
+                    <div class="col-lg-10">
+                        @Html.DropDownListFor(m => m.ParentId, new SelectList(ViewBag.Locations, "Value", "Text"), new { @class = "form-control", @id = "location" })
+                    </div>
+                </div>
+                @Html.ActionLink("Нов", "AddCountryCulture", "Admin", new { countryId = Model.Id }, new { @class = "btn btn-primary btn-sm" })
+                <table class="table table-striped table-hover ">
+                    <thead>
+                        <tr>
+                            <th>Име</th>
+                            <th>Език</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Cultures)
+                        {
+                            <tr>
+                                @Html.HiddenFor(m => item.CountryId)
+                                <td>@item.CountryName</td>
+                                <td>@item.CultureName</td>
+                                <td>@Html.ActionLink("Редакция", "EditCountryCulture", "Admin", new { countryId = @item.CountryId, cultureId = @item.CultureId }, new { @class = "" }) </td>
+                                @*<td>@Html.ActionLink("Изтрий", "DeleteCountryCulture", "Admin", new { countryId = @item.CountryId, cultureId = @item.CultureId }, new { @class = "deleteItem", id = "deleteItem", data_target = "#basic", data_toggle = "modal", data_countryid = "@item.CountryId", data_countryid_name = "countryId", data_culture_id = "@item.CultureId", data_culture_id_name = "cultureId" }) </td>*@
+                                <td>
+                                    <a id="deleteItem" class="deleteItem" data-target="#basic" data-toggle="modal" data-first-id="@item.CountryId" data-first-name="countryId" data-second-id="@item.CultureId" data-second-name="cultureId" href="#" controller-name ="Admin" action-name="DeleteCountryCulture">Изтрий</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="reset" class="btn btn-default">Изчисти</button>
+                        <button type="submit" class="btn btn-primary">Запази</button>
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>
+@Html.Partial("ModalConfirmationDialog")
+
+

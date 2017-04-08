@@ -1,5 +1,4 @@
-﻿@using System.Activities.Statements
-@model IEnumerable<SportData.Web.Models.Admin.CountryViewModel>
+﻿@model IEnumerable<SportData.Web.Models.Admin.CountryViewModel>
 
 @{
     ViewBag.Title = "Countries";
@@ -8,31 +7,35 @@
 <div class="row" Id="test">
     @Html.Partial("_AdminList")
     <div class="col-lg-8 col-md-8 col-sm-7">
-        @Html.ActionLink("Нов", "AddCountry", "Admin", new { @class = "btn btn-success" })
-        <table class="table table-striped table-hover ">
+        @Html.ActionLink("Нов", "AddCountry", "Admin", new { @class = "btn btn-primary btn-sm" })
+        <table class="table table-bordered table-hover">
             <thead>
-            <tr>
-                <th>Име</th>
-                <th>Локация</th>
-                <th>Език</th>
-                <th>Съкращение</th>
-            </tr>
+                <tr>
+                    <th>Име</th>
+                    <th>Локация</th>
+                    <th>Съкращение</th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
-            @foreach (var item in Model)
+                @foreach (var item in Model)
             {
-                <tr>
-                    <td>@item.CountryName</td>
-                    <td>@item.LocationName</td>
-                    <td>@item.CultureName</td>
-                    <td>@item.Abbreviation</td>
-                    <td>@Html.ActionLink("Редакция", "AddCountry", "Admin", new {@class = "btn btn-warning" }) </td>
-                    <td>@Html.ActionLink("Изтрий", "DeleteCountry", "Admin", new {@class = "btn btn-danger"}) </td>
-                </tr>
-            }
+                    <tr>
+                        @Html.HiddenFor(m => item.Id)
+                        <td>@item.Name</td>
+                        <td>@item.LocationName</td>
+                        @*<td>@item.CultureName</td>*@
+                        <td>@item.Abbreviation</td>
+                        <td>@Html.ActionLink("Редакция", "EditCountry", "Admin", new { countryId = @item.Id }, new { @class = "" }) </td>
+                        @*<td>@Html.ActionLink("Изтрий", "DeleteCountry", "Admin", new { countryId = @item.Id }, new { @class = "btn btn-warning" }) </td>*@
+                        @*<td>@Html.ActionLink("Изтрий", "", "", new { countryId = @item.Id }, new { @class = "deleteItem", id = "deleteItem", data_target = "#basic", data_toggle = "modal", data_id = "@item.Id", data_name = "countryId" }) </td>*@
+                        <td>
+                            <a id="deleteItem" class="deleteItem" data-target="#basic" data-toggle="modal" data-first-id="@item.Id" data-first-name="countryId" href="#" controller-name ="Admin" action-name="DeleteCountry">Изтрий</a>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
 </div>
-
-
+@Html.Partial("ModalConfirmationDialog")

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity.Core.Objects;
 using SportData.Data.Entities;
 
 namespace SportData.Web.Interfaces
@@ -14,5 +15,7 @@ namespace SportData.Web.Interfaces
         IRepository<CultureDescription> CultureDescription { get; }
 
         int SaveChanges();
+
+        void ReloadContext();
     }
 }

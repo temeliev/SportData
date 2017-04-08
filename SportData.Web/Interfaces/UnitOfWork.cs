@@ -1,12 +1,11 @@
-﻿using System.Linq;
-using SportData.Data;
+﻿using SportData.Data;
 using SportData.Data.Entities;
 
 namespace SportData.Web.Interfaces
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly SportDataContext _context;
+        private SportDataContext _context;
         private IRepository<Match> _matches;
         private IRepository<Location> _locations;
         private IRepository<LocationCulture> _locationCultures;
@@ -41,6 +40,11 @@ namespace SportData.Web.Interfaces
         public void Dispose()
         {
             this._context.Dispose();
+        }
+
+        public void ReloadContext()
+        {
+            this._context = new SportDataContext();
         }
     }
 }

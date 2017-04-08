@@ -7,15 +7,6 @@ namespace SportData.Data.Entities
     [Table("CultureDescription")]
     public class CultureDescription
     {
-        public CultureDescription()
-        {
-            this.LocationCultures = new HashSet<LocationCulture>();
-            this.FootballCompetitionCultures = new HashSet<FootballCompetitionCulture>();
-            this.FootballPlayerCultures = new HashSet<FootballPlayerCulture>();
-            this.FootballTeamCultures = new HashSet<FootballTeamCulture>();
-            this.MatchStatusCultures = new HashSet<MatchStatusCulture>();
-        }
-
         [Key]
         public int Id { get; set; }
 
@@ -29,14 +20,14 @@ namespace SportData.Data.Entities
         [Column(TypeName = "nvarchar")]
         public string ShowText { get; set; }
 
-        public ICollection<LocationCulture> LocationCultures { get; set; }
+        public virtual ICollection<LocationCulture> LocationCultures { get; set; }
 
-        public ICollection<FootballCompetitionCulture> FootballCompetitionCultures { get; set; }
+        public virtual ICollection<FootballCompetitionCulture> FootballCompetitionCultures { get; set; }
 
-        public ICollection<FootballPlayerCulture> FootballPlayerCultures { get; set; }
+        public virtual ICollection<FootballPlayerCulture> FootballPlayerCultures { get; set; }
 
-        public ICollection<FootballTeamCulture> FootballTeamCultures { get; set; }
+        public virtual ICollection<FootballTeamCulture> FootballTeamCultures { get; set; }
 
-        public ICollection<MatchStatusCulture> MatchStatusCultures { get; set; }
+        public virtual ICollection<MatchStatusCulture> MatchStatusCultures { get; set; }
     }
 }
