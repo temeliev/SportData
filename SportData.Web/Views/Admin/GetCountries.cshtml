@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<SportData.Web.Models.Admin.CountryViewModel>
 
 @{
-    ViewBag.Title = "Countries";
+    ViewBag.Title = "Държави";
 }
 
 <div class="row" Id="test">
@@ -24,11 +24,8 @@
                         @Html.HiddenFor(m => item.Id)
                         <td>@item.Name</td>
                         <td>@item.LocationName</td>
-                        @*<td>@item.CultureName</td>*@
                         <td>@item.Abbreviation</td>
                         <td>@Html.ActionLink("Редакция", "EditCountry", "Admin", new { countryId = @item.Id }, new { @class = "" }) </td>
-                        @*<td>@Html.ActionLink("Изтрий", "DeleteCountry", "Admin", new { countryId = @item.Id }, new { @class = "btn btn-warning" }) </td>*@
-                        @*<td>@Html.ActionLink("Изтрий", "", "", new { countryId = @item.Id }, new { @class = "deleteItem", id = "deleteItem", data_target = "#basic", data_toggle = "modal", data_id = "@item.Id", data_name = "countryId" }) </td>*@
                         <td>
                             <a id="deleteItem" class="deleteItem" data-target="#basic" data-toggle="modal" data-first-id="@item.Id" data-first-name="countryId" href="#" controller-name ="Admin" action-name="DeleteCountry">Изтрий</a>
                         </td>

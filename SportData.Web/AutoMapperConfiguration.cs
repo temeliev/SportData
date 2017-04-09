@@ -18,7 +18,6 @@ namespace SportData.Web
                 cfg.CreateMap<CountryCultureViewModel, LocationCulture>()
                     .ForMember(dst => dst.CultureId, opt => opt.MapFrom(src => src.CultureId))
                     .ForMember(dst => dst.LocationId, opt => opt.MapFrom(src => src.CountryId))
-                    //.ForMember(dst => dst.Culture.ShowText, opt => opt.MapFrom(src => src))
                     .ForMember(dst => dst.Name, opt => opt.MapFrom(src => src.CountryName));
 
                 cfg.CreateMap<Location, CountryViewModel>()
@@ -28,6 +27,17 @@ namespace SportData.Web
                     .ForMember(dst => dst.ParentId, opt => opt.MapFrom(src => src.ParentId));
 
                 cfg.CreateMap<CountryViewModel, Location>();
+
+                cfg.CreateMap<CompetitionViewModel, FootballCompetition>();
+                cfg.CreateMap<FootballCompetition, CompetitionViewModel>()
+                    .ForMember(dst => dst.LocationName, opt => opt.MapFrom(src => src.Location.Name));
+
+                cfg.CreateMap<CompetitionCultureViewModel, FootballCompetitionCulture>()
+                    .ForMember(dst => dst.Name, opt => opt.MapFrom(src => src.CompetitionName));
+
+                cfg.CreateMap<FootballCompetitionCulture, CompetitionCultureViewModel>()
+                    .ForMember(dst => dst.CompetitionName, opt => opt.MapFrom(src => src.Name))
+                    .ForMember(dst => dst.CultureName, opt => opt.MapFrom(src => src.Culture.ShowText));
             });
         }
     }

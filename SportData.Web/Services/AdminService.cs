@@ -20,6 +20,8 @@ namespace SportData.Web.Services
         {
         }
 
+        #region Country
+
         public IEnumerable<CountryViewModel> GetCountries()
         {
             return UnitOfWork.Locations.Where(x => x.ParentId != null).ProjectTo<CountryViewModel>().AsEnumerable();
@@ -28,6 +30,16 @@ namespace SportData.Web.Services
         public List<SelectListItem> GetMainLocations()
         {
             return UnitOfWork.LocationCultures.Where(x => x.Location.ParentId == null && x.CultureId == (int)CultureType.Bg)
+                .Select(s => new SelectListItem()
+                {
+                    Text = s.Name,
+                    Value = s.LocationId.ToString()
+                }).ToList();
+        }
+
+        public List<SelectListItem> GetAllLocations()
+        {
+            return UnitOfWork.LocationCultures.Where(x => x.CultureId == (int)CultureType.Bg)
                 .Select(s => new SelectListItem()
                 {
                     Text = s.Name,
@@ -151,5 +163,124 @@ namespace SportData.Web.Services
             UnitOfWork.LocationCultures.Remove(countryCulture);
             UnitOfWork.SaveChanges();
         }
+
+        #endregion
+
+
+
+        #region Competition
+
+        public IEnumerable<CompetitionViewModel> GetCompetitions()
+        {
+            return UnitOfWork.FootballCompetitions.Entities.AsQueryable().ProjectTo<CompetitionViewModel>().AsEnumerable();
+        }
+
+        public int AddCompetition(CompetitionViewModel model)
+        {
+            FootballCompetition competition = AutoMapper.Mapper.Map<FootballCompetition>(model);
+            UnitOfWork.FootballCompetitions.Add(competition);
+            UnitOfWork.SaveChanges();
+
+            return competition.Id;
+        }
+
+        public void UpdateCompetition(CompetitionViewModel model)
+        {
+            FootballCompetition competition = UnitOfWork.FootballCompetitions.FirstOrDefault(x => x.Id == model.Id);
+            if (competition == null)
+            {
+                throw new ArgumentNullException("There is no such item in database");
+            }
+
+            competition.Name = model.Name;
+            competition.CompetitionImageUrl = model.CompetitionImageUrl;
+            competition.IsActive = model.IsActive;
+            competition.LocationId = model.LocationId;
+
+            UnitOfWork.SaveChanges();
+        }
+
+        public void DeleteCompetition(int competitionId)
+        {
+            FootballCompetition competition = UnitOfWork.FootballCompetitions.FirstOrDefault(x => x.Id == competitionId);
+            if (competition == null)
+            {
+                throw new ArgumentNullException("There is no such item in database");
+            }
+
+            if (competition.Cultures.Count > 0)
+            {
+                UnitOfWork.FootballCompetitionCultures.RemoveRange(competition.Cultures);
+            }
+
+            UnitOfWork.FootballCompetitions.Remove(competition);
+
+            UnitOfWork.SaveChanges();
+        }
+
+        public void AddCompetitionCulture(CompetitionCultureViewModel model)
+        {
+            FootballCompetitionCulture competition = AutoMapper.Mapper.Map<FootballCompetitionCulture>(model);
+            competition.CDate = DateTime.Now;
+            UnitOfWork.FootballCompetitionCultures.Add(competition);
+            UnitOfWork.SaveChanges();
+            UnitOfWork.ReloadContext();
+        }
+
+        public CompetitionCultureViewModel GetCompetitionCultureViewById(int competitionId, int cultureId)
+        {
+            var competitionFromDb = UnitOfWork.FootballCompetitionCultures.FirstOrDefault(x => x.CompetitionId == competitionId && x.CultureId == cultureId);
+            if (competitionFromDb == null)
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            var vm = AutoMapper.Mapper.Map<CompetitionCultureViewModel>(competitionFromDb);
+
+            return vm;
+        }
+
+        public void UpdateCompetitionCulture(CompetitionCultureViewModel model)
+        {
+            var competitionCultureFromDb =
+               UnitOfWork.FootballCompetitionCultures.FirstOrDefault(
+                   x => x.CompetitionId == model.CompetitionId && x.CultureId == model.CultureId);
+
+            if (competitionCultureFromDb == null)
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            competitionCultureFromDb.Name = model.CompetitionName;
+            
+            UnitOfWork.SaveChanges();
+        }
+
+        public void DeleteCompetitionCulture(int competitionId, int cultureId)
+        {
+            var competitionCultureFromDb = UnitOfWork.FootballCompetitionCultures.FirstOrDefault(culture => culture.CompetitionId == competitionId && culture.CultureId == cultureId);
+            if (competitionCultureFromDb == null)
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            UnitOfWork.FootballCompetitionCultures.Remove(competitionCultureFromDb);
+            UnitOfWork.SaveChanges();
+        }
+
+        public CompetitionViewModel GetCompetitionViewById(int competitionId)
+        {
+            var competitionFromDb = UnitOfWork.FootballCompetitions.FirstOrDefault(x => x.Id == competitionId);
+            if (competitionFromDb == null)
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            var vm = AutoMapper.Mapper.Map<CompetitionViewModel>(competitionFromDb);
+
+            return vm;
+        }
+
+        #endregion
     }
 }

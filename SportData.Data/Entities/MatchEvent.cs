@@ -24,9 +24,7 @@ namespace SportData.Data.Entities
         [Column(TypeName = "nchar")]
         public string Minute { get; set; }
 
-        [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime CDate { get; set; }
+        public DateTime? CDate { get; set; }
 
         public virtual Match Match { get; set; }
 

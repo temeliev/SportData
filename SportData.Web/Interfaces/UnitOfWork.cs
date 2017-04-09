@@ -10,6 +10,8 @@ namespace SportData.Web.Interfaces
         private IRepository<Location> _locations;
         private IRepository<LocationCulture> _locationCultures;
         private IRepository<CultureDescription> _cultureDescription;
+        private IRepository<FootballCompetition> _footballCompetitions;
+        private IRepository<FootballCompetitionCulture> _footballCompetitionCultures;
 
         public UnitOfWork()
         {
@@ -31,6 +33,16 @@ namespace SportData.Web.Interfaces
             =>
                 this._cultureDescription ??
                 (this._cultureDescription = new Repository<CultureDescription>(this._context.CultureDescription));
+
+        public IRepository<FootballCompetition> FootballCompetitions
+            =>
+                this._footballCompetitions ??
+                (this._footballCompetitions = new Repository<FootballCompetition>(this._context.FootballCompetition));
+
+        public IRepository<FootballCompetitionCulture> FootballCompetitionCultures
+            =>
+                this._footballCompetitionCultures ??
+                (this._footballCompetitionCultures = new Repository<FootballCompetitionCulture>(this._context.FootballCompetitionCultures));
 
         public int SaveChanges()
         {

@@ -1,23 +1,21 @@
-﻿@model SportData.Web.Models.Admin.CountryCultureViewModel
+﻿@model SportData.Web.Models.Admin.CompetitionCultureViewModel
 @{
-    ViewBag.Title = "EditCountryCulture";
+    ViewBag.Title = "Редакция на език";
 }
 
 <div class="row" Id="test">
     @Html.Partial("_AdminList")
     <div class="col-lg-8 col-md-8 col-sm-7">
-        @using (Html.BeginForm("EditCountryCulture", "Admin", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("EditCompetitionCulture", "Admin", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
         {
-            @*<form class="form-horizontal">*@
             <fieldset>
                 @Html.ValidationSummary(true)
-                @Html.HiddenFor(x => x.CountryId)
+                @Html.HiddenFor(x => x.CompetitionId)
                 @Html.HiddenFor(x => x.CultureId)
                 <div class="form-group">
-                    @Html.LabelFor(m => m.CountryName, new { @class = "col-lg-2 control-label" })
-                    @*<label for="inputName" class="col-lg-2 control-label">Име</label>*@
+                    @Html.LabelFor(m => m.CompetitionName, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        @Html.EditorFor(x => x.CountryName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Наименование" } })
+                        @Html.EditorFor(x => x.CompetitionName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Наименование" } })
                     </div>
                 </div>
                 <div class="form-group">
@@ -36,4 +34,3 @@
         }
     </div>
 </div>
-

@@ -21,17 +21,20 @@ namespace SportData.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Countries()
+        public ActionResult GetCountries()
         {
             var countries = _service.GetCountries();
             return View(countries);
         }
 
         [HttpGet]
-        public ActionResult Competitions()
+        public ActionResult GetCompetitions()
         {
-            return View();
+            var competitionVm = _service.GetCompetitions();
+            return View(competitionVm);
         }
+
+        #region Location
 
         [HttpGet]
         public ActionResult AddCountry()
@@ -39,7 +42,7 @@ namespace SportData.Web.Controllers
             CountryViewModel countryVm = new CountryViewModel();
             ViewBag.Locations = _service.GetMainLocations();
             ViewBag.Cultures = _service.GetCultures();
-             
+
             return View("AddCountry", countryVm);
         }
 
@@ -47,11 +50,8 @@ namespace SportData.Web.Controllers
         public ActionResult AddCountry(CountryViewModel model)
         {
             int countryId = _service.AddCountry(model);
-            var countryVm = _service.GetCountryViewById(countryId);
-            ViewBag.Locations = _service.GetMainLocations();
-            ViewBag.Cultures = _service.GetCultures();
 
-            return View("EditCountry", countryVm);
+            return EditCountry(countryId);
         }
 
         [HttpGet]
@@ -80,8 +80,10 @@ namespace SportData.Web.Controllers
         public ActionResult DeleteCountry(int countryId)
         {
             _service.DeleteCountry(countryId);
+
             var countries = _service.GetCountries();
-            return View("Countries", countries);
+
+            return View("GetCountries", countries);
         }
 
         [HttpGet]
@@ -89,9 +91,9 @@ namespace SportData.Web.Controllers
         {
             CountryCultureViewModel countryCultureVm = new CountryCultureViewModel();
             countryCultureVm.CountryId = countryId;
-             
+
             ViewBag.Cultures = _service.GetCultures();
-            
+
             return View(countryCultureVm);
         }
 
@@ -99,11 +101,8 @@ namespace SportData.Web.Controllers
         public ActionResult AddCountryCulture([Bind(Include = "CountryId, CountryName, CultureId")]CountryCultureViewModel model)
         {
             _service.AddCountryCulture(model);
-            var countryVm = _service.GetCountryViewById(model.CountryId);
-            ViewBag.Locations = _service.GetMainLocations();
-            ViewBag.Cultures = _service.GetCultures();
 
-            return View("EditCountry", countryVm);
+            return EditCountry(model.CountryId);
         }
 
         [HttpGet]
@@ -115,22 +114,110 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditCountryCulture(CountryCultureViewModel model)
+        public ActionResult EditCountryCulture([Bind(Include = "CountryId, CountryName, CultureId")]CountryCultureViewModel model)
         {
             _service.UpdateCountryCulture(model);
-            var countryVm = _service.GetCountryViewById(model.CountryId);
-            ViewBag.Locations = _service.GetMainLocations();
-            ViewBag.Cultures = _service.GetCultures();
-
-            return View("EditCountry", countryVm);
+             
+            return EditCountry(model.CountryId);
         }
 
         [HttpGet]
         public ActionResult DeleteCountryCulture(int countryId, int cultureId)
         {
             _service.DeleteCountryCulture(countryId, cultureId);
-            var countries = _service.GetCountries();
-            return View("Countries", countries);
+            return EditCountry(countryId);
         }
+
+        #endregion Location
+
+        #region Competition
+
+        public ActionResult AddCompetition()
+        {
+            CompetitionViewModel competitionVm = new CompetitionViewModel();
+            ViewBag.Locations = _service.GetAllLocations();
+            
+            return View("AddCompetition", competitionVm);
+        }
+
+        [HttpPost]
+        public ActionResult AddCompetition(CompetitionViewModel model)
+        {
+            int competitionId = _service.AddCompetition(model);
+             
+            return EditCompetition(competitionId);
+        }
+
+        [HttpGet]
+        public ActionResult EditCompetition(int competitionId)
+        {
+            var competitionVm = _service.GetCompetitionViewById(competitionId);
+            ViewBag.Locations = _service.GetAllLocations();
+
+            return View("EditCompetition", competitionVm);
+        }
+
+        [HttpPost]
+        public ActionResult EditCompetition([Bind(Include = "Id, Name, CompetitionImageUrl, IsActive, LocationId, OriginalCompetitionId")]CompetitionViewModel model)
+        {
+            _service.UpdateCompetition(model);
+
+            return EditCompetition(model.Id);
+        }
+
+        [HttpGet]
+        public ActionResult DeleteCompetition(int competitionId)
+        {
+            _service.DeleteCompetition(competitionId);
+
+            var competitionVm = _service.GetCompetitions();
+
+            return View("GetCompetitions", competitionVm);
+        }
+
+        [HttpGet]
+        public ActionResult AddCompetitionCulture(int competitionId)
+        {
+            CompetitionCultureViewModel competitionCultureVm = new CompetitionCultureViewModel();
+            competitionCultureVm.CompetitionId = competitionId;
+
+            ViewBag.Cultures = _service.GetCultures();
+
+            return View(competitionCultureVm);
+        }
+
+        [HttpPost]
+        public ActionResult AddCompetitionCulture([Bind(Include = "CompetitionId, CompetitionName, CultureId")]CompetitionCultureViewModel model)
+        {
+            _service.AddCompetitionCulture(model);
+             
+            return EditCompetition(model.CompetitionId);
+        }
+
+        [HttpGet]
+        public ActionResult EditCompetitionCulture(int competitionId, int cultureId)
+        {
+            CompetitionCultureViewModel competitionCultureVm = _service.GetCompetitionCultureViewById(competitionId, cultureId);
+
+            return View(competitionCultureVm);
+        }
+
+        [HttpPost]
+        public ActionResult EditCompetitionCulture([Bind(Include = "CompetitionId, CompetitionName, CultureId")]CompetitionCultureViewModel model)
+        {
+            _service.UpdateCompetitionCulture(model);
+            
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult DeleteCompetitionCulture(int competitionId, int cultureId)
+        {
+            _service.DeleteCompetitionCulture(competitionId, cultureId);
+             
+            return EditCompetition(competitionId);
+        }
+
+        #endregion
     }
 }

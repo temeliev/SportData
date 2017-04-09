@@ -14,6 +14,10 @@ namespace SportData.Web.Interfaces
 
         IRepository<CultureDescription> CultureDescription { get; }
 
+        IRepository<FootballCompetition> FootballCompetitions { get; }
+
+        IRepository<FootballCompetitionCulture> FootballCompetitionCultures { get; }
+
         int SaveChanges();
 
         void ReloadContext();

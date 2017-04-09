@@ -31,9 +31,7 @@ namespace SportData.Data.Entities
 
         public DateTime DateOfBirth { get; set; }
 
-        [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime CDate { get; set; }
+        public DateTime? CDate { get; set; }
 
         public virtual Location Nationality { get; set; }
 

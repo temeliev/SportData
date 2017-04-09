@@ -33,9 +33,7 @@ namespace SportData.Data.Entities
         [MaxLength(10)]
         public string Minute { get; set; }
 
-        [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime CDate { get; set; }
+        public DateTime? CDate { get; set; }
 
         public virtual FootballTeam HomeTeam { get; set; }
 

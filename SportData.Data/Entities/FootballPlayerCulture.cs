@@ -27,9 +27,7 @@ namespace SportData.Data.Entities
         [Column(TypeName = "nvarchar")]
         public string LastName { get; set; }
 
-        [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime CDate { get; set; }
+        public DateTime? CDate { get; set; }
 
         public virtual FootballPlayer Player { get; set; }
 
