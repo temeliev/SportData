@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SportData.Web;
 using SportData.Web.Controllers;
 using SportData.Web.Interfaces;
+using SportData.Web.Services;
 
 namespace SportData.Tests.Controllers
 {
@@ -17,7 +18,7 @@ namespace SportData.Tests.Controllers
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController(new UnitOfWork());
+            HomeController controller = new HomeController(new HomeService(new UnitOfWork()));
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -30,7 +31,7 @@ namespace SportData.Tests.Controllers
         public void About()
         {
             // Arrange
-            HomeController controller = new HomeController(new UnitOfWork());
+            HomeController controller = new HomeController(new HomeService(new UnitOfWork()));
 
             // Act
             ViewResult result = controller.About() as ViewResult;
@@ -43,7 +44,7 @@ namespace SportData.Tests.Controllers
         public void Contact()
         {
             // Arrange
-            HomeController controller = new HomeController(new UnitOfWork());
+            HomeController controller = new HomeController(new HomeService(new UnitOfWork()));
 
             // Act
             ViewResult result = controller.Contact() as ViewResult;

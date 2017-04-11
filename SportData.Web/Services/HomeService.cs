@@ -10,7 +10,7 @@ using SportData.Web.Models;
 
 namespace SportData.Web.Services
 {
-    public class HomeService : Service
+    public class HomeService : Service, IHomeService
     {
         public HomeService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

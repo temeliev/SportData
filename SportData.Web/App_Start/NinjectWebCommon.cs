@@ -16,20 +16,20 @@ namespace SportData.Web.App_Start
     using Ninject;
     using Ninject.Web.Common;
 
-    public static class NinjectWebCommon 
+    public static class NinjectWebCommon
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
         /// Starts the application
         /// </summary>
-        public static void Start() 
+        public static void Start()
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
-        
+
         /// <summary>
         /// Stops the application.
         /// </summary>
@@ -37,7 +37,7 @@ namespace SportData.Web.App_Start
         {
             bootstrapper.ShutDown();
         }
-        
+
         /// <summary>
         /// Creates the kernel that will manage your application.
         /// </summary>
@@ -52,6 +52,7 @@ namespace SportData.Web.App_Start
 
                 //kernel.Bind<IRepository<Match>>().To<Repository<Match>>();
                 kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+                //kernel.Bind<IService>().To<Service>();
 
                 RegisterServices(kernel);
                 return kernel;
@@ -69,7 +70,8 @@ namespace SportData.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            
-        }        
+            kernel.Bind<IAdminService>().To<AdminService>();
+            kernel.Bind<IHomeService>().To<HomeService>();
+        }
     }
 }

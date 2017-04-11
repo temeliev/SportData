@@ -14,7 +14,7 @@ using SportData.Web.Models.Admin;
 
 namespace SportData.Web.Services
 {
-    public class AdminService : Service
+    public class AdminService : Service, IAdminService
     {
         public AdminService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

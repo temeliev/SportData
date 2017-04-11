@@ -11,18 +11,18 @@ namespace SportData.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly HomeService _service;
+        private readonly IHomeService _homeService;
 
-        public HomeController(IUnitOfWork unitOfWork)
+        public HomeController(IHomeService homeService)
         {
-            _service = new HomeService(unitOfWork);
+            _homeService = homeService;
         }
 
         [HttpGet]
         public ActionResult Index()
         {
             HomeViewModel home = new HomeViewModel();
-            home.Matches = _service.GetMatchesByDate(DateTime.Now);
+            home.Matches = _homeService.GetMatchesByDate(DateTime.Now);
             return View(home);
         }
 
