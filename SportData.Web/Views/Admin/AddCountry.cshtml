@@ -1,4 +1,5 @@
-﻿@model SportData.Web.Models.Admin.CountryViewModel
+﻿@using SportData.Web.Helpers
+@model SportData.Web.Models.Admin.CountryViewModel
 @{
     ViewBag.Title = "Country";
 }
@@ -17,9 +18,15 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputImageUrl" class="col-lg-2 control-label">Иконка</label>
+                    @Html.LabelFor(m => m.LocationImageUrl, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        <input type="url" class="form-control" id="inputImageUrl" placeholder="Линк">
+                        @Html.EditorFor(x => x.LocationImageUrl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Линк", @type = "url" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Иконка</label>
+                    <div class="col-lg-10">
+                        @Html.Image(@Model.LocationImageUrl, "Няма иконка", new { @class = "", @width = "20", @height = "20" })
                     </div>
                 </div>
                 <div class="form-group">

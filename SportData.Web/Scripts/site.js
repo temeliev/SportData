@@ -11,9 +11,21 @@ $(".deleteItem").click(function (e) {
 
 $('#btnContinueDelete').click(function () {
     var path = "/" + controller_name + "/" + action_name + "?" + item_to_delete_name + "=" + item_to_delete;
-    if (typeof item_to_delete_second != 'undefined') {
+    if (typeof item_to_delete_second !== 'undefined') {
         path += "&" + item_to_delete_name_second + "=" + item_to_delete_second;
     }
     window.location = path;
+});
+
+//$(document).ready(function () {
+
+//    $('.ui-datepicker').datepicker({
+//        format: "dd/mm/yyyy"
+//    });
+
+//});
+
+$(document).ready(function () {
+    $('.ui-datepicker').datepicker({ dateFormat: '<%= Html.ConvertDateFormat() %>' });
 });
 

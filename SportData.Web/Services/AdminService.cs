@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
 using SportData.Data;
@@ -27,23 +28,27 @@ namespace SportData.Web.Services
             return UnitOfWork.Locations.Where(x => x.ParentId != null).ProjectTo<CountryViewModel>().AsEnumerable();
         }
 
-        public List<SelectListItem> GetMainLocations()
+        public List<SelectListItem> GetLocations(LocationType type)
         {
-            return UnitOfWork.LocationCultures.Where(x => x.Location.ParentId == null && x.CultureId == (int)CultureType.Bg)
-                .Select(s => new SelectListItem()
-                {
-                    Text = s.Name,
-                    Value = s.LocationId.ToString()
-                }).ToList();
-        }
+            Expression<Func<Location, bool>> locationExpression = null;
+            switch (type)
+            {
+                case LocationType.All:
+                    locationExpression = loc => true;
+                    break;
+                case LocationType.Continent:
+                    locationExpression = loc => loc.ParentId == null;
+                    break;
+                case LocationType.Country:
+                    locationExpression = loc => loc.ParentId != null;
+                    break;
+            }
 
-        public List<SelectListItem> GetAllLocations()
-        {
-            return UnitOfWork.LocationCultures.Where(x => x.CultureId == (int)CultureType.Bg)
+            return UnitOfWork.Locations.Where(locationExpression)
                 .Select(s => new SelectListItem()
                 {
                     Text = s.Name,
-                    Value = s.LocationId.ToString()
+                    Value = s.Id.ToString()
                 }).ToList();
         }
 
@@ -166,8 +171,6 @@ namespace SportData.Web.Services
 
         #endregion
 
-
-
         #region Competition
 
         public IEnumerable<CompetitionViewModel> GetCompetitions()
@@ -252,7 +255,7 @@ namespace SportData.Web.Services
             }
 
             competitionCultureFromDb.Name = model.CompetitionName;
-            
+
             UnitOfWork.SaveChanges();
         }
 
@@ -279,6 +282,126 @@ namespace SportData.Web.Services
             var vm = AutoMapper.Mapper.Map<CompetitionViewModel>(competitionFromDb);
 
             return vm;
+        }
+
+        #endregion
+
+        #region Football Player
+
+        public IEnumerable<FootballPlayerViewModel> GetFootballPlayers()
+        {
+            return UnitOfWork.FootballPlayers.Entities.AsQueryable().ProjectTo<FootballPlayerViewModel>().AsEnumerable();
+        }
+
+        public int AddFootballPlayer(FootballPlayerViewModel model)
+        {
+            FootballPlayer player = AutoMapper.Mapper.Map<FootballPlayer>(model);
+            UnitOfWork.FootballPlayers.Add(player);
+            UnitOfWork.SaveChanges();
+
+            return player.Id;
+        }
+
+        public FootballPlayerViewModel GetFootballPlayerViewById(int footballPlayerId)
+        {
+            var playerFromDb = UnitOfWork.FootballPlayers.FirstOrDefault(x => x.Id == footballPlayerId);
+            if (playerFromDb == null)
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            var vm = AutoMapper.Mapper.Map<FootballPlayerViewModel>(playerFromDb);
+
+            return vm;
+        }
+
+        public void UpdateFootballPlayer(FootballPlayerViewModel model)
+        {
+            FootballPlayer player = UnitOfWork.FootballPlayers.FirstOrDefault(x => x.Id == model.Id);
+            if (player == null)
+            {
+                throw new ArgumentNullException("There is no such item in database");
+            }
+
+            player.FirstName = model.FirstName;
+            player.SecondName = model.SecondName;
+            player.LastName = model.LastName;
+            player.NationalityId = model.NationalityId;
+            player.DateOfBirth = model.DateOfBirth;
+            player.PlayerImageUrl = model.PlayerImageUrl;
+            player.CDate = DateTime.Now;
+
+            UnitOfWork.SaveChanges();
+        }
+
+        public void DeleteFootballPlayer(int footballPlayerId)
+        {
+            FootballPlayer player = UnitOfWork.FootballPlayers.FirstOrDefault(x => x.Id == footballPlayerId);
+            if (player == null)
+            {
+                throw new ArgumentNullException("There is no such item in database");
+            }
+
+            if (player.Cultures.Count > 0)
+            {
+                UnitOfWork.FootballPlayerCultures.RemoveRange(player.Cultures);
+            }
+
+            UnitOfWork.FootballPlayers.Remove(player);
+
+            UnitOfWork.SaveChanges();
+        }
+
+        public void AddFootballPlayerCulture(FootballPlayerCultureViewModel model)
+        {
+            FootballPlayerCulture player = AutoMapper.Mapper.Map<FootballPlayerCulture>(model);
+            player.CDate = DateTime.Now;
+            UnitOfWork.FootballPlayerCultures.Add(player);
+            UnitOfWork.SaveChanges();
+            UnitOfWork.ReloadContext();
+        }
+
+        public FootballPlayerCultureViewModel GetFootballPlayerCultureViewById(int footballPlayerId, int cultureId)
+        {
+            var playerFromDb = UnitOfWork.FootballPlayerCultures.FirstOrDefault(x => x.PlayerId == footballPlayerId && x.CultureId == cultureId);
+            if (playerFromDb == null)
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            var vm = AutoMapper.Mapper.Map<FootballPlayerCultureViewModel>(playerFromDb);
+
+            return vm;
+        }
+
+        public void UpdateFootballPlayerCulture(FootballPlayerCultureViewModel model)
+        {
+            var playerCultureFromDb =
+               UnitOfWork.FootballPlayerCultures.FirstOrDefault(
+                   x => x.PlayerId == model.FootballPlayerId && x.CultureId == model.CultureId);
+
+            if (playerCultureFromDb == null)
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            playerCultureFromDb.FirstName = model.FirstName;
+            playerCultureFromDb.SecondName = model.SecondName;
+            playerCultureFromDb.LastName = model.LastName;
+
+            UnitOfWork.SaveChanges();
+        }
+
+        public void DeleteFootballCulture(int footballPlayerId, int cultureId)
+        {
+            var playerCultureFromDb = UnitOfWork.FootballPlayerCultures.FirstOrDefault(culture => culture.PlayerId == footballPlayerId && culture.CultureId == cultureId);
+            if (playerCultureFromDb == null)
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            UnitOfWork.FootballPlayerCultures.Remove(playerCultureFromDb);
+            UnitOfWork.SaveChanges();
         }
 
         #endregion

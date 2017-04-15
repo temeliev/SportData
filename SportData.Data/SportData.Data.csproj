@@ -88,6 +88,7 @@
     <Compile Include="Entities\FootballTeam.cs" />
     <Compile Include="Entities\FootballTeamCulture.cs" />
     <Compile Include="Enums\CultureType.cs" />
+    <Compile Include="Enums\LocationType.cs" />
     <Compile Include="Enums\MatchStatus.cs" />
     <Compile Include="Entities\Identity\ApplicationUser.cs" />
     <Compile Include="Extensions\DbContextExtensions.cs" />
@@ -127,6 +128,10 @@
     <Compile Include="Migrations\201704090754595_CDateChange.Designer.cs">
       <DependentUpon>201704090754595_CDateChange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704141921295_FootballPlayerChanges.cs" />
+    <Compile Include="Migrations\201704141921295_FootballPlayerChanges.Designer.cs">
+      <DependentUpon>201704141921295_FootballPlayerChanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SportDataContext.cs" />
@@ -162,6 +167,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704090754595_CDateChange.resx">
       <DependentUpon>201704090754595_CDateChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704141921295_FootballPlayerChanges.resx">
+      <DependentUpon>201704141921295_FootballPlayerChanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

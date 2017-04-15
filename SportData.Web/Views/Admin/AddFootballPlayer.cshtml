@@ -1,0 +1,59 @@
+﻿@model SportData.Web.Models.Admin.FootballPlayerViewModel
+@{
+    ViewBag.Title = "Добави играч";
+}
+
+<div class="row" Id="test">
+    @Html.Partial("_AdminList")
+    <div class="col-lg-8 col-md-8 col-sm-7">
+        @using (Html.BeginForm("AddFootballPlayer", "Admin", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+        {
+            <fieldset>
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.FirstName, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.EditorFor(x => x.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Име" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.SecondName, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.EditorFor(x => x.SecondName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Презиме" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LastName, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.EditorFor(x => x.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Фамилия" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.DateOfBirth, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(x => x.DateOfBirth, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", @placeholder = "Дата на раждане" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.PlayerImageUrl, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.EditorFor(x => x.PlayerImageUrl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Линк", @type = "url" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="location" class="col-lg-2 control-label">Локация</label>
+                    <div class="col-lg-10">
+                        @Html.DropDownListFor(m => m.NationalityId, new SelectList(ViewBag.Locations, "Value", "Text"), "  ----- Избери -----  ", new { @class = "form-control", @id = "location" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="reset" class="btn btn-default">Изчисти</button>
+                        <button type="submit" class="btn btn-primary">Запази</button>
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>
+

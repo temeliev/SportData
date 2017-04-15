@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using SportData.Data.Enums;
 using SportData.Web.Interfaces;
 using SportData.Web.Models.Admin;
 using SportData.Web.Services;
@@ -20,27 +21,20 @@ namespace SportData.Web.Controllers
             return View();
         }
 
+        #region Location
+
         [HttpGet]
-        public ActionResult GetCountries()
+        public ActionResult Countries()
         {
             var countries = _adminService.GetCountries();
             return View(countries);
         }
 
         [HttpGet]
-        public ActionResult GetCompetitions()
-        {
-            var competitionVm = _adminService.GetCompetitions();
-            return View(competitionVm);
-        }
-
-        #region Location
-
-        [HttpGet]
         public ActionResult AddCountry()
         {
             CountryViewModel countryVm = new CountryViewModel();
-            ViewBag.Locations = _adminService.GetMainLocations();
+            ViewBag.Locations = _adminService.GetLocations(LocationType.Continent);
             ViewBag.Cultures = _adminService.GetCultures();
 
             return View("AddCountry", countryVm);
@@ -58,7 +52,7 @@ namespace SportData.Web.Controllers
         public ActionResult EditCountry(int countryId)
         {
             var countryVm = _adminService.GetCountryViewById(countryId);
-            ViewBag.Locations = _adminService.GetMainLocations();
+            ViewBag.Locations = _adminService.GetLocations(LocationType.Country);
             ViewBag.Cultures = _adminService.GetCultures();
 
             return View("EditCountry", countryVm);
@@ -70,7 +64,7 @@ namespace SportData.Web.Controllers
             _adminService.UpdateCountry(model);
 
             var countryVm = _adminService.GetCountryViewById(model.Id);
-            ViewBag.Locations = _adminService.GetMainLocations();
+            ViewBag.Locations = _adminService.GetLocations(LocationType.Continent);
             ViewBag.Cultures = _adminService.GetCultures();
 
             return View("EditCountry", countryVm);
@@ -132,10 +126,17 @@ namespace SportData.Web.Controllers
 
         #region Competition
 
+        [HttpGet]
+        public ActionResult Competitions()
+        {
+            var competitionVm = _adminService.GetCompetitions();
+            return View(competitionVm);
+        }
+
         public ActionResult AddCompetition()
         {
             CompetitionViewModel competitionVm = new CompetitionViewModel();
-            ViewBag.Locations = _adminService.GetAllLocations();
+            ViewBag.Locations = _adminService.GetLocations(LocationType.All);
 
             return View("AddCompetition", competitionVm);
         }
@@ -152,7 +153,7 @@ namespace SportData.Web.Controllers
         public ActionResult EditCompetition(int competitionId)
         {
             var competitionVm = _adminService.GetCompetitionViewById(competitionId);
-            ViewBag.Locations = _adminService.GetAllLocations();
+            ViewBag.Locations = _adminService.GetLocations(LocationType.All);
 
             return View("EditCompetition", competitionVm);
         }
@@ -216,6 +217,104 @@ namespace SportData.Web.Controllers
             _adminService.DeleteCompetitionCulture(competitionId, cultureId);
 
             return EditCompetition(competitionId);
+        }
+
+        #endregion
+
+        #region Player
+
+        [HttpGet]
+        public ActionResult FootballPlayers()
+        {
+            var footballPlayerVm = _adminService.GetFootballPlayers();
+            return View(footballPlayerVm);
+        }
+
+        [HttpGet]
+        public ActionResult AddFootballPlayer()
+        {
+            FootballPlayerViewModel footballPlayerVm = new FootballPlayerViewModel();
+            ViewBag.Locations = _adminService.GetLocations(LocationType.Country);
+
+            return View("AddFootballPlayer", footballPlayerVm);
+        }
+
+        [HttpPost]
+        public ActionResult AddFootballPlayer(FootballPlayerViewModel model)
+        {
+            int playerId = _adminService.AddFootballPlayer(model);
+
+            return RedirectToAction("EditFootballPlayer", new { footballPlayerId = playerId });
+        }
+
+        [HttpGet]
+        public ActionResult EditFootballPlayer(int footballPlayerId)
+        {
+            var footballPlayerVm = _adminService.GetFootballPlayerViewById(footballPlayerId);
+            ViewBag.Locations = _adminService.GetLocations(LocationType.Country);
+
+            return View("EditFootballPlayer", footballPlayerVm);
+        }
+
+        [HttpPost]
+        public ActionResult EditFootballPlayer([Bind(Include = "Id, FirstName, SecondName, LastName, DateOfBirth, NationalityId, PlayerImageUrl")]FootballPlayerViewModel model)
+        {
+            _adminService.UpdateFootballPlayer(model);
+
+            return EditFootballPlayer(model.Id);
+        }
+
+        [HttpGet]
+        public ActionResult DeleteFootballPlayer(int footballPlayerId)
+        {
+            _adminService.DeleteFootballPlayer(footballPlayerId);
+
+            var footballPlayerVm = _adminService.GetFootballPlayers();
+
+            return View("FootballPlayers", footballPlayerVm);
+        }
+
+        [HttpGet]
+        public ActionResult AddFootballPlayerCulture(int footballPlayerId)
+        {
+            FootballPlayerCultureViewModel footballPlayerCultureVm = new FootballPlayerCultureViewModel();
+            footballPlayerCultureVm.FootballPlayerId = footballPlayerId;
+
+            ViewBag.Cultures = _adminService.GetCultures();
+
+            return View(footballPlayerCultureVm);
+        }
+
+        [HttpPost]
+        public ActionResult AddFootballPlayerCulture([Bind(Include = "FootballPlayerId, FirstName, SecondName, LastName, CultureId")]FootballPlayerCultureViewModel model)
+        {
+            _adminService.AddFootballPlayerCulture(model);
+
+            return RedirectToAction("EditFootballPlayer", new { footballPlayerId = model.FootballPlayerId });
+        }
+
+        [HttpGet]
+        public ActionResult EditFootballPlayerCulture(int footballPlayerId, int cultureId)
+        {
+            FootballPlayerCultureViewModel footballPlayerCultureVm = _adminService.GetFootballPlayerCultureViewById(footballPlayerId, cultureId);
+
+            return View(footballPlayerCultureVm);
+        }
+
+        [HttpPost]
+        public ActionResult EditFootballPlayerCulture([Bind(Include = "FootballPlayerId, FirstName, SecondName, LastName, CultureId")]FootballPlayerCultureViewModel model)
+        {
+            _adminService.UpdateFootballPlayerCulture(model);
+
+            return RedirectToAction("EditFootballPlayerCulture", new { footballPlayerId = model.FootballPlayerId, cultureId = model.CultureId });
+        }
+
+        [HttpGet]
+        public ActionResult DeleteFootballPlayerCulture(int footballPlayerId, int cultureId)
+        {
+            _adminService.DeleteFootballCulture(footballPlayerId, cultureId);
+
+            return RedirectToAction("EditFootballPlayer", new { footballPlayerId = footballPlayerId });
         }
 
         #endregion

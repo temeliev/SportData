@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using SportData.Data.Enums;
 using SportData.Web.Interfaces;
 using SportData.Web.Models.Admin;
 
@@ -7,11 +8,11 @@ namespace SportData.Web.Services
 {
     public interface IAdminService
     {
+        IUnitOfWork UnitOfWork { get; }
+
         IEnumerable<CountryViewModel> GetCountries();
 
-        List<SelectListItem> GetMainLocations();
-
-        List<SelectListItem> GetAllLocations();
+        List<SelectListItem> GetLocations(LocationType type);
 
         List<SelectListItem> GetCultures();
 
@@ -49,6 +50,22 @@ namespace SportData.Web.Services
 
         CompetitionViewModel GetCompetitionViewById(int competitionId);
 
-        IUnitOfWork UnitOfWork { get; }
+        IEnumerable<FootballPlayerViewModel> GetFootballPlayers();
+
+        int AddFootballPlayer(FootballPlayerViewModel model);
+
+        FootballPlayerViewModel GetFootballPlayerViewById(int footballPlayerId);
+
+        void UpdateFootballPlayer(FootballPlayerViewModel model);
+
+        void DeleteFootballPlayer(int footballPlayerId);
+
+        void AddFootballPlayerCulture(FootballPlayerCultureViewModel model);
+
+        FootballPlayerCultureViewModel GetFootballPlayerCultureViewById(int footballPlayerId, int cultureId);
+
+        void UpdateFootballPlayerCulture(FootballPlayerCultureViewModel model);
+
+        void DeleteFootballCulture(int footballPlayerId, int cultureId);
     }
 }

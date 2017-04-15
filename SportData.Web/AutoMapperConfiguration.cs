@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using SportData.Data.Entities;
 using SportData.Web.Models.Admin;
 
@@ -37,6 +38,21 @@ namespace SportData.Web
 
                 cfg.CreateMap<FootballCompetitionCulture, CompetitionCultureViewModel>()
                     .ForMember(dst => dst.CompetitionName, opt => opt.MapFrom(src => src.Name))
+                    .ForMember(dst => dst.CultureName, opt => opt.MapFrom(src => src.Culture.ShowText));
+
+
+                cfg.CreateMap<FootballPlayerViewModel, FootballPlayer>();
+                    //.ForMember(dst => dst.DateOfBirth, opt => opt.MapFrom(src => Convert.ToDateTime(src.DateOfBirthTest)));
+
+                cfg.CreateMap<FootballPlayer, FootballPlayerViewModel>()
+                    .ForMember(dst => dst.NationalityImageUrl, opt => opt.MapFrom(src => src.Nationality.LocationImageUrl))
+                    .ForMember(dst => dst.LocationName, opt => opt.MapFrom(src => src.Nationality.Name));
+
+                cfg.CreateMap<FootballPlayerCultureViewModel, FootballPlayerCulture>()
+                    .ForMember(dst => dst.PlayerId, opt => opt.MapFrom(src => src.FootballPlayerId));
+
+                cfg.CreateMap<FootballPlayerCulture, FootballPlayerCultureViewModel>()
+                    .ForMember(dst => dst.FootballPlayerId, opt => opt.MapFrom(src => src.PlayerId))
                     .ForMember(dst => dst.CultureName, opt => opt.MapFrom(src => src.Culture.ShowText));
             });
         }

@@ -1,0 +1,43 @@
+﻿@using SportData.Web.Helpers
+@model IEnumerable<SportData.Web.Models.Admin.FootballPlayerViewModel>
+
+@{
+    ViewBag.Title = "Играчи";
+}
+
+<div class="row" Id="test">
+    @Html.Partial("_AdminList")
+    <div class="col-lg-8 col-md-8 col-sm-7">
+        @Html.ActionLink("Нов", "AddFootballPlayer", "Admin", new { @class = "btn btn-primary btn-sm" })
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Име</th>
+                    <th>Презиме</th>
+                    <th>Фамилия</th>
+                    <th>Националност</th>
+                    <th>Флаг</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @Html.HiddenFor(m => item.Id)
+                        <td>@item.FirstName</td>
+                        <td>@item.SecondName</td>
+                        <td>@item.LastName</td>
+                        <td>@item.LocationName</td>
+                        <td>@Html.Image(item.NationalityImageUrl, "Няма иконка", new { @class = "", @width = "15", @height = "15" })</td>
+                        <td>@Html.ActionLink("Редакция", "EditFootballPlayer", "Admin", new { footballPlayerId = @item.Id }, new { @class = "" }) </td>
+                        <td>
+                            <a id="deleteItem" class="deleteItem" data-target="#basic" data-toggle="modal" data-first-id="@item.Id" data-first-name="footballPlayerId" href="#" controller-name="Admin" action-name="DeleteFootballPlayer">Изтрий</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@Html.Partial("ModalConfirmationDialog")

@@ -21,6 +21,7 @@ namespace SportData.Web.Models.Admin
         [Display(Name = "Локация")]
         public string LocationName { get; set; }
 
+        [Display(Name = "Линк")]
         public string LocationImageUrl { get; set; }
 
         public string Abbreviation { get; set; }

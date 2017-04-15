@@ -29,7 +29,7 @@ namespace SportData.Data.Entities
 
         public string PlayerImageUrl { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         public DateTime? CDate { get; set; }
 
@@ -42,5 +42,7 @@ namespace SportData.Data.Entities
         public virtual ICollection<MatchEvent> SecondaryPlayerEvents { get; set; }
 
         public virtual ICollection<FootballTeamPlayer> TeamsHistory { get; set; }
+
+        public virtual ICollection<FootballPlayerCulture> Cultures { get; set; }
     }
 }
