@@ -23,9 +23,13 @@ namespace SportData.Data.Entities
 
         public bool IsActive { get; set; }
 
+        public int CompetitionTypeId { get; set; }
+
         public virtual FootballCompetition OriginalCompetition { get; set; }
 
         public virtual Location Location { get; set; }
+
+        public virtual CompetitionType CompetitionType { get; set; }
 
         public virtual ICollection<FootballCompetitionCulture> Cultures { get; set; }
 

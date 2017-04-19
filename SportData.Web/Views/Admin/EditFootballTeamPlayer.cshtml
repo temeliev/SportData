@@ -1,0 +1,49 @@
+﻿@model SportData.Web.Models.Admin.FootballTeamPlayerViewModel
+@{
+    ViewBag.Title = "Редакция престоя на играч";
+}
+
+<div class="row" Id="test">
+    @Html.Partial("_AdminList")
+    <div class="col-lg-8 col-md-8 col-sm-7">
+        @using (Html.BeginForm("EditFootballTeamPlayer", "Admin", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+        {
+            <fieldset>
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(x => x.Id)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.PlayerFullName, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.EditorFor(x => x.PlayerFullName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Име", @readonly = "readonly" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.StartDate, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(x => x.StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", @placeholder = "Дата" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.EndDate, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(x => x.EndDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", @placeholder = "Дата" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.PlayerStatusId, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.DropDownListFor(m => m.PlayerStatusId, new SelectList(ViewBag.PlayerStatuses, "Value", "Text"), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <a href=@Model.PreviousLink class="btn btn-default">Назад</a>
+                        <button type="submit" class="btn btn-primary">Запази</button>
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>
+
+

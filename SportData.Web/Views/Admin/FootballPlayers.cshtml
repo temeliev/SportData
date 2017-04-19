@@ -8,7 +8,7 @@
 <div class="row" Id="test">
     @Html.Partial("_AdminList")
     <div class="col-lg-8 col-md-8 col-sm-7">
-        @Html.ActionLink("Нов", "AddFootballPlayer", "Admin", new { @class = "btn btn-primary btn-sm" })
+        @Html.ActionLink("Нов запис", "AddFootballPlayer", "Admin", new { @class = "btn btn-default btn-sm" })
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
@@ -17,6 +17,7 @@
                     <th>Фамилия</th>
                     <th>Националност</th>
                     <th>Флаг</th>
+                    <th></th>
                     <th></th>
                 </tr>
             </thead>
@@ -31,13 +32,10 @@
                         <td>@item.LocationName</td>
                         <td>@Html.Image(item.NationalityImageUrl, "Няма иконка", new { @class = "", @width = "15", @height = "15" })</td>
                         <td>@Html.ActionLink("Редакция", "EditFootballPlayer", "Admin", new { footballPlayerId = @item.Id }, new { @class = "" }) </td>
-                        <td>
-                            <a id="deleteItem" class="deleteItem" data-target="#basic" data-toggle="modal" data-first-id="@item.Id" data-first-name="footballPlayerId" href="#" controller-name="Admin" action-name="DeleteFootballPlayer">Изтрий</a>
-                        </td>
+                        <td>@Html.ActionLink("Изтрий", "DeleteFootballPlayer", "Admin", new { footballPlayerId = @item.Id }, new { @class = "" }) </td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
 </div>
-@Html.Partial("ModalConfirmationDialog")

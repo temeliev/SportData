@@ -9,6 +9,7 @@ using AutoMapper.QueryableExtensions;
 using SportData.Data;
 using SportData.Data.Entities;
 using SportData.Data.Enums;
+using SportData.Web.Helpers;
 using SportData.Web.Interfaces;
 using SportData.Web.Models;
 using SportData.Web.Models.Admin;
@@ -284,6 +285,16 @@ namespace SportData.Web.Services
             return vm;
         }
 
+        public List<SelectListItem> GetCompetitionTypes()
+        {
+            return UnitOfWork.CompetitionTypes.Entities.
+                Select(s => new SelectListItem()
+                {
+                    Text = s.Name,
+                    Value = s.Id.ToString()
+                }).ToList();
+        }
+
         #endregion
 
         #region Football Player
@@ -392,7 +403,7 @@ namespace SportData.Web.Services
             UnitOfWork.SaveChanges();
         }
 
-        public void DeleteFootballCulture(int footballPlayerId, int cultureId)
+        public void DeleteFootballPlayerCulture(int footballPlayerId, int cultureId)
         {
             var playerCultureFromDb = UnitOfWork.FootballPlayerCultures.FirstOrDefault(culture => culture.PlayerId == footballPlayerId && culture.CultureId == cultureId);
             if (playerCultureFromDb == null)
@@ -402,6 +413,247 @@ namespace SportData.Web.Services
 
             UnitOfWork.FootballPlayerCultures.Remove(playerCultureFromDb);
             UnitOfWork.SaveChanges();
+        }
+
+        #endregion
+
+        #region Football Team
+
+        public IEnumerable<FootballTeamViewModel> GetFootballTeams()
+        {
+            return UnitOfWork.FootballTeams.Entities.AsQueryable().ProjectTo<FootballTeamViewModel>().AsEnumerable();
+        }
+
+        public int AddFootballTeam(FootballTeamViewModel model)
+        {
+            FootballTeam footballTeam = AutoMapper.Mapper.Map<FootballTeam>(model);
+            UnitOfWork.FootballTeams.Add(footballTeam);
+            UnitOfWork.SaveChanges();
+
+            return footballTeam.Id;
+        }
+
+        public void UpdateFootballTeam(FootballTeamViewModel model)
+        {
+            FootballTeam footballTeam = UnitOfWork.FootballTeams.FirstOrDefault(x => x.Id == model.Id);
+            if (footballTeam == null)
+            {
+                throw new ArgumentNullException("There is no such item in database");
+            }
+
+            footballTeam.Name = model.Name;
+            footballTeam.EmblemImageUrl = model.EmblemImageUrl;
+            footballTeam.IsDeleted = model.IsDeleted;
+            footballTeam.LocationId = model.LocationId;
+            footballTeam.CDate = DateTime.Now;
+
+            UnitOfWork.SaveChanges();
+        }
+
+        public void DeleteFootballTeam(int footballTeamId)
+        {
+            FootballTeam footballTeam = UnitOfWork.FootballTeams.FirstOrDefault(x => x.Id == footballTeamId);
+            if (footballTeam == null)
+            {
+                throw new ArgumentNullException("There is no such item in database");
+            }
+
+            if (footballTeam.Cultures.Count > 0)
+            {
+                UnitOfWork.FootballTeamCultures.RemoveRange(footballTeam.Cultures);
+            }
+
+            UnitOfWork.FootballTeams.Remove(footballTeam);
+
+            UnitOfWork.SaveChanges();
+        }
+
+        public void AddFootballTeamCulture(FootballTeamCultureViewModel model)
+        {
+            FootballTeamCulture team = AutoMapper.Mapper.Map<FootballTeamCulture>(model);
+            team.CDate = DateTime.Now;
+            UnitOfWork.FootballTeamCultures.Add(team);
+            UnitOfWork.SaveChanges();
+            UnitOfWork.ReloadContext();
+        }
+
+        public FootballTeamCultureViewModel GetFootballTeamCultureViewById(int footballTeamId, int cultureId)
+        {
+            var teamFromDb = UnitOfWork.FootballTeamCultures.FirstOrDefault(x => x.TeamId == footballTeamId && x.CultureId == cultureId);
+            if (teamFromDb == null)
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            var vm = AutoMapper.Mapper.Map<FootballTeamCultureViewModel>(teamFromDb);
+
+            return vm;
+        }
+
+        public void UpdateFootballTeamCulture(FootballTeamCultureViewModel model)
+        {
+            var footballTeamCultureFromDb =
+               UnitOfWork.FootballTeamCultures.FirstOrDefault(
+                   x => x.TeamId == model.FootballTeamId && x.CultureId == model.CultureId);
+
+            if (footballTeamCultureFromDb == null)
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            footballTeamCultureFromDb.Name = model.FootballTeamName;
+
+            UnitOfWork.SaveChanges();
+        }
+
+        public void DeleteFootballTeamCulture(int footballTeamId, int cultureId)
+        {
+            var footballTeamCultureFromDb = UnitOfWork.FootballTeamCultures.FirstOrDefault(culture => culture.TeamId == footballTeamId && culture.CultureId == cultureId);
+            if (footballTeamCultureFromDb == null)
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            UnitOfWork.FootballTeamCultures.Remove(footballTeamCultureFromDb);
+            UnitOfWork.SaveChanges();
+        }
+
+        public FootballTeamViewModel GetFootballTeamViewById(int footballTeamId)
+        {
+            var footballTeamFromDb = UnitOfWork.FootballTeams.FirstOrDefault(x => x.Id == footballTeamId);
+            if (footballTeamFromDb == null)
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            var vm = AutoMapper.Mapper.Map<FootballTeamViewModel>(footballTeamFromDb);
+
+            return vm;
+        }
+
+        public void DeleteFootballPlayerFromTeam(int footballTeamPlayerId)
+        {
+            FootballTeamPlayer teamPlayerItem = UnitOfWork.FootballTeamsPlayers.FirstOrDefault(x => x.Id == footballTeamPlayerId);
+
+            if (teamPlayerItem == null)
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            UnitOfWork.FootballTeamsPlayers.Remove(teamPlayerItem);
+            UnitOfWork.SaveChanges();
+        }
+
+        public void AddFootballPlayerToTeam(FootballTeamPlayerViewModel model)
+        {
+            if (!UnitOfWork.FootballTeams.Any(x => x.Id == model.TeamId))
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            if (!UnitOfWork.FootballPlayers.Any(x => x.Id == model.PlayerId))
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            if (UnitOfWork.FootballTeamsPlayers.Any(
+                    x => x.PlayerId == model.PlayerId &&
+                    x.TeamId == model.TeamId &&
+                    x.EndDate == null))
+            {
+                throw new ArgumentNullException("The player is already in the team!");
+            }
+
+            FootballTeamPlayer teamPlayerItem = AutoMapper.Mapper.Map<FootballTeamPlayer>(model);
+            teamPlayerItem.CDate = DateTime.Now;
+
+            UnitOfWork.FootballTeamsPlayers.Add(teamPlayerItem);
+            UnitOfWork.SaveChanges();
+        }
+
+        public List<FootballTeamPlayerViewModel> GetSearchResults(SearchFootballPlayerViewModel filter)
+        {
+            Expression<Func<FootballPlayer, bool>> teamSearchExpression = t => true;
+
+            if (filter.TeamId > 0)
+            {
+                teamSearchExpression = h => h.TeamsHistory.All(a => a.TeamId != filter.TeamId || (a.TeamId == filter.TeamId && a.EndDate != null));
+            }
+
+            var players = UnitOfWork.FootballPlayers.Where(teamSearchExpression).ToList();
+            return players.Where(
+                         x =>
+                             x.FirstName.Contains(filter.SearchText) || 
+                             (x.SecondName != null && x.SecondName.Contains(filter.SearchText)) ||
+                             x.LastName.Contains(filter.SearchText))
+                         .AsQueryable()
+                         .ProjectTo<FootballTeamPlayerViewModel>()
+                         .ToList();
+        }
+
+        public FootballTeamPlayerViewModel GetFootballTeamPlayerViewModelById(int footballTeamPlayerId)
+        {
+            var teamFromDb = UnitOfWork.FootballTeamsPlayers.FirstOrDefault(x => x.Id == footballTeamPlayerId);
+            if (teamFromDb == null)
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            var vm = AutoMapper.Mapper.Map<FootballTeamPlayerViewModel>(teamFromDb);
+
+            return vm;
+        }
+
+        public void UpdateFootballTeamPlayer(FootballTeamPlayerViewModel model)
+        {
+            FootballTeamPlayer footballTeamPlayer = UnitOfWork.FootballTeamsPlayers.FirstOrDefault(x => x.Id == model.Id);
+            if (footballTeamPlayer == null)
+            {
+                throw new ArgumentNullException("There is no such item in database");
+            }
+
+            footballTeamPlayer.StartDate = model.StartDate;
+            footballTeamPlayer.EndDate = model.EndDate;
+            footballTeamPlayer.PlayerStatusId = model.PlayerStatusId;
+            footballTeamPlayer.CDate = DateTime.Now;
+
+            UnitOfWork.SaveChanges();
+        }
+
+        public List<SelectListItem> GetPlayerStatuses()
+        {
+            return UnitOfWork.PlayerStatuses.Entities.
+                    Select(s => new SelectListItem()
+                    {
+                        Text = s.Name,
+                        Value = s.Id.ToString()
+                    }).ToList();
+        }
+
+        public FootballTeamPlayerViewModel GetFootballTeamPlayerViewByFootballPlayerId(int footballPlayerId)
+        {
+            var playerFromDb = UnitOfWork.FootballPlayers.FirstOrDefault(x => x.Id == footballPlayerId);
+            if (playerFromDb == null)
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            var vm = AutoMapper.Mapper.Map<FootballTeamPlayerViewModel>(playerFromDb);
+
+            return vm;
+        }
+
+        public FootballTeamPlayerViewModel GetFootballTeamPlayerViewById(int footballTeamPlayerId)
+        {
+            var teamPlayerFromDb = UnitOfWork.FootballTeamsPlayers.FirstOrDefault(x => x.Id == footballTeamPlayerId);
+            if (teamPlayerFromDb == null)
+            {
+                throw new ArgumentNullException("Not found in database!");
+            }
+
+            var vm = AutoMapper.Mapper.Map<FootballTeamPlayerViewModel>(teamPlayerFromDb);
+
+            return vm;
         }
 
         #endregion

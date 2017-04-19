@@ -1,0 +1,48 @@
+﻿@model SportData.Web.Models.Admin.FootballPlayerCultureViewModel
+@{
+    ViewBag.Title = "Изтриване на превод";
+}
+
+<div class="row" Id="test">
+    @Html.Partial("_AdminList")
+    <div class="col-lg-8 col-md-8 col-sm-7">
+        @using (Html.BeginForm("DeleteFootballPlayerCulture", "Admin", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+        {
+            <fieldset>
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(x => x.FootballPlayerId)
+                @Html.HiddenFor(x => x.CultureId)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.FirstName, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.SecondName, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(x => x.SecondName, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LastName, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CultureName, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(x => x.CultureName, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <a href=@Model.PreviousLink class="btn btn-default">Назад</a>
+                        <button type="submit" class="btn btn-danger">Изтрий</button>
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>

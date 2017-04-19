@@ -2,7 +2,7 @@
 
 namespace SportData.Web.Models.Admin
 {
-    public class FootballPlayerCultureViewModel
+    public class FootballPlayerCultureViewModel : BaseViewModel
     {
         public int FootballPlayerId { get; set; }
 

@@ -4,7 +4,7 @@ using System.Web.Mvc;
 
 namespace SportData.Web.Models.Admin
 {
-    public class CountryViewModel
+    public class CountryViewModel : BaseViewModel
     {
         public CountryViewModel()
         {

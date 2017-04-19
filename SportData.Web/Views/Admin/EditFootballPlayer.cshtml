@@ -42,12 +42,12 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="location" class="col-lg-2 control-label">Локация</label>
+                    @Html.LabelFor(m => m.NationalityId, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        @Html.DropDownListFor(m => m.NationalityId, new SelectList(ViewBag.Locations, "Value", "Text"), "  ----- Избери -----  ", new { @class = "form-control", @id = "location" })
+                        @Html.DropDownListFor(m => m.NationalityId, new SelectList(ViewBag.Locations, "Value", "Text"), "  ----- Избери -----  ", new { @class = "form-control" })
                     </div>
                 </div>
-                @Html.ActionLink("Нов", "AddFootballPlayerCulture", "Admin", new { footballPlayerId = Model.Id }, new { @class = "btn btn-primary btn-sm" })
+                @Html.ActionLink("Нов запис", "AddFootballPlayerCulture", "Admin", new { footballPlayerId = Model.Id }, new { @class = "btn btn-default btn-sm" })
                 <table class="table table-striped table-hover ">
                     <thead>
                         <tr>
@@ -55,6 +55,8 @@
                             <th>Презиме</th>
                             <th>Фамилия</th>
                             <th>Език</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,16 +69,14 @@
                                 <td>@item.LastName</td>
                                 <td>@item.CultureName</td>
                                 <td>@Html.ActionLink("Редакция", "EditFootballPlayerCulture", "Admin", new { footballPlayerId = @item.FootballPlayerId, cultureId = @item.CultureId }, new { @class = "" }) </td>
-                                <td>
-                                    <a id="deleteItem" class="deleteItem" data-target="#basic" data-toggle="modal" data-first-id="@item.FootballPlayerId" data-first-name="footballPlayerId" data-second-id="@item.CultureId" data-second-name="cultureId" href="#" controller-name="Admin" action-name="DeleteFootballPlayerCulture">Изтрий</a>
-                                </td>
+                                <td>@Html.ActionLink("Изтрий", "DeleteFootballPlayerCulture", "Admin", new { footballPlayerId = @item.FootballPlayerId, cultureId = @item.CultureId }, new { @class = "" }) </td>
                             </tr>
                         }
                     </tbody>
                 </table>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                        <button type="reset" class="btn btn-default">Изчисти</button>
+                        <a href=@Model.PreviousLink class="btn btn-default">Назад</a>
                         <button type="submit" class="btn btn-primary">Запази</button>
                     </div>
                 </div>
@@ -84,6 +84,5 @@
         }
     </div>
 </div>
-@Html.Partial("ModalConfirmationDialog")
 
 

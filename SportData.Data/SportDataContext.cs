@@ -62,6 +62,10 @@ namespace SportData.Data
 
         public virtual DbSet<CultureDescription> CultureDescription { get; set; }
 
+        public virtual DbSet<PlayerStatus> PlayerStatuses { get; set; }
+
+        public virtual DbSet<CompetitionType> CompetitionTypes { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

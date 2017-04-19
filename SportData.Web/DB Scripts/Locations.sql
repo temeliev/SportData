@@ -28,4 +28,11 @@ SELECT * FROM Locations
 SELECT * FROM LocationCultures
 
 
+INSERT INTO PlayerStatuses(Name)
+VALUES ('Договор'), ('Под наем'), ('Даден под наем')
+
+INSERT INTO CompetitionTypes(Name)
+VALUES ('Лига'), ('Купа'), ('Приятелски мач')
+
+
 

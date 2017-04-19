@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SportData.Web.Models.Admin
 {
-    public class FootballPlayerViewModel
+    public class FootballPlayerViewModel : BaseViewModel
     {
         public int Id { get; set; }
 
@@ -30,6 +30,8 @@ namespace SportData.Web.Models.Admin
         public DateTime? DateOfBirth { get; set; }
 
         public string LocationName { get; set; }
+
+        public  int FootballTeamPlayerId { get; set; }
         
         public List<FootballPlayerCultureViewModel> Cultures { get; set; }
     }

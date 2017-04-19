@@ -1,0 +1,47 @@
+﻿@model SportData.Web.Models.Admin.FootballTeamViewModel
+@{
+    ViewBag.Title = "Добави отбор";
+}
+
+<div class="row" Id="test">
+    @Html.Partial("_AdminList")
+    <div class="col-lg-8 col-md-8 col-sm-7">
+        @using (Html.BeginForm("AddFootballTeam", "Admin", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+        {
+            <fieldset>
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.EditorFor(x => x.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Наименование" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.EmblemImageUrl, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.EditorFor(x => x.EmblemImageUrl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Линк", @type = "url" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.IsDeleted, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.CheckBoxFor(x => x.IsDeleted, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="location" class="col-lg-2 control-label">Локация</label>
+                    <div class="col-lg-10">
+                        @Html.DropDownListFor(m => m.LocationId, new SelectList(ViewBag.Locations, "Value", "Text"), "  ----- Избери -----  ", new { @class = "form-control", @id = "location" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <a href=@Model.PreviousLink class="btn btn-default">Назад</a>
+                        <button type="submit" class="btn btn-primary">Запази</button>
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>
+

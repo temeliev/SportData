@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportData.Tests", "SportDat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportData.Data", "SportData.Data\SportData.Data.csproj", "{FDD03BB3-C430-4315-97DE-173B1DB978F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resources", "Resources\Resources.csproj", "{FB0B0A95-72D7-4D49-893D-75EC3793B546}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,23 +29,12 @@ Global
 		{FDD03BB3-C430-4315-97DE-173B1DB978F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDD03BB3-C430-4315-97DE-173B1DB978F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDD03BB3-C430-4315-97DE-173B1DB978F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB0B0A95-72D7-4D49-893D-75EC3793B546}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB0B0A95-72D7-4D49-893D-75EC3793B546}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB0B0A95-72D7-4D49-893D-75EC3793B546}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB0B0A95-72D7-4D49-893D-75EC3793B546}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://temeliev.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = SportData.Tests\\SportData.Tests.csproj
-		SccProjectName1 = SportData.Tests
-		SccLocalPath1 = SportData.Tests
-		SccProjectUniqueName2 = SportData.Web\\SportData.Web.csproj
-		SccProjectName2 = SportData.Web
-		SccLocalPath2 = SportData.Web
-		SccProjectUniqueName3 = SportData.Data\\SportData.Data.csproj
-		SccProjectName3 = SportData.Data
-		SccLocalPath3 = SportData.Data
 	EndGlobalSection
 EndGlobal

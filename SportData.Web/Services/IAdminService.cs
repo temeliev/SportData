@@ -66,6 +66,42 @@ namespace SportData.Web.Services
 
         void UpdateFootballPlayerCulture(FootballPlayerCultureViewModel model);
 
-        void DeleteFootballCulture(int footballPlayerId, int cultureId);
+        void DeleteFootballPlayerCulture(int footballPlayerId, int cultureId);
+
+        IEnumerable<FootballTeamViewModel> GetFootballTeams();
+
+        int AddFootballTeam(FootballTeamViewModel model);
+
+        FootballTeamViewModel GetFootballTeamViewById(int footballTeamId);
+
+        void UpdateFootballTeam(FootballTeamViewModel model);
+
+        void DeleteFootballTeam(int footballTeamId);
+
+        void AddFootballTeamCulture(FootballTeamCultureViewModel model);
+
+        FootballTeamCultureViewModel GetFootballTeamCultureViewById(int footballTeamId, int cultureId);
+
+        void UpdateFootballTeamCulture(FootballTeamCultureViewModel model);
+
+        void DeleteFootballTeamCulture(int footballTeamId, int cultureId);
+
+        List<FootballTeamPlayerViewModel> GetSearchResults(SearchFootballPlayerViewModel filter);
+
+        void AddFootballPlayerToTeam(FootballTeamPlayerViewModel model);
+
+        void DeleteFootballPlayerFromTeam(int footballTeamPlayerId);
+
+        FootballTeamPlayerViewModel GetFootballTeamPlayerViewModelById(int footballTeamPlayerId);
+
+        void UpdateFootballTeamPlayer(FootballTeamPlayerViewModel model);
+
+        List<SelectListItem> GetPlayerStatuses();
+
+        List<SelectListItem> GetCompetitionTypes();
+
+        FootballTeamPlayerViewModel GetFootballTeamPlayerViewByFootballPlayerId(int footballPlayerId);
+
+        FootballTeamPlayerViewModel GetFootballTeamPlayerViewById(int footballTeamPlayerId);
     }
 }

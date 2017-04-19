@@ -1,0 +1,96 @@
+﻿@using SportData.Web.Helpers
+@model SportData.Web.Models.Admin.FootballTeamViewModel
+@{
+    ViewBag.Title = "Редакция на отбор";
+}
+
+<div class="row" Id="test">
+    @Html.Partial("_AdminList")
+    <div class="col-lg-8 col-md-8 col-sm-7">
+        @using (Html.BeginForm("EditFootballTeam", "Admin", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+        {
+            <fieldset>
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(x => x.Id)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.EditorFor(x => x.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Име" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.EmblemImageUrl, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.EditorFor(x => x.EmblemImageUrl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Линк", @type = "url" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Иконка</label>
+                    <div class="col-lg-10">
+                        @Html.Image(@Model.EmblemImageUrl, "Няма иконка", new { @class = "", @width = "50", @height = "50" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.LocationId, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.DropDownListFor(m => m.LocationId, new SelectList(ViewBag.Locations, "Value", "Text"), "  ----- Избери -----  ", new { @class = "form-control" })
+                    </div>
+                </div>
+                @Html.ActionLink("Нов запис", "AddFootballTeamCulture", "Admin", new { footballTeamId = Model.Id }, new { @class = "btn btn-default btn-sm" })
+                <table class="table table-striped table-hover ">
+                    <thead>
+                    <tr>
+                        <th>Име</th>
+                        <th>Език</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.Cultures)
+                    {
+                        <tr>
+                            @Html.HiddenFor(m => item.FootballTeamId)
+                            <td>@item.FootballTeamName</td>
+                            <td>@item.CultureName</td>
+                            <td>@Html.ActionLink("Редакция", "EditFootballTeamCulture", "Admin", new { footballTeamId = @item.FootballTeamId, cultureId = @item.CultureId }, new { @class = "" }) </td>
+                            <td>@Html.ActionLink("Изтрий", "DeleteFootballTeamCulture", "Admin", new { footballTeamId = @item.FootballTeamId, cultureId = @item.CultureId }, new { @class = "" }) </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+                @Html.ActionLink("Нов запис", "SearchFootballPlayer", "Admin", new { teamId = Model.Id }, new { @class = "btn btn-default btn-sm" })
+                <table class="table table-striped table-hover ">
+                    <thead>
+                        <tr>
+                            <th>Имена</th>
+                            <th>Националност</th>
+                            <th>Флаг</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Players)
+                        {
+                            <tr>
+                                @Html.HiddenFor(m => item.Id)
+                                <td>@item.PlayerFullName</td>
+                                <td>@item.LocationName</td>
+                                <td>@Html.Image(item.NationalityImageUrl, "Няма иконка", new { @class = "", @width = "20", @height = "20" })</td>
+                                <td>@Html.ActionLink("Редакция", "EditFootballTeamPlayer", "Admin", new { footballTeamPlayerId = @item.Id }, new { @class = "" }) </td>
+                                <td>@Html.ActionLink("Изтрий", "DeleteFootballPlayerFromTeam", "Admin", new { footballTeamPlayerId = @item.Id }, new { @class = "" }) </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <a href=@Model.PreviousLink class="btn btn-default">Назад</a>
+                        <button type="submit" class="btn btn-primary">Запази</button>
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>
+
+

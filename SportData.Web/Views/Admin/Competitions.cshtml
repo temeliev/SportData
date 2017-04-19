@@ -1,18 +1,20 @@
 ﻿@model IEnumerable<SportData.Web.Models.Admin.CompetitionViewModel>
 
 @{
-    ViewBag.Title = "Competitions";
+    ViewBag.Title = "Състезания";
 }
 
 <div class="row" Id="test">
     @Html.Partial("_AdminList")
     <div class="col-lg-8 col-md-8 col-sm-7">
-        @Html.ActionLink("Нов", "AddCompetition", "Admin", new { @class = "btn btn-primary btn-sm" })
+        @Html.ActionLink("Нов запис", "AddCompetition", "Admin", new { @class = "btn btn-default btn-sm" })
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
                     <th>Име</th>
                     <th>Локация</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -23,13 +25,10 @@
                         <td>@item.Name</td>
                         <td>@item.LocationName</td>
                         <td>@Html.ActionLink("Редакция", "EditCompetition", "Admin", new { competitionId = @item.Id }, new { @class = "" }) </td>
-                        <td>
-                            <a id="deleteItem" class="deleteItem" data-target="#basic" data-toggle="modal" data-first-id="@item.Id" data-first-name="competitionId" href="#" controller-name="Admin" action-name="DeleteCompetition">Изтрий</a>
-                        </td>
+                        <td>@Html.ActionLink("Изтрий", "DeleteCompetition", "Admin", new { competitionId = @item.Id }, new { @class = "" }) </td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
 </div>
-@Html.Partial("ModalConfirmationDialog")

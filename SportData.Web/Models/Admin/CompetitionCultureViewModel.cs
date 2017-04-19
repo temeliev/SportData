@@ -2,7 +2,7 @@
 
 namespace SportData.Web.Models.Admin
 {
-    public class CompetitionCultureViewModel
+    public class CompetitionCultureViewModel : BaseViewModel
     {
         public int CompetitionId { get; set; }
 

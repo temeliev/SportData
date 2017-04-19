@@ -1,4 +1,5 @@
-﻿@model SportData.Web.Models.Admin.CompetitionViewModel
+﻿@using SportData.Web.Helpers
+@model SportData.Web.Models.Admin.CompetitionViewModel
 @{
     ViewBag.Title = "Редакция на състезание";
 }
@@ -14,25 +15,37 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.Name, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        @Html.EditorFor(x => x.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Наименование" } })
+                        @Html.EditorFor(x => x.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Наименование" }})
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputImageUrl" class="col-lg-2 control-label">Иконка</label>
+                    @Html.LabelFor(x => x.CompetitionImageUrl, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        <input type="url" class="form-control" id="inputImageUrl" placeholder="Линк">
+                        @Html.EditorFor(x => x.CompetitionImageUrl, new { htmlAttributes = new { @class = "form-control", @placeholder = "http:\\\\", @type = "url" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Иконка", new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                       @Html.Image(@Model.CompetitionImageUrl, "Няма иконка", new { @class = "", @width = "50", @height = "50" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.IsActive, new { @class = "col-lg-2 control-label" })
-                    <div class="col-lg-10 checkbox">
-                        @Html.CheckBoxFor(x => x.IsActive, new { htmlAttributes = new { @class = "form-control" } })
+                    <div class="col-lg-10">
+                        @Html.CheckBoxFor(x => x.IsActive, new { @class = "form-control checkbox" })
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="location" class="col-lg-2 control-label">Локация</label>
+                    @Html.LabelFor(x => x.LocationId, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        @Html.DropDownListFor(m => m.LocationId, new SelectList(ViewBag.Locations, "Value", "Text"), new { @class = "form-control", @id = "location" })
+                        @Html.DropDownListFor(m => m.LocationId, new SelectList(ViewBag.Locations, "Value", "Text"), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.CompetitionTypeId, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.DropDownListFor(m => m.CompetitionTypeId, new SelectList(ViewBag.CompetitionTypes, "Value", "Text"), new { @class = "form-control" })
                     </div>
                 </div>
                 @Html.ActionLink("Нов", "AddCompetitionCulture", "Admin", new { competitionId = Model.Id }, new { @class = "btn btn-primary btn-sm" })
@@ -41,6 +54,8 @@
                         <tr>
                             <th>Име</th>
                             <th>Език</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,16 +66,14 @@
                                 <td>@item.CompetitionName</td>
                                 <td>@item.CultureName</td>
                                 <td>@Html.ActionLink("Редакция", "EditCompetitionCulture", "Admin", new { competitionId = @item.CompetitionId, cultureId = @item.CultureId }, new { @class = "" }) </td>
-                                <td>
-                                    <a id="deleteItem" class="deleteItem" data-target="#basic" data-toggle="modal" data-first-id="@item.CompetitionId" data-first-name="competitionId" data-second-id="@item.CultureId" data-second-name="cultureId" href="#" controller-name="Admin" action-name="DeleteCompetitionCulture">Изтрий</a>
-                                </td>
+                                <td>@Html.ActionLink("Изтрий", "DeleteCompetitionCulture", "Admin", new { competitionId = @item.CompetitionId, cultureId = @item.CultureId }, new { @class = "" }) </td>
                             </tr>
                         }
                     </tbody>
                 </table>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                        <button type="reset" class="btn btn-default">Изчисти</button>
+                        <a href=@Model.PreviousLink class="btn btn-default">Назад</a>
                         <button type="submit" class="btn btn-primary">Запази</button>
                     </div>
                 </div>
@@ -68,6 +81,5 @@
         }
     </div>
 </div>
-@Html.Partial("ModalConfirmationDialog")
 
 

@@ -14,6 +14,11 @@ namespace SportData.Web.Interfaces
         private IRepository<FootballCompetitionCulture> _footballCompetitionCultures;
         private IRepository<FootballPlayer> _footballPlayers;
         private IRepository<FootballPlayerCulture> _footballPlayerCultures;
+        private IRepository<FootballTeam> _footballTeams;
+        private IRepository<FootballTeamCulture> _footballTeamCultures;
+        private IRepository<FootballTeamPlayer> _footballTeamsPlayers;
+        private IRepository<PlayerStatus> _playerStatuses;
+        private IRepository<CompetitionType> _competitionTypes;
 
         public UnitOfWork()
         {
@@ -55,6 +60,31 @@ namespace SportData.Web.Interfaces
             =>
                 this._footballPlayerCultures ??
                 (this._footballPlayerCultures = new Repository<FootballPlayerCulture>(this._context.FootballPlayerCultures));
+
+        public IRepository<FootballTeam> FootballTeams
+            =>
+                this._footballTeams ??
+                (this._footballTeams = new Repository<FootballTeam>(this._context.FootballTeams));
+
+        public IRepository<FootballTeamCulture> FootballTeamCultures
+            =>
+                this._footballTeamCultures ??
+                (this._footballTeamCultures = new Repository<FootballTeamCulture>(this._context.FootballTeamCultures));
+
+        public IRepository<FootballTeamPlayer> FootballTeamsPlayers
+            =>
+                this._footballTeamsPlayers ??
+                (this._footballTeamsPlayers = new Repository<FootballTeamPlayer>(this._context.FootballTeamPlayers));
+
+        public IRepository<PlayerStatus> PlayerStatuses
+           =>
+               this._playerStatuses ??
+               (this._playerStatuses = new Repository<PlayerStatus>(this._context.PlayerStatuses));
+
+        public IRepository<CompetitionType> CompetitionTypes
+           =>
+               this._competitionTypes ??
+               (this._competitionTypes = new Repository<CompetitionType>(this._context.CompetitionTypes));
 
         public int SaveChanges()
         {

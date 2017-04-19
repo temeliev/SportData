@@ -15,16 +15,20 @@ namespace SportData.Data.Entities
 
         public string EmblemImageUrl { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool IsDeleted { get; set; }
 
         [Required]
         [MaxLength(250)]
         [Column(TypeName = "nvarchar")]
         public string Name { get; set; }
 
+        public int LocationId { get; set; }
+
         public DateTime? CDate { get; set; }
 
         public virtual FootballTeam OriginalTeam { get; set; }
+
+        public virtual Location Location { get; set; }
 
         public virtual ICollection<FootballTeamCulture> Cultures { get; set; }
 
@@ -36,6 +40,8 @@ namespace SportData.Data.Entities
 
         public virtual ICollection<MatchEvent> MatchEvents { get; set; }
 
-        public virtual ICollection<FootballTeamPlayer> PlayersHistory { get; set; }
+        public virtual ICollection<FootballTeamPlayer> Players { get; set; }
+
+        //public virtual ICollection<FootballPlayer> PlayersTest { get; set; }
     }
 }

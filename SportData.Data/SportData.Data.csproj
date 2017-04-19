@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\AddressInfo.cs" />
+    <Compile Include="Entities\CompetitionType.cs" />
     <Compile Include="Entities\CultureDescription.cs" />
     <Compile Include="Entities\FootballCompetition.cs" />
     <Compile Include="Entities\FootballCompetitionCulture.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Entities\MatchEvent.cs" />
     <Compile Include="Entities\MatchStatus.cs" />
     <Compile Include="Entities\MatchStatusCulture.cs" />
+    <Compile Include="Entities\PlayerStatus.cs" />
     <Compile Include="Entities\Season.cs" />
     <Compile Include="Entities\FootballTeam.cs" />
     <Compile Include="Entities\FootballTeamCulture.cs" />
@@ -132,6 +134,30 @@
     <Compile Include="Migrations\201704141921295_FootballPlayerChanges.Designer.cs">
       <DependentUpon>201704141921295_FootballPlayerChanges.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704151347275_FootballTeamChanges.cs" />
+    <Compile Include="Migrations\201704151347275_FootballTeamChanges.Designer.cs">
+      <DependentUpon>201704151347275_FootballTeamChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704151413276_FootballTeamsPlayersChanges.cs" />
+    <Compile Include="Migrations\201704151413276_FootballTeamsPlayersChanges.Designer.cs">
+      <DependentUpon>201704151413276_FootballTeamsPlayersChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704151612092_FootballTeamsChanges.cs" />
+    <Compile Include="Migrations\201704151612092_FootballTeamsChanges.Designer.cs">
+      <DependentUpon>201704151612092_FootballTeamsChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704171312354_AddPlayerStatusTable.cs" />
+    <Compile Include="Migrations\201704171312354_AddPlayerStatusTable.Designer.cs">
+      <DependentUpon>201704171312354_AddPlayerStatusTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704181431186_CompanyTypesTablesWasAdded.cs" />
+    <Compile Include="Migrations\201704181431186_CompanyTypesTablesWasAdded.Designer.cs">
+      <DependentUpon>201704181431186_CompanyTypesTablesWasAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704190826573_CompanyTypesChanges.cs" />
+    <Compile Include="Migrations\201704190826573_CompanyTypesChanges.Designer.cs">
+      <DependentUpon>201704190826573_CompanyTypesChanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SportDataContext.cs" />
@@ -170,6 +196,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704141921295_FootballPlayerChanges.resx">
       <DependentUpon>201704141921295_FootballPlayerChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704151347275_FootballTeamChanges.resx">
+      <DependentUpon>201704151347275_FootballTeamChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704151413276_FootballTeamsPlayersChanges.resx">
+      <DependentUpon>201704151413276_FootballTeamsPlayersChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704151612092_FootballTeamsChanges.resx">
+      <DependentUpon>201704151612092_FootballTeamsChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704171312354_AddPlayerStatusTable.resx">
+      <DependentUpon>201704171312354_AddPlayerStatusTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704181431186_CompanyTypesTablesWasAdded.resx">
+      <DependentUpon>201704181431186_CompanyTypesTablesWasAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704190826573_CompanyTypesChanges.resx">
+      <DependentUpon>201704190826573_CompanyTypesChanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

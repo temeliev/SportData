@@ -2,7 +2,7 @@
 
 namespace SportData.Web.Models.Admin
 {
-    public class CountryCultureViewModel
+    public class CountryCultureViewModel : BaseViewModel
     {
         public int CountryId { get; set; }
 

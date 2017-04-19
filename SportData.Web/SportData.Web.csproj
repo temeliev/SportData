@@ -210,17 +210,23 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
+    <Compile Include="Helpers\Utility.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Interfaces\Repository.cs" />
     <Compile Include="Interfaces\UnitOfWork.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Admin\BaseViewModel.cs" />
     <Compile Include="Models\Admin\FootballPlayerCultureViewModel.cs" />
     <Compile Include="Models\Admin\CompetitionCultureViewModel.cs" />
     <Compile Include="Models\Admin\CompetitionViewModel.cs" />
     <Compile Include="Models\Admin\CountryViewModel.cs" />
     <Compile Include="Models\Admin\CountryCultureViewModel.cs" />
     <Compile Include="Models\Admin\FootballPlayerViewModel.cs" />
+    <Compile Include="Models\Admin\FootballTeamCultureViewModel.cs" />
+    <Compile Include="Models\Admin\FootballTeamPlayerViewModel.cs" />
+    <Compile Include="Models\Admin\FootballTeamViewModel.cs" />
+    <Compile Include="Models\Admin\SearchFootballPlayerViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\LocationViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -372,6 +378,23 @@
     <Content Include="Views\Admin\AddFootballPlayerCulture.cshtml" />
     <Content Include="Views\Admin\EditFootballPlayer.cshtml" />
     <Content Include="Views\Admin\EditFootballPlayerCulture.cshtml" />
+    <Content Include="Views\Admin\FootballTeams.cshtml" />
+    <Content Include="Views\Admin\AddFootballTeam.cshtml" />
+    <Content Include="Views\Admin\EditFootballTeam.cshtml" />
+    <Content Include="Views\Admin\AddFootballTeamCulture.cshtml" />
+    <Content Include="Views\Admin\EditFootballTeamCulture.cshtml" />
+    <Content Include="Views\Admin\SearchFootballPlayer.cshtml" />
+    <Content Include="Views\Admin\EditFootballTeamPlayer.cshtml" />
+    <Content Include="Views\Admin\DeleteCountry.cshtml" />
+    <Content Include="Views\Admin\DeleteCountryCulture.cshtml" />
+    <Content Include="Views\Admin\DeleteCompetition.cshtml" />
+    <Content Include="Views\Admin\DeleteCompetitionCulture.cshtml" />
+    <Content Include="Views\Admin\DeleteFootballPlayer.cshtml" />
+    <Content Include="Views\Admin\DeleteFootballPlayerCulture.cshtml" />
+    <Content Include="Views\Admin\DeleteFootballTeam.cshtml" />
+    <Content Include="Views\Admin\DeleteFootballTeamCulture.cshtml" />
+    <Content Include="Views\Admin\AddFootballPlayerToTeam.cshtml" />
+    <Content Include="Views\Admin\DeleteFootballPlayerFromTeam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

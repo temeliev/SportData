@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SportData.Data.Entities
 {
-    [Table("FootballTeamPlayers")]
+    [Table("FootballTeamsPlayers")]
     public class FootballTeamPlayer
     {
         [Key]
@@ -14,16 +14,18 @@ namespace SportData.Data.Entities
 
         public int PlayerId { get; set; }
 
-        public bool IsActive { get; set; }
+        public int PlayerStatusId { get; set; }
 
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         public DateTime? CDate { get; set; }
 
         public virtual FootballTeam Team { get; set; }
 
         public virtual FootballPlayer Player { get; set; }
+
+        public virtual PlayerStatus PlayerStatus { get; set; }
     }
 }
