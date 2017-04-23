@@ -13,7 +13,8 @@ namespace SportData.Web.Models.Admin
 
         public int Id { get; set; }
 
-        [Display(Name = "Име")]
+        [Display(Name = "Име", ResourceType = typeof(Resources.Resources))]
+        [Required(ErrorMessage = "Липсва име на държавата!")]
         public string Name { get; set; }
 
         public int? ParentId { get; set; }
@@ -24,6 +25,7 @@ namespace SportData.Web.Models.Admin
         [Display(Name = "Линк")]
         public string LocationImageUrl { get; set; }
 
+        [Display(Name = "Съкращение")]
         public string Abbreviation { get; set; }
 
         public List<CountryCultureViewModel> Cultures { get; set; }

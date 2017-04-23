@@ -12,6 +12,8 @@ namespace SportData.Web
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/jquery-ui-{version}.js"));
 
+            //"~/Scripts/DataTables/dataTables.bootstrap.js"
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
@@ -29,8 +31,10 @@ namespace SportData.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css",
-                      "~/Content/themes/base/jquery-ui.css"));
+                      "~/Content/themes/base/jquery-ui.css",
+                      "~/Content/site.css"));
+
+            //"~/Content/DataTables/css/dataTables.bootstrap.css"
         }
     }
 }

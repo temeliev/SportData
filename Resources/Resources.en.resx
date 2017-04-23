@@ -117,7 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ChooseYourLanguage" xml:space="preserve">
+    <value>Select a language</value>
+  </data>
+  <data name="CurrentCulture" xml:space="preserve">
+    <value>EN</value>
+  </data>
+  <data name="IndexTitle" xml:space="preserve">
+    <value>Home page</value>
+  </data>
   <data name="LocationName" xml:space="preserve">
     <value>Name of a country</value>
+  </data>
+  <data name="NavigationAboutButton" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="NavigationAdminPanelButton" xml:space="preserve">
+    <value>Admin panel</value>
+  </data>
+  <data name="NavigationContactsButton" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="NavigationHomeButton" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="NavigationLoginButton" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="NavigationLogofButton" xml:space="preserve">
+    <value>Log off</value>
+  </data>
+  <data name="NavigationRegisterButton" xml:space="preserve">
+    <value>Register</value>
   </data>
 </root>

@@ -117,7 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ChooseYourLanguage" xml:space="preserve">
+    <value>Изберете език</value>
+  </data>
+  <data name="CurrentCulture" xml:space="preserve">
+    <value>BG</value>
+  </data>
+  <data name="IndexTitle" xml:space="preserve">
+    <value>Основно меню</value>
+  </data>
   <data name="LocationName" xml:space="preserve">
     <value>Локация</value>
+  </data>
+  <data name="NavigationAboutButton" xml:space="preserve">
+    <value>За нас</value>
+  </data>
+  <data name="NavigationAdminPanelButton" xml:space="preserve">
+    <value>Админски панел</value>
+  </data>
+  <data name="NavigationContactsButton" xml:space="preserve">
+    <value>Контакти</value>
+  </data>
+  <data name="NavigationHomeButton" xml:space="preserve">
+    <value>Начало</value>
+  </data>
+  <data name="NavigationLoginButton" xml:space="preserve">
+    <value>Логин</value>
+  </data>
+  <data name="NavigationLogoffButton" xml:space="preserve">
+    <value>Излез</value>
+  </data>
+  <data name="NavigationRegisterButton" xml:space="preserve">
+    <value>Регистрация</value>
   </data>
 </root>

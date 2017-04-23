@@ -7,7 +7,9 @@ namespace SportData.Web.Models
     {
         public DateTime CurrentDate { get; set; }
 
-        public List<MatchViewModel> Matches { get; set; }
+        public string SelectedDate { get; set; }
+
+        public List<GroupedMatchesViewModel> GroupedMatches { get; set; }
 
         public List<LocationViewModel> Countries { get; set; }
 

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<SportData.Web.Models.LocationViewModel>
+
+<div class="col-lg-2">
+    <p class="caption">@Resources.Home.Index.CountriesCaption</p>
+    <div id="accordion">
+        @foreach (var country in @Model)
+        {
+            <p>@country.Name</p>
+            if (country.Competitions != null)
+            {
+                <ul style="padding: 5px; text-align: center">
+
+                    @foreach (var competition in country.Competitions)
+                    {
+                        <li>@Html.ActionLink(competition.CompetitionName, "GetTest", "Home", new { @class = "sidebar-li-item" })</li>
+                    }
+                </ul>
+            }
+        }
+    </div>
+</div>
+@*<div class="col-lg-2">
+    <label>@Resources.Home.Index.CountriesCaption</label>
+    <ul class="nav nav-tabs nav-stacked">
+        @foreach (var country in @Model)
+        {
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    @country.Name <span class="caret"></span>
+                </a>
+                @if (country.Competitions != null)
+            {
+                    <ul class="dropdown-menu">
+                        @foreach (var competition in country.Competitions)
+                        {
+                            <li>@Html.ActionLink(competition.CompetitionName, "GetTest", "Home")</li>
+                        }*@
+
+@*<li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+    <li class="divider"></li>
+    <li><a href="#">Separated link</a></li>*@
+@*</ul>
+        }
+    </li>*@
+@*<li>@Html.ActionLink(country.Name, "EditCountry", "Home", new { countryId = @country.Id }, new { @class = "" }) </li>*@
+@*}
+        </ul>
+    </div>*@
+

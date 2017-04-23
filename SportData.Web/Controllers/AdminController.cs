@@ -8,7 +8,7 @@ using SportData.Web.Services;
 
 namespace SportData.Web.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : BaseController
     {
         private readonly IAdminService _adminService;
 
@@ -46,9 +46,16 @@ namespace SportData.Web.Controllers
         [HttpPost]
         public ActionResult AddCountry(CountryViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Locations = _adminService.GetLocations(LocationType.Continent);
+                model.PreviousLink = this.Url.Action("Countries", "Admin", Request.Url.Scheme);
+                return View(model);
+            }
+
             int countryId = _adminService.AddCountry(model);
 
-            return EditCountry(countryId);
+            return RedirectToAction("EditCountry", new {countryId});
         }
 
         [HttpGet]

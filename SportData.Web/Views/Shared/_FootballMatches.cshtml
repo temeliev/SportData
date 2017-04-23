@@ -1,0 +1,15 @@
+﻿@using SportData.Data.Enums
+@using SportData.Web.Helpers
+@model SportData.Web.Models.FootballMatchesViewModel
+
+@Html.DropDownListFor(x => x.SelectedDate, new SelectList(ViewBag.DateList, "Value", "Text"), new { @class = "form-control" })
+<div id="tabs">
+    <ul>
+        <li><a href=@Url.Action("FootballMatches","FootballMatches", new { date = @Model.SelectedDate, status = MatchStatus.Default })>@Resources.Home.Index.AllGames</a></li>
+        <li><a href=@Url.Action("FootballMatches","FootballMatches", new { date = @Model.SelectedDate, status = MatchStatus.NotStarted })>@Resources.Home.Index.UpcomingGames</a></li>
+        <li><a href=@Url.Action("FootballMatches","FootballMatches", new { date = @Model.SelectedDate, status = MatchStatus.Finished })>@Resources.Home.Index.FinishedGames</a></li>
+    </ul>
+    @Html.RenderPartial("_FootballMatchesTable")
+
+
+</div>

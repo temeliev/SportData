@@ -22,7 +22,7 @@ namespace Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Resources.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,11 +61,101 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Изберете език.
+        /// </summary>
+        public static string ChooseYourLanguage {
+            get {
+                return ResourceManager.GetString("ChooseYourLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BG.
+        /// </summary>
+        public static string CurrentCulture {
+            get {
+                return ResourceManager.GetString("CurrentCulture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Основно меню.
+        /// </summary>
+        public static string IndexTitle {
+            get {
+                return ResourceManager.GetString("IndexTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Локация.
         /// </summary>
-        internal static string LocationName {
+        public static string LocationName {
             get {
                 return ResourceManager.GetString("LocationName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to За нас.
+        /// </summary>
+        public static string NavigationAboutButton {
+            get {
+                return ResourceManager.GetString("NavigationAboutButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Админски панел.
+        /// </summary>
+        public static string NavigationAdminPanelButton {
+            get {
+                return ResourceManager.GetString("NavigationAdminPanelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Контакти.
+        /// </summary>
+        public static string NavigationContactsButton {
+            get {
+                return ResourceManager.GetString("NavigationContactsButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Начало.
+        /// </summary>
+        public static string NavigationHomeButton {
+            get {
+                return ResourceManager.GetString("NavigationHomeButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Логин.
+        /// </summary>
+        public static string NavigationLoginButton {
+            get {
+                return ResourceManager.GetString("NavigationLoginButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Излез.
+        /// </summary>
+        public static string NavigationLogoffButton {
+            get {
+                return ResourceManager.GetString("NavigationLogoffButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Регистрация.
+        /// </summary>
+        public static string NavigationRegisterButton {
+            get {
+                return ResourceManager.GetString("NavigationRegisterButton", resourceCulture);
             }
         }
     }

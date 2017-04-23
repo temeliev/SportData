@@ -1,0 +1,52 @@
+﻿@using Microsoft.Ajax.Utilities
+@using SportData.Data.Enums
+@using SportData.Web.Helpers
+@model SportData.Web.Models.FootballMatchesViewModel
+
+@{
+    string tabId = string.Empty;
+    switch (@Model.MatchStatus)
+    {
+        case MatchStatus.Finished:
+            tabId = "tabs-finished";
+            break;
+        case MatchStatus.NotStarted:
+            tabId = "tabs-upcoming";
+            break;
+        default:
+            tabId = "tabs-all";
+            break;
+    }
+}
+
+<div id= @tabId>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tbody>
+                @foreach (var group in @Model.Matches)
+                {
+                    <tr class="table-group">
+                        <td colspan="5">
+                            @Html.Image(@group.CompetitionLocationFlagUrl, "no image", new { @class = "", @width = "20", @height = "20" })
+                            <span class="displayed">@group.CompetitionLocationName: @group.FootballCompetitionName</span>
+                        </td>
+                    </tr>
+                    foreach (var match in group.Matches)
+                    {
+                        <tr>
+                            <td class="col-sm-1 table-col">@Html.DisplayFor(modelItem => match.StartHour)</td>
+                            <td class="col-sm-4">
+                                <p class="table-col-right">@Html.DisplayFor(modelItem => match.HomeTeamName)</p>
+                            </td>
+                            <td class="col-sm-1 table-col">@Html.DisplayFor(modelItem => match.MatchResult)</td>
+                            <td class="col-sm-4">
+                                <p class="table-col-left">@Html.DisplayFor(modelItem => match.AwayTeamName)</p>
+                            </td>
+                            <td class="col-sm-2 table-col">@Html.DisplayFor(modelItem => match.MatchStatusName)</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

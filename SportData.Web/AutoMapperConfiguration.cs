@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using SportData.Data.Entities;
+using SportData.Web.Models;
 using SportData.Web.Models.Admin;
 
 namespace SportData.Web
@@ -96,13 +97,14 @@ namespace SportData.Web
                     .ForMember(dst => dst.NationalityImageUrl, opt => opt.MapFrom(src => src.Nationality.LocationImageUrl))
                     .ForMember(dst => dst.PlayerId, opt => opt.MapFrom(src => src.Id));
 
-                //cfg.CreateMap<FootballPlayer, FootballTeamPlayerViewModel>()
-                //    .ForMember(dst => dst.PlayerFullName,
-                //        opt => opt.MapFrom(src => src.FirstName + " " + src.SecondName + " " + src.LastName))
-                //    .ForMember(dst => dst.LocationName, opt => opt.MapFrom(src => src.Nationality.Name))
-                //    .ForMember(dst => dst.NationalityImageUrl, opt => opt.MapFrom(src => src.Nationality.LocationImageUrl))
-                //    .ForMember(dst => dst.PlayerId, opt => opt.MapFrom(src => src.Id))
-                //    .ForMember(dst => dst.PlayerStatusId, opt => opt.MapFrom(src => src.))
+
+                cfg.CreateMap<Location, LocationViewModel>();
+
+                cfg.CreateMap<FootballCompetition, CompetitionCultureViewModel>()
+                    .ForMember(dst => dst.CompetitionName, opt => opt.MapFrom(src => src.Name))
+                    .ForMember(dst => dst.CompetitionId, opt => opt.MapFrom(src => src.Id));
+                //.ForMember(dst => dst.Id, opt => opt.MapFrom(src => src.LocationId))
+                //.ForMember(x=>x.Competitions, opt => opt.MapFrom(src => src.Location.Competitions));
 
             });
         }

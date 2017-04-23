@@ -1,7 +1,17 @@
-﻿@model SportData.Web.Models.HomeViewModel
+﻿@using SportData.Data.Enums
+@using SportData.Web.Helpers
+@model SportData.Web.Models.HomeViewModel
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = Resources.Resources.IndexTitle;
 }
+
+@*@helper selected(string c, string culture)
+    {
+        if (c == culture)
+        {
+            @:checked="checked"
+        }
+    }*@
 
 <div class="col-lg-12">
     <div class="jumbotron">
@@ -9,89 +19,222 @@
         <p class="lead"></p>
         <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
     </div>
-
-    <div class="col-lg-2">
-        <ul class="nav nav-tabs nav-stacked">
-            <li>@Html.ActionLink("Team1", "Index", "Home")</li>
-            <li>@Html.ActionLink("Team2", "About", "Home")</li>
-            <li>@Html.ActionLink("Team3", "Contact", "Home")</li>
-        </ul>
-    </div>
+    @Html.Partial("_SideBarMenuCountries", @Model.Countries)
     <div class="col-lg-8">
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-            <li><a href="#profile" data-toggle="tab">Profile</a></li>
-            <li class="disabled"><a>Disabled</a></li>
-        </ul>
-        <div id="myTabContent" class="tab-content">
-            <div class="tab-pane fade active in" id="home">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>Page</th>
-                                <th>Visits</th>
-                                <th>% New Visits</th>
-                                <th>Revenue</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>/index.html</td>
-                                <td>1265</td>
-                                <td>32.3%</td>
-                                <td>$321.33</td>
-                            </tr>
-                            <tr>
-                                <td>/about.html</td>
-                                <td>261</td>
-                                <td>33.3%</td>
-                                <td>$234.12</td>
-                            </tr>
-                            <tr>
-                                <td>/sales.html</td>
-                                <td>665</td>
-                                <td>21.3%</td>
-                                <td>$16.34</td>
-                            </tr>
-                            <tr>
-                                <td>/blog.html</td>
-                                <td>9516</td>
-                                <td>89.3%</td>
-                                <td>$1644.43</td>
-                            </tr>
-                            <tr>
-                                <td>/404.html</td>
-                                <td>23</td>
-                                <td>34.3%</td>
-                                <td>$23.52</td>
-                            </tr>
-                            <tr>
-                                <td>/services.html</td>
-                                <td>421</td>
-                                <td>60.3%</td>
-                                <td>$724.32</td>
-                            </tr>
-                            <tr>
-                                <td>/blog/post.html</td>
-                                <td>1233</td>
-                                <td>93.2%</td>
-                                <td>$126.34</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="profile">
-                <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
-            </div>
-            <div class="tab-pane fade" id="dropdown1">
-                <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>
-            </div>
-            <div class="tab-pane fade" id="dropdown2">
-                <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.</p>
-            </div>
+        @Html.DropDownListFor(x => x.SelectedDate, new SelectList(ViewBag.DateList, "Value", "Text"), new { @class = "form-control", @Id = "dateDropdown" })
+        <div id="tabs">
+            <ul>
+                <li id="tabAll"><a id="all" href=@Url.Action("FootballMatches","FootballMatches", new { date = @Model.SelectedDate, status = MatchStatus.Default })>@Resources.Home.Index.AllGames</a></li>
+                <li id="tabUpcoming"><a id="upcoming" href=@Url.Action("FootballMatches","FootballMatches", new { date = @Model.SelectedDate, status = MatchStatus.NotStarted })>@Resources.Home.Index.UpcomingGames</a></li>
+                <li id="tabFinished"><a id="finished" href=@Url.Action("FootballMatches","FootballMatches", new { date = @Model.SelectedDate, status = MatchStatus.Finished })>@Resources.Home.Index.FinishedGames</a></li>
+            </ul>
+
+
         </div>
+        @*@Html.Partial("_FootballMatches")*@
+        @*<ul class="nav nav-tabs">
+                <li class="active"><a href="#all" data-toggle="tab">@Resources.Home.Index.AllGames</a></li>
+                <li><a href="#upcoming" data-toggle="tab">@Resources.Home.Index.UpcomingGames</a></li>
+                <li><a href="#finished" data-toggle="tab">@Resources.Home.Index.FinishedGames</a></li>
+            </ul>*@
+        @*<div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="all">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tbody>
+                                @foreach (var group in @Model.GroupedMatches)
+                                {
+                                    <tr class="table-group">
+                                        <td colspan="5">
+                                            @Html.Image(@group.CompetitionLocationFlagUrl, "no image", new { @class = "", @width = "20", @height = "20" })
+                                            <span class="displayed">@group.CompetitionLocationName: @group.FootballCompetitionName</span>
+                                        </td>
+                                    </tr>
+                                    foreach (var match in group.Matches)
+                                    {
+                                        <tr>
+                                            <td class="col-sm-1 table-col">@Html.DisplayFor(modelItem => match.StartHour)</td>
+                                            <td class="col-sm-4">
+                                                <p class="table-col-right">@Html.DisplayFor(modelItem => match.HomeTeamName)</p>
+                                            </td>
+                                            <td class="col-sm-1 table-col">@Html.DisplayFor(modelItem => match.MatchResult)</td>
+                                            <td class="col-sm-4">
+                                                <p class="table-col-left">@Html.DisplayFor(modelItem => match.AwayTeamName)</p>
+                                            </td>
+                                            <td class="col-sm-2 table-col">@Html.DisplayFor(modelItem => match.MatchStatusName)</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade active in" id="upcoming">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tbody>
+                                @foreach (var group in @Model.GroupedMatches.Where(g => g.Matches.All(a => a.MatchStatusId == (int)MatchStatus.NotStarted)))
+                                {
+                                    <tr class="table-group">
+                                        <td colspan="5">
+                                            @Html.Image(@group.CompetitionLocationFlagUrl, "no image", new { @class = "", @width = "20", @height = "20" })
+                                            <span class="displayed">@group.CompetitionLocationName: @group.FootballCompetitionName</span>
+                                        </td>
+                                    </tr>
+                                    foreach (var match in group.Matches)
+                                    {
+                                        <tr>
+                                            <td class="col-sm-1 table-col">@Html.DisplayFor(modelItem => match.StartHour)</td>
+                                            <td class="col-sm-4">
+                                                <p class="table-col-right">@Html.DisplayFor(modelItem => match.HomeTeamName)</p>
+                                            </td>
+                                            <td class="col-sm-1 table-col">@Html.DisplayFor(modelItem => match.MatchResult)</td>
+                                            <td class="col-sm-4">
+                                                <p class="table-col-left">@Html.DisplayFor(modelItem => match.AwayTeamName)</p>
+                                            </td>
+                                            <td class="col-sm-2 table-col">@Html.DisplayFor(modelItem => match.MatchStatusName)</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade active in" id="finished">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tbody>
+                                @foreach (var group in @Model.GroupedMatches.Where(g => g.Matches.All(a => a.MatchStatusId == (int)MatchStatus.Finished)))
+                                {
+                                    <tr class="table-group">
+                                        <td colspan="5">
+                                            @Html.Image(@group.CompetitionLocationFlagUrl, "no image", new { @class = "", @width = "20", @height = "20" })
+                                            <span class="displayed">@group.CompetitionLocationName: @group.FootballCompetitionName</span>
+                                        </td>
+                                    </tr>
+                                    foreach (var match in group.Matches)
+                                    {
+                                        <tr>
+                                            <td class="col-sm-1 table-col">@Html.DisplayFor(modelItem => match.StartHour)</td>
+                                            <td class="col-sm-4">
+                                                <p class="table-col-right">@Html.DisplayFor(modelItem => match.HomeTeamName)</p>
+                                            </td>
+                                            <td class="col-sm-1 table-col">@Html.DisplayFor(modelItem => match.MatchResult)</td>
+                                            <td class="col-sm-4">
+                                                <p class="table-col-left">@Html.DisplayFor(modelItem => match.AwayTeamName)</p>
+                                            </td>
+                                            <td class="col-sm-2 table-col">@Html.DisplayFor(modelItem => match.MatchStatusName)</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>*@
+
+
+        @*@Html.DropDownListFor(x => x.SelectedDate, new SelectList(ViewBag.DateList, "Value", "Text"), new { @class = "form-control" })
+            <div id="tabs">
+                <ul>
+                    <li><a href="#tabs-all">@Resources.Home.Index.AllGames</a></li>
+                    <li><a href="#tabs-upcoming">@Resources.Home.Index.UpcomingGames</a></li>
+                    <li><a href="#tabs-finished">@Resources.Home.Index.FinishedGames</a></li>
+                </ul>
+                <div id="tabs-all">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tbody>
+                                @foreach (var group in @Model.GroupedMatches)
+                        {
+                            <tr class="table-group">
+                                <td colspan="5">
+                                    @Html.Image(@group.CompetitionLocationFlagUrl, "no image", new {@class = "", @width = "20", @height = "20"})
+                                    <span class="displayed">@group.CompetitionLocationName: @group.FootballCompetitionName</span>
+                                </td>
+                            </tr>
+                            foreach (var match in group.Matches)
+                            {
+                            <tr>
+                                <td class="col-sm-1 table-col">@Html.DisplayFor(modelItem => match.StartHour)</td>
+                                <td class="col-sm-4">
+                                    <p class="table-col-right">@Html.DisplayFor(modelItem => match.HomeTeamName)</p>
+                                </td>
+                                <td class="col-sm-1 table-col">@Html.DisplayFor(modelItem => match.MatchResult)</td>
+                                <td class="col-sm-4">
+                                    <p class="table-col-left">@Html.DisplayFor(modelItem => match.AwayTeamName)</p>
+                                </td>
+                                <td class="col-sm-2 table-col">@Html.DisplayFor(modelItem => match.MatchStatusName)</td>
+                            </tr>
+                            }
+                        }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="tabs-upcoming">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tbody>
+                                @foreach (var group in @Model.GroupedMatches.Where(g => g.Matches.All(a => a.MatchStatusId == (int)MatchStatus.NotStarted)))
+                                {
+                                    <tr class="table-group">
+                                        <td colspan="5">
+                                            @Html.Image(@group.CompetitionLocationFlagUrl, "no image", new { @class = "", @width = "20", @height = "20" })
+                                            <span class="displayed">@group.CompetitionLocationName: @group.FootballCompetitionName</span>
+                                        </td>
+                                    </tr>
+                                    foreach (var match in group.Matches)
+                                    {
+                                        <tr>
+                                            <td class="col-sm-1 table-col">@Html.DisplayFor(modelItem => match.StartHour)</td>
+                                            <td class="col-sm-4">
+                                                <p class="table-col-right">@Html.DisplayFor(modelItem => match.HomeTeamName)</p>
+                                            </td>
+                                            <td class="col-sm-1 table-col">@Html.DisplayFor(modelItem => match.MatchResult)</td>
+                                            <td class="col-sm-4">
+                                                <p class="table-col-left">@Html.DisplayFor(modelItem => match.AwayTeamName)</p>
+                                            </td>
+                                            <td class="col-sm-2 table-col">@Html.DisplayFor(modelItem => match.MatchStatusName)</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="tabs-finished">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tbody>
+                                @foreach (var group in @Model.GroupedMatches.Where(g => g.Matches.All(a => a.MatchStatusId == (int)MatchStatus.Finished)))
+                                {
+                                    <tr class="table-group">
+                                        <td colspan="5">
+                                            @Html.Image(@group.CompetitionLocationFlagUrl, "no image", new { @class = "", @width = "20", @height = "20" })
+                                            <span class="displayed">@group.CompetitionLocationName: @group.FootballCompetitionName</span>
+                                        </td>
+                                    </tr>
+                                    foreach (var match in group.Matches)
+                                    {
+                                        <tr>
+                                            <td class="col-sm-1 table-col">@Html.DisplayFor(modelItem => match.StartHour)</td>
+                                            <td class="col-sm-4">
+                                                <p class="table-col-right">@Html.DisplayFor(modelItem => match.HomeTeamName)</p>
+                                            </td>
+                                            <td class="col-sm-1 table-col">@Html.DisplayFor(modelItem => match.MatchResult)</td>
+                                            <td class="col-sm-4">
+                                                <p class="table-col-left">@Html.DisplayFor(modelItem => match.AwayTeamName)</p>
+                                            </td>
+                                            <td class="col-sm-2 table-col">@Html.DisplayFor(modelItem => match.MatchStatusName)</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>*@
     </div>
 
     <ul class="nav nav-pills nav-stacked col-lg-2">

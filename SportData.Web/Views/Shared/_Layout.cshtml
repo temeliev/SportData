@@ -16,14 +16,26 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                @{
+                    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+
+                    if (culture == "en-us")
+                    {
+                        @Html.ActionLink("BG", "SetCulture", "Home", new { culture = "bg-bg" }, new { @class = "navbar-brand" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("EN", "SetCulture", "Home", new { culture = "en-us" }, new { @class = "navbar-brand" })
+                    }
+                }
                 @Html.ActionLink("Sport Info", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Admin Panel", "Index", "Admin")</li>
+                    <li>@Html.ActionLink(@Resources.Resources.NavigationHomeButton, "Index", "Home")</li>
+                    <li>@Html.ActionLink(@Resources.Resources.NavigationAboutButton, "About", "Home")</li>
+                    <li>@Html.ActionLink(@Resources.Resources.NavigationContactsButton, "Contact", "Home")</li>
+                    <li>@Html.ActionLink(@Resources.Resources.NavigationAdminPanelButton, "Index", "Admin")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
