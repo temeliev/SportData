@@ -7,8 +7,8 @@ DEFAULT GETDATE() FOR CDate ;
 ALTER TABLE IdentityUsers ADD CONSTRAINT DF_Users_CDATE  
 DEFAULT GETDATE() FOR CDate ; 
 
-INSERT INTO Locations(Abbreviation)
-VALUES('EUR'), ('ASI'), ('AFC'),('NCA'),('SAA'),('AOA'),('WOR')
+INSERT INTO Locations(Name, Abbreviation)
+VALUES('Европа','EUR'), ('Азия','ASI'), ('Африка','AFC'),('Северна и централна Америка','NCA'),('Южна Америка','SAA'),('Австралия и Океания','AOA'),('Свят','WOR')
 
 INSERT INTO LocationCultures(LocationId,Name,CultureId)
 VALUES 

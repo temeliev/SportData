@@ -21,6 +21,7 @@ namespace SportData.Web.Models.Admin
         public DateTime? EndDate { get; set; }
 
         [Display(Name = "Статус")]
+        [Required(ErrorMessage = "Въведете статус на футболиста!")]
         public int PlayerStatusId { get; set; }
 
         [Display(Name = "Статус")]

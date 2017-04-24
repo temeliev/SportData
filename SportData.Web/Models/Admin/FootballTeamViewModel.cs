@@ -9,16 +9,19 @@ namespace SportData.Web.Models.Admin
 
         public int? OriginalTeamId { get; set; }
 
+        [Display(Name = "Иконка")]
         public string EmblemImageUrl { get; set; }
 
         public bool IsDeleted { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Въведете име на отбора!")]
         [Display(Name = "Име")]
         public string Name { get; set; }
 
+        [Display(Name = "Локация")]
         public string LocationName { get; set; }
 
+        [Display(Name = "Локация")]
         public int LocationId { get; set; }
 
         public List<FootballTeamCultureViewModel> Cultures { get; set; }

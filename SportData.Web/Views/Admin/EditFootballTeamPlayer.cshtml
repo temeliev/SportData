@@ -33,6 +33,7 @@
                     @Html.LabelFor(m => m.PlayerStatusId, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
                         @Html.DropDownListFor(m => m.PlayerStatusId, new SelectList(ViewBag.PlayerStatuses, "Value", "Text"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.PlayerStatusId, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">

@@ -63,7 +63,7 @@ namespace SportData.Web.Controllers
         {
             var countryVm = _adminService.GetCountryViewById(countryId);
             countryVm.PreviousLink = this.Url.Action("Countries", "Admin", this.Request.Url.Scheme);
-            ViewBag.Locations = _adminService.GetLocations(LocationType.Country);
+            ViewBag.Locations = _adminService.GetLocations(LocationType.Continent);
             ViewBag.Cultures = _adminService.GetCultures();
 
             return View("EditCountry", countryVm);
@@ -72,11 +72,18 @@ namespace SportData.Web.Controllers
         [HttpPost]
         public ActionResult EditCountry([Bind(Include = "Id, Name, LocationImageUrl, Abbreviation, ParentId")]CountryViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Cultures = _adminService.GetCultures();
+                ViewBag.Locations = _adminService.GetLocations(LocationType.Continent);
+                model.PreviousLink = this.Url.Action("Countries", "Admin", this.Request.Url.Scheme);
+                
+                return View(model);
+            }
+
             _adminService.UpdateCountry(model);
 
             var countryVm = _adminService.GetCountryViewById(model.Id);
-            ViewBag.Locations = _adminService.GetLocations(LocationType.Continent);
-            ViewBag.Cultures = _adminService.GetCultures();
 
             return View("EditCountry", countryVm);
         }
@@ -113,9 +120,17 @@ namespace SportData.Web.Controllers
         [HttpPost]
         public ActionResult AddCountryCulture([Bind(Include = "CountryId, CountryName, CultureId")]CountryCultureViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Cultures = _adminService.GetCultures();
+                model.PreviousLink = this.Url.Action("EditCountry", "Admin", new { model.CountryId }, this.Request.Url.Scheme);
+
+                return View(model);
+            }
+
             _adminService.AddCountryCulture(model);
 
-            return RedirectToAction("EditCountry", new { countryId = model.CountryId });// EditCountry(model.CountryId);
+            return RedirectToAction("EditCountry", new { countryId = model.CountryId });
         }
 
         [HttpGet]
@@ -130,9 +145,16 @@ namespace SportData.Web.Controllers
         [HttpPost]
         public ActionResult EditCountryCulture([Bind(Include = "CountryId, CountryName, CultureId")]CountryCultureViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                model.PreviousLink = this.Url.Action("EditCountry", "Admin", new { countryId = model.CountryId }, this.Request.Url.Scheme);
+
+                return View(model);
+            }
+
             _adminService.UpdateCountryCulture(model);
 
-            return RedirectToAction("EditCountry", new { countryId = model.CountryId }); //EditCountry(model.CountryId);
+            return RedirectToAction("EditCountry", new { countryId = model.CountryId });
         }
 
         [HttpGet]
@@ -178,9 +200,18 @@ namespace SportData.Web.Controllers
         [HttpPost]
         public ActionResult AddCompetition(CompetitionViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Locations = _adminService.GetLocations(LocationType.All);
+                ViewBag.CompetitionTypes = _adminService.GetCompetitionTypes();
+                model.PreviousLink = this.Url.Action("Competitions", "Admin", this.Request.Url.Scheme);
+
+                return View(model);
+            }
+
             int competitionId = _adminService.AddCompetition(model);
 
-            return RedirectToAction("EditCompetition", new { competitionId }); //EditCompetition(competitionId);
+            return RedirectToAction("EditCompetition", new { competitionId });
         }
 
         [HttpGet]
@@ -197,6 +228,15 @@ namespace SportData.Web.Controllers
         [HttpPost]
         public ActionResult EditCompetition([Bind(Include = "Id, Name, CompetitionImageUrl, IsActive, LocationId, OriginalCompetitionId")]CompetitionViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Locations = _adminService.GetLocations(LocationType.All);
+                ViewBag.CompetitionTypes = _adminService.GetCompetitionTypes();
+                model.PreviousLink = this.Url.Action("Competitions", "Admin", this.Request.Url.Scheme);
+
+                return View(model);
+            }
+
             _adminService.UpdateCompetition(model);
 
             return EditCompetition(model.Id);
@@ -234,6 +274,14 @@ namespace SportData.Web.Controllers
         [HttpPost]
         public ActionResult AddCompetitionCulture([Bind(Include = "CompetitionId, CompetitionName, CultureId")]CompetitionCultureViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Cultures = _adminService.GetCultures();
+                model.PreviousLink = this.Url.Action("EditCompetition", "Admin", new { competitionId = model.CompetitionId }, this.Request.Url.Scheme);
+
+                return View(model);
+            }
+
             _adminService.AddCompetitionCulture(model);
 
             return RedirectToAction("EditCompetition", new { competitionId = model.CompetitionId });
@@ -251,6 +299,13 @@ namespace SportData.Web.Controllers
         [HttpPost]
         public ActionResult EditCompetitionCulture([Bind(Include = "CompetitionId, CompetitionName, CultureId")]CompetitionCultureViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                model.PreviousLink = this.Url.Action("EditCompetition", "Admin", new { competitionId = model.CompetitionId }, this.Request.Url.Scheme);
+
+                return View(model);
+            }
+
             _adminService.UpdateCompetitionCulture(model);
 
             return View();
@@ -291,12 +346,20 @@ namespace SportData.Web.Controllers
             ViewBag.Locations = _adminService.GetLocations(LocationType.Country);
             footballPlayerVm.PreviousLink = this.Url.Action("FootballPlayers", "Admin", this.Request.Url.Scheme);
 
-            return View("AddFootballPlayer", footballPlayerVm);
+            return View(footballPlayerVm);
         }
 
         [HttpPost]
         public ActionResult AddFootballPlayer(FootballPlayerViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Locations = _adminService.GetLocations(LocationType.Country);
+                model.PreviousLink = this.Url.Action("FootballPlayers", "Admin", this.Request.Url.Scheme);
+
+                return View(model);
+            }
+
             int playerId = _adminService.AddFootballPlayer(model);
 
             return RedirectToAction("EditFootballPlayer", new { footballPlayerId = playerId });
@@ -315,6 +378,14 @@ namespace SportData.Web.Controllers
         [HttpPost]
         public ActionResult EditFootballPlayer([Bind(Include = "Id, FirstName, SecondName, LastName, DateOfBirth, LocationName, PlayerImageUrl")]FootballPlayerViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Locations = _adminService.GetLocations(LocationType.Country);
+                model.PreviousLink = this.Url.Action("FootballPlayers", "Admin", this.Request.Url.Scheme);
+
+                return View(model);
+            }
+
             _adminService.UpdateFootballPlayer(model);
 
             return EditFootballPlayer(model.Id);
@@ -352,6 +423,14 @@ namespace SportData.Web.Controllers
         [HttpPost]
         public ActionResult AddFootballPlayerCulture([Bind(Include = "FootballPlayerId, FirstName, SecondName, LastName, CultureId")]FootballPlayerCultureViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Cultures = _adminService.GetCultures();
+                model.PreviousLink = this.Url.Action("EditFootballPlayer", "Admin", new { footballPlayerId = model.FootballPlayerId }, this.Request.Url.Scheme);
+
+                return View(model);
+            }
+
             _adminService.AddFootballPlayerCulture(model);
 
             return RedirectToAction("EditFootballPlayer", new { footballPlayerId = model.FootballPlayerId });
@@ -369,6 +448,13 @@ namespace SportData.Web.Controllers
         [HttpPost]
         public ActionResult EditFootballPlayerCulture([Bind(Include = "FootballPlayerId, FirstName, SecondName, LastName, CultureId")]FootballPlayerCultureViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                model.PreviousLink = this.Url.Action("EditFootballPlayer", "Admin", new { footballPlayerId = model.FootballPlayerId }, this.Request.Url.Scheme);
+
+                return View(model);
+            }
+
             _adminService.UpdateFootballPlayerCulture(model);
 
             return RedirectToAction("EditFootballPlayerCulture", new { footballPlayerId = model.FootballPlayerId, cultureId = model.CultureId });
@@ -416,6 +502,14 @@ namespace SportData.Web.Controllers
         [HttpPost]
         public ActionResult AddFootballTeam(FootballTeamViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Locations = _adminService.GetLocations(LocationType.All);
+                model.PreviousLink = this.Url.Action("FootballTeams", "Admin", this.Request.Url.Scheme);
+
+                return View(model);
+            }
+
             int teamId = _adminService.AddFootballTeam(model);
 
             return RedirectToAction("EditFootballTeam", new { footballTeamId = teamId });
@@ -436,6 +530,15 @@ namespace SportData.Web.Controllers
         [HttpPost]
         public ActionResult EditFootballTeam([Bind(Include = "Id, Name, EmblemImageUrl, IsActive")]FootballTeamViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Locations = _adminService.GetLocations(LocationType.All);
+                ViewBag.CompetitionTypes = _adminService.GetCompetitionTypes();
+                model.PreviousLink = this.Url.Action("FootballTeams", "Admin", this.Request.Url.Scheme);
+
+                return View(model);
+            }
+
             _adminService.UpdateFootballTeam(model);
 
             return EditFootballTeam(model.Id);
@@ -473,6 +576,14 @@ namespace SportData.Web.Controllers
         [HttpPost]
         public ActionResult AddFootballTeamCulture([Bind(Include = "FootballTeamId, FootballTeamName, CultureId")]FootballTeamCultureViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Cultures = _adminService.GetCultures();
+                model.PreviousLink = this.Url.Action("EditFootballTeam", "Admin", new { footballTeamId = model.FootballTeamId }, this.Request.Url.Scheme);
+
+                return View(model);
+            }
+
             _adminService.AddFootballTeamCulture(model);
 
             return RedirectToAction("EditFootballTeam", new { footballTeamId = model.FootballTeamId });
@@ -490,6 +601,13 @@ namespace SportData.Web.Controllers
         [HttpPost]
         public ActionResult EditFootballTeamCulture([Bind(Include = "FootballTeamId, FootballTeamName, CultureId")]FootballTeamCultureViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                model.PreviousLink = this.Url.Action("EditFootballTeam", "Admin", new { footballTeamId = model.FootballTeamId }, this.Request.Url.Scheme);
+
+                return View(model);
+            }
+
             _adminService.UpdateFootballTeamCulture(model);
 
             return RedirectToAction("EditFootballTeamCulture", new { footballTeamId = model.FootballTeamId, cultureId = model.CultureId });
@@ -526,6 +644,14 @@ namespace SportData.Web.Controllers
         [HttpPost]
         public ActionResult AddFootballPlayerToTeam([Bind(Include = "PlayerId, TeamId, StartDate, EndDate, PlayerStatusId")]FootballTeamPlayerViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.PlayerStatuses = _adminService.GetPlayerStatuses();
+                model.PreviousLink = this.Url.Action("EditFootballTeam", "Admin", new { footballTeamId = model.TeamId }, this.Request.Url.Scheme);
+
+                return View(model);
+            }
+
             _adminService.AddFootballPlayerToTeam(model);
 
             return RedirectToAction("EditFootballTeam", new { footballTeamId = model.TeamId });
@@ -575,6 +701,14 @@ namespace SportData.Web.Controllers
         [HttpPost]
         public ActionResult EditFootballTeamPlayer([Bind(Include = "Id, StartDate, EndDate, PlayerStatusId")]FootballTeamPlayerViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.PlayerStatuses = _adminService.GetPlayerStatuses();
+                model.PreviousLink = this.Url.Action("EditFootballTeam", "Admin", new { footballTeamId = model.TeamId }, Request.Url.Scheme);
+
+                return View(model);
+            }
+
             _adminService.UpdateFootballTeamPlayer(model);
 
             return View(model);

@@ -16,6 +16,7 @@
                     @Html.LabelFor(m => m.CompetitionName, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
                         @Html.EditorFor(x => x.CompetitionName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Наименование" }})
+                        @Html.ValidationMessageFor(x => x.CompetitionName, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">

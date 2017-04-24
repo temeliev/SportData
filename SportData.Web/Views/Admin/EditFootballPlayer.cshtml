@@ -15,6 +15,7 @@
                     @Html.LabelFor(m => m.FirstName, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
                         @Html.EditorFor(x => x.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Име" } })
+                        @Html.ValidationMessageFor(x => x.FirstName, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
@@ -27,6 +28,7 @@
                     @Html.LabelFor(m => m.LastName, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
                         @Html.EditorFor(x => x.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Фамилия" } })
+                        @Html.ValidationMessageFor(x => x.LastName, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
@@ -45,6 +47,7 @@
                     @Html.LabelFor(m => m.NationalityId, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
                         @Html.DropDownListFor(m => m.NationalityId, new SelectList(ViewBag.Locations, "Value", "Text"), "  ----- Избери -----  ", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.NationalityId, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 @Html.ActionLink("Нов запис", "AddFootballPlayerCulture", "Admin", new { footballPlayerId = Model.Id }, new { @class = "btn btn-default btn-sm" })

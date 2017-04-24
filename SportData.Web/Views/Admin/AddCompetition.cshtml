@@ -14,6 +14,7 @@
                     @Html.LabelFor(m => m.Name, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
                         @Html.EditorFor(x => x.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Наименование" }})
+                        @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
@@ -22,22 +23,24 @@
                         @Html.EditorFor(x => x.CompetitionImageUrl, new { htmlAttributes = new { @class = "form-control", @placeholder = "http:\\\\", @type = "url" }})
                     </div>
                 </div>
-                <div class="form-group">
+                @*<div class="form-group">
                     @Html.LabelFor(m => m.IsActive, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
                         @Html.CheckBoxFor(x => x.IsActive, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
-                </div>
+                </div>*@
                 <div class="form-group">
                     @Html.LabelFor(x => x.LocationId, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
                         @Html.DropDownListFor(m => m.LocationId, new SelectList(ViewBag.Locations, "Value", "Text"), "  ----- Избери -----  ", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.LocationId, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(x => x.CompetitionTypeId, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
                         @Html.DropDownListFor(m => m.CompetitionTypeId, new SelectList(ViewBag.CompetitionTypes, "Value", "Text"), "  ----- Избери -----  ", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.CompetitionTypeId, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">

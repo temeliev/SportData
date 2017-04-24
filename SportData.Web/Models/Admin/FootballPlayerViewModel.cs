@@ -9,14 +9,18 @@ namespace SportData.Web.Models.Admin
         public int Id { get; set; }
 
         [Display(Name = "Име")]
+        [Required(ErrorMessage = "Въведете име на футболиста!")]
         public string FirstName { get; set; }
 
         [Display(Name = "Презиме")]
         public string SecondName { get; set; }
 
         [Display(Name = "Фамилия")]
+        [Required(ErrorMessage = "Въведете фамилия на футболиста!")]
         public string LastName { get; set; }
 
+        [Display(Name = "Националност")]
+        [Required(ErrorMessage = "Въведете фамилия на футболиста!")]
         public int NationalityId { get; set; }
 
         public string NationalityImageUrl { get; set; }
@@ -29,6 +33,7 @@ namespace SportData.Web.Models.Admin
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? DateOfBirth { get; set; }
 
+        [Display(Name = "Държава")]
         public string LocationName { get; set; }
 
         public  int FootballTeamPlayerId { get; set; }

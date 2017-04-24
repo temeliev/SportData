@@ -16,6 +16,7 @@
                     @Html.LabelFor(m => m.Name, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
                         @Html.EditorFor(x => x.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Име" } })
+                        @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
@@ -34,6 +35,7 @@
                     @Html.LabelFor(x => x.LocationId, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
                         @Html.DropDownListFor(m => m.LocationId, new SelectList(ViewBag.Locations, "Value", "Text"), "  ----- Избери -----  ", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.LocationId, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 @Html.ActionLink("Нов запис", "AddFootballTeamCulture", "Admin", new { footballTeamId = Model.Id }, new { @class = "btn btn-default btn-sm" })

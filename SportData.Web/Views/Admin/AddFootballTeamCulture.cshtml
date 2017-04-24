@@ -21,6 +21,7 @@
                     @Html.LabelFor(m => m.CultureName, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
                         @Html.DropDownListFor(m => m.CultureId, new SelectList(ViewBag.Cultures, "Value", "Text"), "  ----- Избери -----  ", new { @class = "form-control", @id = "culture" })
+                        @Html.ValidationMessageFor(x => x.CultureId, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">

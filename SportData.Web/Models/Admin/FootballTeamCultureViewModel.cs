@@ -7,8 +7,11 @@ namespace SportData.Web.Models.Admin
         public int FootballTeamId { get; set; }
 
         [Display(Name = "Име")]
+        [Required(ErrorMessage = "Въведете име на отбора!")]
         public string FootballTeamName { get; set; }
 
+        [Display(Name = "Език")]
+        [Required(ErrorMessage = "Изберете език!")]
         public int CultureId { get; set; }
 
         [Display(Name = "Език")]
