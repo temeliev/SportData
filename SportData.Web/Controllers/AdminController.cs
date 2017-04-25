@@ -44,6 +44,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddCountry(CountryViewModel model)
         {
             if (!ModelState.IsValid)
@@ -55,7 +56,7 @@ namespace SportData.Web.Controllers
 
             int countryId = _adminService.AddCountry(model);
 
-            return RedirectToAction("EditCountry", new {countryId});
+            return RedirectToAction("EditCountry", new { countryId });
         }
 
         [HttpGet]
@@ -70,6 +71,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditCountry([Bind(Include = "Id, Name, LocationImageUrl, Abbreviation, ParentId")]CountryViewModel model)
         {
             if (!ModelState.IsValid)
@@ -77,15 +79,13 @@ namespace SportData.Web.Controllers
                 ViewBag.Cultures = _adminService.GetCultures();
                 ViewBag.Locations = _adminService.GetLocations(LocationType.Continent);
                 model.PreviousLink = this.Url.Action("Countries", "Admin", this.Request.Url.Scheme);
-                
+
                 return View(model);
             }
 
             _adminService.UpdateCountry(model);
 
-            var countryVm = _adminService.GetCountryViewById(model.Id);
-
-            return View("EditCountry", countryVm);
+            return this.RedirectToAction("EditCountry", new { countryId = model.Id });
         }
 
         [HttpGet]
@@ -98,6 +98,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteCountry([Bind(Include = "Id, Name, LocationImageUrl, Abbreviation, ParentId")]CountryViewModel model)
         {
             _adminService.DeleteCountry(model.Id);
@@ -118,6 +119,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddCountryCulture([Bind(Include = "CountryId, CountryName, CultureId")]CountryCultureViewModel model)
         {
             if (!ModelState.IsValid)
@@ -143,6 +145,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditCountryCulture([Bind(Include = "CountryId, CountryName, CultureId")]CountryCultureViewModel model)
         {
             if (!ModelState.IsValid)
@@ -167,6 +170,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteCountryCulture([Bind(Include = "CountryId, CountryName, CultureId, CultureName")]CountryCultureViewModel model)
         {
             _adminService.DeleteCountryCulture(model.CountryId, model.CultureId);
@@ -198,6 +202,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddCompetition(CompetitionViewModel model)
         {
             if (!ModelState.IsValid)
@@ -226,6 +231,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditCompetition([Bind(Include = "Id, Name, CompetitionImageUrl, IsActive, LocationId, OriginalCompetitionId")]CompetitionViewModel model)
         {
             if (!ModelState.IsValid)
@@ -252,6 +258,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteCompetition([Bind(Include = "Id")]CompetitionViewModel model)
         {
             _adminService.DeleteCompetition(model.Id);
@@ -272,6 +279,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddCompetitionCulture([Bind(Include = "CompetitionId, CompetitionName, CultureId")]CompetitionCultureViewModel model)
         {
             if (!ModelState.IsValid)
@@ -297,6 +305,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditCompetitionCulture([Bind(Include = "CompetitionId, CompetitionName, CultureId")]CompetitionCultureViewModel model)
         {
             if (!ModelState.IsValid)
@@ -321,6 +330,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteCompetitionCulture([Bind(Include = "CompetitionId, CultureId")]CompetitionCultureViewModel model)
         {
             _adminService.DeleteCompetitionCulture(model.CompetitionId, model.CultureId);
@@ -350,6 +360,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddFootballPlayer(FootballPlayerViewModel model)
         {
             if (!ModelState.IsValid)
@@ -376,6 +387,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditFootballPlayer([Bind(Include = "Id, FirstName, SecondName, LastName, DateOfBirth, LocationName, PlayerImageUrl")]FootballPlayerViewModel model)
         {
             if (!ModelState.IsValid)
@@ -401,6 +413,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteFootballPlayer([Bind(Include = "Id")]FootballPlayerViewModel model)
         {
             _adminService.DeleteFootballPlayer(model.Id);
@@ -421,6 +434,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddFootballPlayerCulture([Bind(Include = "FootballPlayerId, FirstName, SecondName, LastName, CultureId")]FootballPlayerCultureViewModel model)
         {
             if (!ModelState.IsValid)
@@ -446,6 +460,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditFootballPlayerCulture([Bind(Include = "FootballPlayerId, FirstName, SecondName, LastName, CultureId")]FootballPlayerCultureViewModel model)
         {
             if (!ModelState.IsValid)
@@ -470,6 +485,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteFootballPlayerCulture([Bind(Include = "FootballPlayerId, CultureId")]FootballPlayerCultureViewModel model)
         {
             _adminService.DeleteFootballPlayerCulture(model.FootballPlayerId, model.CultureId);
@@ -500,6 +516,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddFootballTeam(FootballTeamViewModel model)
         {
             if (!ModelState.IsValid)
@@ -528,6 +545,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditFootballTeam([Bind(Include = "Id, Name, EmblemImageUrl, IsActive")]FootballTeamViewModel model)
         {
             if (!ModelState.IsValid)
@@ -554,6 +572,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteFootballTeam([Bind(Include = "Id, Name, EmblemImageUrl, IsActive")]FootballTeamViewModel model)
         {
             _adminService.DeleteFootballTeam(model.Id);
@@ -574,6 +593,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddFootballTeamCulture([Bind(Include = "FootballTeamId, FootballTeamName, CultureId")]FootballTeamCultureViewModel model)
         {
             if (!ModelState.IsValid)
@@ -599,6 +619,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditFootballTeamCulture([Bind(Include = "FootballTeamId, FootballTeamName, CultureId")]FootballTeamCultureViewModel model)
         {
             if (!ModelState.IsValid)
@@ -623,6 +644,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteFootballTeamCulture([Bind(Include = "FootballTeamId, CultureId")]FootballTeamCultureViewModel model)
         {
             _adminService.DeleteFootballTeamCulture(model.FootballTeamId, model.CultureId);
@@ -642,6 +664,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddFootballPlayerToTeam([Bind(Include = "PlayerId, TeamId, StartDate, EndDate, PlayerStatusId")]FootballTeamPlayerViewModel model)
         {
             if (!ModelState.IsValid)
@@ -667,10 +690,11 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteFootballPlayerFromTeam([Bind(Include = "Id, TeamId")]FootballTeamPlayerViewModel model)
         {
             _adminService.DeleteFootballPlayerFromTeam(model.Id);
-             
+
             return RedirectToAction("EditFootballTeam", new { footballTeamId = model.TeamId });
         }
 
@@ -699,6 +723,7 @@ namespace SportData.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditFootballTeamPlayer([Bind(Include = "Id, StartDate, EndDate, PlayerStatusId")]FootballTeamPlayerViewModel model)
         {
             if (!ModelState.IsValid)
