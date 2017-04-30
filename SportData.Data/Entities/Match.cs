@@ -33,6 +33,10 @@ namespace SportData.Data.Entities
         [MaxLength(10)]
         public string Minute { get; set; }
 
+        [Column(TypeName = "nvarchar")]
+        [MaxLength(20)]
+        public string Round { get; set; }
+
         public DateTime? CDate { get; set; }
 
         public virtual FootballTeam HomeTeam { get; set; }

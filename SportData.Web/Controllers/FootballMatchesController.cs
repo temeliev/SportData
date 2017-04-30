@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using SportData.Data.Enums;
 using SportData.Web.Models;
@@ -18,19 +15,45 @@ namespace SportData.Web.Controllers
             _homeService = homeService;
         }
 
-        // GET: FootballMatches
+        [HttpGet]
         public PartialViewResult FootballMatches(string date, MatchStatus status)
         {
-            //var dateList = _homeService.GetDateList();
-            //ViewBag.DateList = dateList;
             FootballMatchesViewModel vm = new FootballMatchesViewModel();
             DateTime selectedDate = _homeService.GetDateFromString(date);
             vm.Matches = _homeService.GetMatchesByDate(selectedDate, status);
             vm.MatchStatus = status;
-            //vm.SelectedDate = dateList[6].Text;//Current date
-            //ViewBag.DateList = dateList;
 
             return PartialView("_FootballMatchesTable", vm);
+        }
+
+        public PartialViewResult FootballLeagueRanking(int competitionId, RankingType type)
+        {
+            FootballLeagueRankingInfoViewModel vm = new FootballLeagueRankingInfoViewModel();
+            vm.CompetitionId = competitionId;
+            //vm.Ranking = this._homeService.GetRanking(competitionId, type, 1);
+
+            return PartialView("_FootballLeagueRankingInfo", vm);
+        }
+
+        public PartialViewResult FootballLeagueRankingDetail(int competitionId, RankingType type)
+        {
+            FootballLeagueRankingInfoViewModel vm = new FootballLeagueRankingInfoViewModel();
+            vm.CompetitionId = competitionId;
+            vm.RankingType = type;
+            vm.Ranking = this._homeService.GetRanking(competitionId, type, 1);
+
+            return PartialView("_FootballLeagueRankingTable", vm);
+        }
+
+        public ActionResult FootballLeagueInfo(int competitionId)
+        {
+            FootballLeagueInfoViewModel vm = new FootballLeagueInfoViewModel();
+            vm.LeagueRankingInfo = new FootballLeagueRankingInfoViewModel();
+            vm.LeagueRankingInfo.CompetitionId = competitionId;
+            vm.Countries = this._homeService.GetLocationsByType(LocationType.Country);
+            
+            
+            return View(vm);
         }
     }
 }

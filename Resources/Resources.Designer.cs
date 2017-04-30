@@ -88,6 +88,105 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Р.
+        /// </summary>
+        public static string LeagueRankingCaptionDraws {
+            get {
+                return ResourceManager.GetString("LeagueRankingCaptionDraws", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ГР.
+        /// </summary>
+        public static string LeagueRankingCaptionGoalDifference {
+            get {
+                return ResourceManager.GetString("LeagueRankingCaptionGoalDifference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to З.
+        /// </summary>
+        public static string LeagueRankingCaptionLosses {
+            get {
+                return ResourceManager.GetString("LeagueRankingCaptionLosses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ИМ.
+        /// </summary>
+        public static string LeagueRankingCaptionPlayedMatches {
+            get {
+                return ResourceManager.GetString("LeagueRankingCaptionPlayedMatches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Т.
+        /// </summary>
+        public static string LeagueRankingCaptionPoints {
+            get {
+                return ResourceManager.GetString("LeagueRankingCaptionPoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to П.
+        /// </summary>
+        public static string LeagueRankingCaptionWins {
+            get {
+                return ResourceManager.GetString("LeagueRankingCaptionWins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Гост.
+        /// </summary>
+        public static string LeagueRankingTabAwayCaption {
+            get {
+                return ResourceManager.GetString("LeagueRankingTabAwayCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Класиране.
+        /// </summary>
+        public static string LeagueRankingTabCaption {
+            get {
+                return ResourceManager.GetString("LeagueRankingTabCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Домакин.
+        /// </summary>
+        public static string LeagueRankingTabHomeCaption {
+            get {
+                return ResourceManager.GetString("LeagueRankingTabHomeCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Общо.
+        /// </summary>
+        public static string LeagueRankingTabOverallCaption {
+            get {
+                return ResourceManager.GetString("LeagueRankingTabOverallCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отбор.
+        /// </summary>
+        public static string LeagueRankingTeamCaption {
+            get {
+                return ResourceManager.GetString("LeagueRankingTeamCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Локация.
         /// </summary>
         public static string LocationName {

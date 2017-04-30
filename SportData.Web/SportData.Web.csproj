@@ -230,6 +230,9 @@
     <Compile Include="Models\Admin\FootballTeamPlayerViewModel.cs" />
     <Compile Include="Models\Admin\FootballTeamViewModel.cs" />
     <Compile Include="Models\Admin\SearchFootballPlayerViewModel.cs" />
+    <Compile Include="Models\FootballLeagueInfoViewModel.cs" />
+    <Compile Include="Models\FootballLeagueRankingInfoViewModel.cs" />
+    <Compile Include="Models\FootballLeagueRankingViewModel.cs" />
     <Compile Include="Models\FootballMatchesViewModel.cs" />
     <Compile Include="Models\GroupedMatchesViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
@@ -238,6 +241,7 @@
     <Compile Include="Models\FootballMatchViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AdminService.cs" />
+    <Compile Include="Services\FootballMatchesService.cs" />
     <Compile Include="Services\HomeService.cs" />
     <Compile Include="Services\IAdminService.cs" />
     <Compile Include="Services\IHomeService.cs" />
@@ -397,6 +401,26 @@
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Images\Flags\arsenal.png" />
+    <Content Include="Content\Images\Flags\Bournemouth.png" />
+    <Content Include="Content\Images\Flags\Burnley.png" />
+    <Content Include="Content\Images\Flags\chelsea.png" />
+    <Content Include="Content\Images\Flags\Crystal Palace.png" />
+    <Content Include="Content\Images\Flags\Everton.png" />
+    <Content Include="Content\Images\Flags\Hull City.png" />
+    <Content Include="Content\Images\Flags\leicester.png" />
+    <Content Include="Content\Images\Flags\Liverpool.png" />
+    <Content Include="Content\Images\Flags\Manchester City.png" />
+    <Content Include="Content\Images\Flags\Manchester United.png" />
+    <Content Include="Content\Images\Flags\Middlesbrough.png" />
+    <Content Include="Content\Images\Flags\Southampton.png" />
+    <Content Include="Content\Images\Flags\Stoke City.png" />
+    <Content Include="Content\Images\Flags\Sunderland.png" />
+    <Content Include="Content\Images\Flags\Swansea.png" />
+    <Content Include="Content\Images\Flags\Tottenham.png" />
+    <Content Include="Content\Images\Flags\Watford.png" />
+    <Content Include="Content\Images\Flags\West Brom.png" />
+    <Content Include="Content\Images\Flags\West Ham.png" />
     <Content Include="Content\sb-admin.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -622,14 +646,16 @@
     <Content Include="Views\Admin\DeleteFootballTeamCulture.cshtml" />
     <Content Include="Views\Admin\AddFootballPlayerToTeam.cshtml" />
     <Content Include="Views\Admin\DeleteFootballPlayerFromTeam.cshtml" />
-    <Content Include="Views\Home\_SideBarMenuCountries.cshtml" />
+    <Content Include="Views\Shared\_SideBarMenuCountries.cshtml" />
     <Content Include="Views\Shared\_FootballMatches.cshtml" />
     <Content Include="Views\Shared\_FootballMatchesTable.cshtml" />
+    <Content Include="Views\FootballMatches\FootballLeagueInfo.cshtml" />
+    <Content Include="Views\Shared\_FootballLeagueRankingTable.cshtml" />
+    <Content Include="Views\Shared\_FootballLeagueRankingInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\FootballMatches\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

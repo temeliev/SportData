@@ -1,0 +1,24 @@
+﻿@using SportData.Data.Enums
+@model IEnumerable<SportData.Web.Models.LocationViewModel>
+<div class="col-lg-2">
+    <p class="caption">@Resources.Home.Index.CountriesCaption</p>
+    <div id="accordion">
+        @foreach (var country in @Model)
+        {
+            <p>@country.Name</p>
+            if (country.Competitions != null)
+            {
+                <ul style="padding: 5px; text-align: center">
+                    @foreach (var competition in country.Competitions)
+                    {
+                        <li>
+                            @Html.ActionLink(competition.CompetitionName, "FootballLeagueInfo", "FootballMatches",
+                                               new { competitionId = competition.CompetitionId },
+                                               new { @class = "sidebar-li-item" })
+                        </li>
+                    }
+                </ul>
+            }
+        }
+    </div>
+</div>

@@ -1,0 +1,23 @@
+﻿@using System.Web.Mvc.Html
+@using SportData.Data.Enums
+@using SportData.Web.Models
+@model SportData.Web.Models.FootballLeagueInfoViewModel
+@{
+    ViewBag.Title = @Resources.Resources.LeagueRankingTabCaption;
+}
+
+<div class="col-lg-12" style="padding-top: 15px">
+    @Html.Partial("_SideBarMenuCountries", @Model.Countries)
+    <div class="col-lg-8">
+        <div id="tab-container">
+            <ul>
+                <li>
+                    <a href="#ranking-type-tabs"> @Resources.Resources.LeagueRankingTabCaption </a>
+                </li>
+            </ul>
+            <div id="ranking-type-tabs">
+                @Html.Partial("_FootballLeagueRankingInfo", new FootballLeagueRankingInfoViewModel() { CompetitionId = @Model.LeagueRankingInfo.CompetitionId })
+            </div>
+        </div>
+    </div>
+</div>

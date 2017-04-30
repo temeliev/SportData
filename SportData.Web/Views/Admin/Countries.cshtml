@@ -11,8 +11,8 @@
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <th>Име</th>
-                    <th>Локация</th>
+                    <th class="col-lg-5 table-col">Име</th>
+                    <th class="col-lg-5 table-col">Локация</th>
                     <th>Съкращение</th>
                     <th></th> 
                     <th></th>
@@ -23,11 +23,11 @@
                 {
                     <tr>
                         @Html.HiddenFor(m => item.Id)
-                        <td>@item.Name</td>
-                        <td>@item.LocationName</td>
-                        <td>@item.Abbreviation</td>
-                        <td>@Html.ActionLink("Редакция", "EditCountry", "Admin", new { countryId = @item.Id }, new { @class = "" }) </td>
-                        <td>@Html.ActionLink("Изтрий", "DeleteCountry", "Admin", new { countryId = @item.Id }, new { @class = "" }) </td>
+                        <td class="col-lg-5 table-col">@item.Name</td>
+                        <td class="col-lg-5 table-col">@item.LocationName</td>
+                        <td class="col-lg-1 table-col">@item.Abbreviation</td>
+                        <td class="col-lg-1 table-col">@Html.ActionLink("Редакция", "EditCountry", "Admin", new { countryId = @item.Id }, new { @class = "" }) </td>
+                        <td class="col-lg-1 table-col">@Html.ActionLink("Изтрий", "DeleteCountry", "Admin", new { countryId = @item.Id }, new { @class = "" }) </td>
                     </tr>
                 }
             </tbody>

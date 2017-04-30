@@ -18,5 +18,7 @@ namespace SportData.Web.Services
         List<SelectListItem> GetDateList();
 
         DateTime GetDateFromString(string date);
+
+        Dictionary<string, List<FootballLeagueRankingViewModel>> GetRanking(int competitionId, RankingType rankingType, int seasonId);
     }
 }

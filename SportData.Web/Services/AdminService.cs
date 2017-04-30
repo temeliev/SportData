@@ -443,9 +443,9 @@ namespace SportData.Web.Services
 
             footballTeam.Name = model.Name;
             footballTeam.EmblemImageUrl = model.EmblemImageUrl;
-            footballTeam.IsDeleted = model.IsDeleted;
+            //footballTeam.IsDeleted = model.IsDeleted;
             footballTeam.LocationId = model.LocationId;
-            footballTeam.CDate = DateTime.Now;
+            //footballTeam.CDate = DateTime.Now;
 
             UnitOfWork.SaveChanges();
         }

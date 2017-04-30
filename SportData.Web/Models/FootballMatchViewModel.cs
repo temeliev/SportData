@@ -6,7 +6,8 @@ namespace SportData.Web.Models
     {
         public long MatchId { get; set; }
 
-        public string StartHour => MatchDate.Hour + ":" + (MatchDate.Minute < 10 ? "0" + MatchDate.Minute : MatchDate.Minute.ToString());
+        public string StartHour 
+            => (MatchDate.Hour < 10 ? "0" + MatchDate.Hour : MatchDate.Hour.ToString()) + ":" + (MatchDate.Minute < 10 ? "0" + MatchDate.Minute : MatchDate.Minute.ToString());
 
         public DateTime MatchDate { get; set; }
 

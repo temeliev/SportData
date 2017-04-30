@@ -1,0 +1,90 @@
+﻿@using SportData.Data.Enums
+@using SportData.Web.Helpers
+@model SportData.Web.Models.FootballLeagueRankingInfoViewModel
+
+<div class="table-responsive">
+    @foreach (var key in @Model.Ranking)
+            {
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-sm-1 table-col">#</th>
+                    <th class="col-sm-1 table-col-left" colspan="2">@key.Key</th>
+                    <th class="col-sm-1 table-col">@Resources.Resources.LeagueRankingCaptionPlayedMatches</th>
+                    <th class="col-sm-1 table-col">@Resources.Resources.LeagueRankingCaptionWins</th>
+                    <th class="col-sm-1 table-col">@Resources.Resources.LeagueRankingCaptionDraws</th>
+                    <th class="col-sm-1 table-col">@Resources.Resources.LeagueRankingCaptionLosses</th>
+                    <th class="col-sm-1 table-col">@Resources.Resources.LeagueRankingCaptionGoalDifference</th>
+                    <th class="col-sm-1 table-col">@Resources.Resources.LeagueRankingCaptionPoints</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (@Model.RankingType == RankingType.All)
+                {
+                    foreach (var team in key.Value)
+                    {
+                        <tr>
+                            <td class="col-lg-1 table-col">@Html.DisplayFor(modelItem => team.Position)</td>
+                            <td class="col-lg-1 table-col">
+                                @Html.Image(team.TeamImageUrl, "no image", new { @class = "", @width = "20", @height = "20" })
+                            </td>
+                            <td class="col-lg-4 table-col-left">@Html.DisplayFor(modelItem => team.TeamName)</td>
+                            <td class="col-lg-1 table-col">
+                                <p>@Html.DisplayFor(modelItem => team.PlayedMatchesCount)</p>
+                            </td>
+                            <td class="col-lg-1 table-col">@Html.DisplayFor(modelItem => team.Wins)</td>
+                            <td class="col-lg-1 table-col">@Html.DisplayFor(modelItem => team.Draws)</td>
+                            <td class="col-lg-1 table-col">@Html.DisplayFor(modelItem => team.Losses)</td>
+                            <td class="col-lg-1 table-col">@Html.DisplayFor(modelItem => team.GoalDifference)</td>
+                            <td class="col-lg-2 table-col">@Html.DisplayFor(modelItem => team.Points)</td>
+                        </tr>
+                    }
+                }
+                else if (@Model.RankingType == RankingType.Home)
+                {
+                    foreach (var team in key.Value)
+                    {
+                        <tr>
+                            <td class="col-lg-1 table-col">@Html.DisplayFor(modelItem => team.Position)</td>
+                            <td class="col-lg-1 table-col">
+                                @Html.Image(team.TeamImageUrl, "no image", new { @class = "", @width = "20", @height = "20" })
+                            </td>
+                            <td class="col-lg-4 table-col-left">@Html.DisplayFor(modelItem => team.TeamName)</td>
+                            <td class="col-lg-1 table-col">
+                                <p>@Html.DisplayFor(modelItem => team.PlayedMatchesAtHome)</p>
+                            </td>
+                            <td class="col-lg-1 table-col">@Html.DisplayFor(modelItem => team.HomeWins)</td>
+                            <td class="col-lg-1 table-col">@Html.DisplayFor(modelItem => team.HomeDraws)</td>
+                            <td class="col-lg-1 table-col">@Html.DisplayFor(modelItem => team.HomeLosses)</td>
+                            <td class="col-lg-1 table-col">@Html.DisplayFor(modelItem => team.HomeGoalDifference)</td>
+                            <td class="col-lg-2 table-col">@Html.DisplayFor(modelItem => team.HomePoints)</td>
+                        </tr>
+                    }
+                }
+                else if (@Model.RankingType == RankingType.Away)
+                {
+                    foreach (var team in key.Value)
+                    {
+                        <tr>
+                            <td class="col-lg-1 table-col">@Html.DisplayFor(modelItem => team.Position)</td>
+                            <td class="col-lg-1 table-col">
+                                @Html.Image(team.TeamImageUrl, "no image", new { @class = "", @width = "20", @height = "20" })
+                            </td>
+                            <td class="col-lg-4 table-col-left">@Html.DisplayFor(modelItem => team.TeamName)</td>
+                            <td class="col-lg-1 table-col">
+                                <p>@Html.DisplayFor(modelItem => team.PlayedMatchesAway)</p>
+                            </td>
+                            <td class="col-lg-1 table-col">@Html.DisplayFor(modelItem => team.AwayWins)</td>
+                            <td class="col-lg-1 table-col">@Html.DisplayFor(modelItem => team.AwayDraws)</td>
+                            <td class="col-lg-1 table-col">@Html.DisplayFor(modelItem => team.AwayLosses)</td>
+                            <td class="col-lg-1 table-col">@Html.DisplayFor(modelItem => team.AwayGoalDifference)</td>
+                            <td class="col-lg-2 table-col">@Html.DisplayFor(modelItem => team.AwayPoints)</td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+
+        </table>
+    }
+</div>

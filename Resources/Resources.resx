@@ -126,6 +126,39 @@
   <data name="IndexTitle" xml:space="preserve">
     <value>Основно меню</value>
   </data>
+  <data name="LeagueRankingCaptionDraws" xml:space="preserve">
+    <value>Р</value>
+  </data>
+  <data name="LeagueRankingCaptionGoalDifference" xml:space="preserve">
+    <value>ГР</value>
+  </data>
+  <data name="LeagueRankingCaptionLosses" xml:space="preserve">
+    <value>З</value>
+  </data>
+  <data name="LeagueRankingCaptionPlayedMatches" xml:space="preserve">
+    <value>ИМ</value>
+  </data>
+  <data name="LeagueRankingCaptionPoints" xml:space="preserve">
+    <value>Т</value>
+  </data>
+  <data name="LeagueRankingCaptionWins" xml:space="preserve">
+    <value>П</value>
+  </data>
+  <data name="LeagueRankingTabAwayCaption" xml:space="preserve">
+    <value>Гост</value>
+  </data>
+  <data name="LeagueRankingTabCaption" xml:space="preserve">
+    <value>Класиране</value>
+  </data>
+  <data name="LeagueRankingTabHomeCaption" xml:space="preserve">
+    <value>Домакин</value>
+  </data>
+  <data name="LeagueRankingTabOverallCaption" xml:space="preserve">
+    <value>Общо</value>
+  </data>
+  <data name="LeagueRankingTeamCaption" xml:space="preserve">
+    <value>Отбор</value>
+  </data>
   <data name="LocationName" xml:space="preserve">
     <value>Локация</value>
   </data>

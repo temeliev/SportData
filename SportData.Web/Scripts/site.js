@@ -89,3 +89,35 @@ $('#dateDropdown').change(function () {
     });
 
 });
+
+$(function () {
+    $("#tab-container").tabs();
+});
+
+$(function () {
+    $("#ranking-type-tabs").tabs();
+});
+
+$(function () {
+    $("#tab-container").tabs({
+        beforeLoad: function (event, ui) {
+            ui.jqXHR.fail(function () {
+                ui.panel.html(
+                  "Couldn't load this tab. We'll try to fix this as soon as possible. " +
+                  "If this wouldn't be a demo.");
+            });
+        }
+    });
+});
+
+$(function () {
+    $("#ranking-type-tabs").tabs({
+        beforeLoad: function (event, ui) {
+            ui.jqXHR.fail(function () {
+                ui.panel.html(
+                  "Couldn't load this tab. We'll try to fix this as soon as possible. " +
+                  "If this wouldn't be a demo.");
+            });
+        }
+    });
+});

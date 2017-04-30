@@ -126,6 +126,39 @@
   <data name="IndexTitle" xml:space="preserve">
     <value>Home page</value>
   </data>
+  <data name="LeagueRankingCaptionDraws" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="LeagueRankingCaptionGoalDifference" xml:space="preserve">
+    <value>G</value>
+  </data>
+  <data name="LeagueRankingCaptionLosses" xml:space="preserve">
+    <value>L</value>
+  </data>
+  <data name="LeagueRankingCaptionPlayedMatches" xml:space="preserve">
+    <value>MP</value>
+  </data>
+  <data name="LeagueRankingCaptionPoints" xml:space="preserve">
+    <value>Pts</value>
+  </data>
+  <data name="LeagueRankingCaptionWins" xml:space="preserve">
+    <value>W</value>
+  </data>
+  <data name="LeagueRankingTabAwayCaption" xml:space="preserve">
+    <value>Away</value>
+  </data>
+  <data name="LeagueRankingTabCaption" xml:space="preserve">
+    <value>Standings</value>
+  </data>
+  <data name="LeagueRankingTabHomeCaption" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="LeagueRankingTabOverallCaption" xml:space="preserve">
+    <value>Overall</value>
+  </data>
+  <data name="LeagueRankingTeamCaption" xml:space="preserve">
+    <value>Team</value>
+  </data>
   <data name="LocationName" xml:space="preserve">
     <value>Name of a country</value>
   </data>

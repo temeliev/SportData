@@ -79,7 +79,6 @@ table {
     color: white;
     text-indent: 5px;
     vertical-align: middle;
-   
 }
 
 .table-group-caption {
@@ -93,19 +92,37 @@ table {
     padding-right: 5px;
 }
 
-.table-col-left {
+.table-col-left, .table-col-left>p {
     text-align: left;
     margin: 0;
     padding-left: 5px;
+    vertical-align: middle;
 }
 
 /*table.table td.test {
     text-align: right;
 }*/
 
-.table-col {
+.table-col, .table-col > p {
     padding: 5px;
     text-align: center;
+    vertical-align: middle;
+}
+.table-col > p {
+    padding: 0;
+}
+
+.table > tbody > tr > .table-col, .table > tbody > tr > .table-col-left {
+    vertical-align: middle;
+}
+
+.table > tbody > tr > .table-col-left {
+    padding-left: 5px;
+}
+
+.table > tbody > tr > .table-col > p {
+    padding: 0;
+    margin: 0;
 }
 
 .displayed {
@@ -129,14 +146,14 @@ table {
 .caption {
     padding: 5px;
     margin-bottom: 0;
-    background-color: #18bc9c;
+    background-color: grey;
     color: white;
 }
 
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, .ui-button:active {
     border: none;
     background-color: #18bc9c;
-    background:  #18bc9c;
+    background: #18bc9c;
 }
 
 .form-control {

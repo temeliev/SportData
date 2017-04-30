@@ -1,0 +1,15 @@
+﻿@using SportData.Data.Enums
+@model SportData.Web.Models.FootballLeagueRankingInfoViewModel
+
+<ul>
+    <li id="tabOverall">
+        <a id="overall" href=@Url.Action("FootballLeagueRankingDetail", "FootballMatches", new { competitionId = @Model.CompetitionId, type = RankingType.All })>@Resources.Resources.LeagueRankingTabOverallCaption</a>
+    </li>
+    <li id="tabHome">
+        <a id="home" href=@Url.Action("FootballLeagueRankingDetail", "FootballMatches", new { competitionId = @Model.CompetitionId, type = RankingType.Home })>@Resources.Resources.LeagueRankingTabHomeCaption</a>
+    </li>
+    <li id="tabAway">
+        <a id="away" href=@Url.Action("FootballLeagueRankingDetail", "FootballMatches", new { competitionId = @Model.CompetitionId, type = RankingType.Away })>@Resources.Resources.LeagueRankingTabAwayCaption</a>
+    </li>
+</ul>
+

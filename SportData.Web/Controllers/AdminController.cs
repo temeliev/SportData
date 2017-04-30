@@ -546,7 +546,7 @@ namespace SportData.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditFootballTeam([Bind(Include = "Id, Name, EmblemImageUrl, IsActive")]FootballTeamViewModel model)
+        public ActionResult EditFootballTeam([Bind(Include = "Id, Name, EmblemImageUrl, IsActive, LocationId")]FootballTeamViewModel model)
         {
             if (!ModelState.IsValid)
             {
