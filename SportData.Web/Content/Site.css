@@ -3,20 +3,26 @@
     padding-bottom: 20px;
 }
 
+
 /* Set padding to keep content from hitting the edges */
+
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
 
+
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
+
 .dl-horizontal dt {
     white-space: normal;
 }
 
+
 /* Set width on the form input elements since they're 100% wide by default */
+
 input,
 select,
 textarea {
@@ -38,6 +44,7 @@ textarea {
     color: transparent;
 }
 
+
 /*.table > thead > tr > th, .table > thead > tr > td {
     border: solid 1px;
 }*/
@@ -46,12 +53,12 @@ textarea {
     padding: 0;
 }
 
-
 table {
     border-collapse: collapse;
 }
 
-    table td, table th {
+    table td,
+    table th {
         border: 1px solid black;
     }
 
@@ -92,27 +99,32 @@ table {
     padding-right: 5px;
 }
 
-.table-col-left, .table-col-left>p {
+.table-col-left,
+.table-col-left > p {
     text-align: left;
     margin: 0;
     padding-left: 5px;
     vertical-align: middle;
 }
 
+
 /*table.table td.test {
     text-align: right;
 }*/
 
-.table-col, .table-col > p {
+.table-col,
+.table-col > p {
     padding: 5px;
     text-align: center;
     vertical-align: middle;
 }
-.table-col > p {
-    padding: 0;
-}
 
-.table > tbody > tr > .table-col, .table > tbody > tr > .table-col-left {
+    .table-col > p {
+        padding: 0;
+    }
+
+.table > tbody > tr > .table-col,
+.table > tbody > tr > .table-col-left {
     vertical-align: middle;
 }
 
@@ -135,7 +147,9 @@ table {
     /*display: ;*/
 }
 
-#tabs-all, #tabs-finished, #tabs-upcoming {
+#tabs-all,
+#tabs-finished,
+#tabs-upcoming {
     padding: 5px 2px 5px 2px;
 }
 
@@ -150,7 +164,14 @@ table {
     color: white;
 }
 
-.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, .ui-button:active {
+.table > tbody > tr > .caption {
+    padding: 3px;
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+.ui-button:active {
     border: none;
     background-color: #18bc9c;
     background: #18bc9c;
@@ -163,8 +184,42 @@ table {
 .ui-tabs .ui-tabs-panel {
     padding: 0;
 }
-/*.ui-state-active, .ui-state-active, .ui-widget-header .ui-state-active {
-        border: none;
-    background-color: #18bc9c;
-    
-}*/
+
+td.emblem-right {
+    padding: 20px;
+    vertical-align: top;
+    position: relative;
+    white-space: nowrap;
+    text-align: right;
+}
+
+td.emblem-left {
+    padding: 20px;
+    vertical-align: top;
+    position: relative;
+    white-space: nowrap;
+    text-align: left;
+}
+
+
+.content-lg {
+    padding: 0 10px;
+    line-height: 19px;
+    height: 19px;
+    text-align: center;
+    align-content: center;
+}
+
+.table-h2h {
+    width: 100%;
+    line-height:32px;
+    margin:10px 0 10px 0;
+}
+
+td.team-right{
+    text-align:right;
+}
+
+td.team-left{
+    text-align:left;
+}

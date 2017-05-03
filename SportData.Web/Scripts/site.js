@@ -27,7 +27,15 @@
 
 $(document).ready(function () {
     $('.ui-datepicker').datepicker({ dateFormat: '<%= Html.ConvertDateFormat() %>' });
+
+    $("#test-id tr[role='button']").on("click", function (e) {
+        window.location = $(this).data("href");
+    });
 });
+
+$(document).on('click', '#test-id tr[role=\'button\']', function () {
+    window.location = $(this).data("href");
+})
 
 $(function () {
     $("#accordion").accordion({
@@ -45,8 +53,7 @@ $(function () {
         beforeLoad: function (event, ui) {
             ui.jqXHR.fail(function () {
                 ui.panel.html(
-                  "Couldn't load this tab. We'll try to fix this as soon as possible. " +
-                  "If this wouldn't be a demo.");
+                  "Couldn't load this tab. We'll try to fix this as soon as possible. ");
             });
         }
     });
@@ -76,7 +83,7 @@ $('#dateDropdown').change(function () {
     /* Request the partial view with .get request. */
     $.get(link, function (data) {
         var tabId = "#tabs-" + currentTabId;
-        
+
         /* data is the pure html returned from action method, load it to your page */
         $(tabId).html(data);
         /* little fade in effect */
@@ -103,8 +110,7 @@ $(function () {
         beforeLoad: function (event, ui) {
             ui.jqXHR.fail(function () {
                 ui.panel.html(
-                  "Couldn't load this tab. We'll try to fix this as soon as possible. " +
-                  "If this wouldn't be a demo.");
+                  "Couldn't load this tab. We'll try to fix this as soon as possible. ");
             });
         }
     });
@@ -115,8 +121,37 @@ $(function () {
         beforeLoad: function (event, ui) {
             ui.jqXHR.fail(function () {
                 ui.panel.html(
-                  "Couldn't load this tab. We'll try to fix this as soon as possible. " +
-                  "If this wouldn't be a demo.");
+                  "Couldn't load this tab. We'll try to fix this as soon as possible. ");
+            });
+        }
+    });
+});
+
+$(function () {
+    $("#tab-compare-teams-container").tabs();
+});
+
+$(function () {
+    $("#h2h-type-tabs").tabs();
+});
+
+$(function () {
+    $("#h2h-type-tabs").tabs({
+        beforeLoad: function (event, ui) {
+            ui.jqXHR.fail(function () {
+                ui.panel.html(
+                  "Couldn't load this tab. We'll try to fix this as soon as possible. ");
+            });
+        }
+    });
+});
+
+$(function () {
+    $("#tab-compare-teams-container").tabs({
+        beforeLoad: function (event, ui) {
+            ui.jqXHR.fail(function () {
+                ui.panel.html(
+                  "Couldn't load this tab. We'll try to fix this as soon as possible. ");
             });
         }
     });

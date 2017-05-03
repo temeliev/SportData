@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LinqKit;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -84,6 +85,11 @@ namespace SportData.Web.Interfaces
         public void RemoveRange(IEnumerable<T> entities)
         {
             this.set.RemoveRange(entities);
+        }
+
+        public IQueryable<T> AsExpandable()
+        {
+            return this.set.AsExpandable();
         }
     }
 }

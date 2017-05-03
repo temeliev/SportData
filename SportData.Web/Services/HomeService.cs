@@ -20,12 +20,13 @@ using MatchStatus = SportData.Data.Enums.MatchStatus;
 
 namespace SportData.Web.Services
 {
-    using WebGrease.Css.Extensions;
-
     public class HomeService : Service, IHomeService
     {
+        private static int _cultureId;
+
         public HomeService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
+            _cultureId = (int)CultureHelper.GetCurrentCultureType();
         }
 
         public List<GroupedMatchesViewModel> GetMatchesByDate(DateTime date, MatchStatus status)
@@ -53,8 +54,9 @@ namespace SportData.Web.Services
                             MatchResult =
                                  (s1.StatusId == (int)Data.Enums.MatchStatus.NotStarted
                                      ? " - "
-                                     : s1.Events.Count(ev => ev.TeamId == s1.HomeTeamId && ev.EventTypeId == 1) + " - " +
-                                       s1.Events.Count(ev => ev.TeamId == s1.AwayTeamId && ev.EventTypeId == 1)),
+                                     : s1.Events.Count(ev => ev.TeamId == s1.HomeTeamId && ev.EventTypeId == (int)Data.Enums.EventType.Goal)
+                                       + " - " +
+                                       s1.Events.Count(ev => ev.TeamId == s1.AwayTeamId && ev.EventTypeId == (int)Data.Enums.EventType.Goal)),
                             MatchDate = s1.MatchDate
                         }).ToList()
                     }).ToList();
@@ -222,6 +224,160 @@ namespace SportData.Web.Services
             }
 
             return orderedTeams.GroupBy(gr => gr.Round, gr => gr).ToDictionary(x => x.Key, x => x.ToList());
+        }
+
+        public FootballTeamsCompareInfoViewModel GetFootballCompareInfo(long matchId)
+        {
+            int cultureId = (int)CultureHelper.GetCurrentCultureType();
+
+            var result = (from match in UnitOfWork.Matches
+                          where match.Id == matchId
+                          select
+                          new FootballTeamsCompareInfoViewModel
+                          {
+                              MatchId = match.Id,
+                              MatchDate = match.MatchDate,
+                              MatchStatus =
+                                      match.Status.Cultures.FirstOrDefault(
+                                          c => c.CultureId == cultureId).Name,
+                              HostTeamId = match.HomeTeamId,
+                              HostTeamName =
+                                      match.HomeTeam.Cultures.FirstOrDefault(
+                                          c => c.CultureId == cultureId).Name,
+                              HostTeamEmblemUrl = match.HomeTeam.EmblemImageUrl,
+                              VisitorTeamId = match.AwayTeamId,
+                              VisitorTeamName =
+                                      match.AwayTeam.Cultures.FirstOrDefault(
+                                          c => c.CultureId == cultureId).Name,
+                              VisitorTeamEmblemUrl = match.AwayTeam.EmblemImageUrl,
+                              Score = match.Events.Count(ev => ev.TeamId == match.HomeTeamId && ev.EventTypeId == (int)Data.Enums.EventType.Goal)
+                                      + " - " +
+                                      match.Events.Count(ev => ev.TeamId == match.AwayTeamId && ev.EventTypeId == (int)Data.Enums.EventType.Goal)
+                          }).FirstOrDefault();
+
+            return result;
+        }
+
+        //private Expression<System.Func<Match, FootballMatchViewModel>> selectMatchViewModel = (match) =>
+        //        new FootballMatchViewModel()
+        //        {
+        //            MatchDate = match.MatchDate,
+        //            MatchId = match.Id,
+        //            MatchStatusName = match.Status.Cultures.FirstOrDefault(x => x.CultureId == 1).Name,
+        //            CompetitionName = match.Competition.Cultures.FirstOrDefault(x => x.CultureId == 1).Name,
+        //            CompetitionLocationName = match.Competition.Location.Cultures.FirstOrDefault(x => x.CultureId == 1).Name,
+        //            HomeTeamName = match.HomeTeam.Cultures.FirstOrDefault(x => x.CultureId == 1).Name,
+        //            AwayTeamName = match.AwayTeam.Cultures.FirstOrDefault(x => x.CultureId == 1).Name,
+        //            CompetitionEmblemUrl = match.Competition.CompetitionImageUrl,
+        //            MatchResult = ((match.StatusId == (int)Data.Enums.MatchStatus.NotStarted || match.StatusId == (int)Data.Enums.MatchStatus.Suspended)
+        //                               ? " - "
+        //                               : match.Events.Count(ev => ev.TeamId == match.HomeTeamId && ev.EventTypeId == (int)Data.Enums.EventType.Goal)
+        //                                 + " - " +
+        //                                 match.Events.Count(ev => ev.TeamId == match.AwayTeamId && ev.EventTypeId == (int)Data.Enums.EventType.Goal))
+        //};
+
+        private Expression<System.Func<Match, FootballMatchViewModel>> SelectMatchViewModel(int culture)
+        {
+            Expression<System.Func<Match, FootballMatchViewModel>> expression = (match) =>
+                new FootballMatchViewModel()
+                {
+                    MatchDate = match.MatchDate,
+                    MatchId = match.Id,
+                    MatchStatusName = match.Status.Cultures.FirstOrDefault(x => x.CultureId == culture).Name,
+                    CompetitionName = match.Competition.Cultures.FirstOrDefault(x => x.CultureId == culture).Name,
+                    CompetitionLocationName = match.Competition.Location.Cultures.FirstOrDefault(x => x.CultureId == culture).Name,
+                    HomeTeamName = match.HomeTeam.Cultures.FirstOrDefault(x => x.CultureId == culture).Name,
+                    AwayTeamName = match.AwayTeam.Cultures.FirstOrDefault(x => x.CultureId == culture).Name,
+                    CompetitionEmblemUrl = match.Competition.CompetitionImageUrl,
+                    MatchResult = ((match.StatusId == (int)Data.Enums.MatchStatus.NotStarted || match.StatusId == (int)Data.Enums.MatchStatus.Suspended)
+                                       ? " - "
+                                       : match.Events.Count(ev => ev.TeamId == match.HomeTeamId && ev.EventTypeId == (int)Data.Enums.EventType.Goal)
+                                         + " - " +
+                                         match.Events.Count(ev => ev.TeamId == match.AwayTeamId && ev.EventTypeId == (int)Data.Enums.EventType.Goal))
+                };
+
+            return expression;
+        }
+
+
+        public FootballTeamsCompareInfoDetailsViewModel GetLastFootballMatches(int hostTeamId, int visitorTeamId, MatchCompareType type, int topRows)
+        {
+            FootballTeamsCompareInfoDetailsViewModel vm = new FootballTeamsCompareInfoDetailsViewModel();
+            int cultureId = (int)CultureHelper.GetCurrentCultureType();
+            switch (type)
+            {
+                case MatchCompareType.Overall:
+                    vm.HostMatches = (from match in UnitOfWork.Matches
+                                      where
+                                      (match.HomeTeamId == hostTeamId || match.AwayTeamId == hostTeamId)
+                                      && match.StatusId == (int)MatchStatus.Finished
+                                      select match).Select(SelectMatchViewModel(cultureId))
+                                      .OrderByDescending(o => o.MatchDate)
+                                      .Take(topRows)
+                                      .ToList();
+
+                    vm.VisitorMatches = (from match in UnitOfWork.Matches
+                                         where
+                                         (match.HomeTeamId == visitorTeamId || match.AwayTeamId == visitorTeamId)
+                                         && match.StatusId == (int)MatchStatus.Finished
+                                         select match).Select(SelectMatchViewModel(cultureId))
+                                      .OrderByDescending(o => o.MatchDate)
+                                      .Take(topRows)
+                                      .ToList();
+
+                    vm.BetweenMatches = (from match in UnitOfWork.Matches
+                                         where
+                                         ((match.HomeTeamId == hostTeamId && match.AwayTeamId == visitorTeamId) ||
+                                         ((match.HomeTeamId == visitorTeamId && match.AwayTeamId == hostTeamId)))
+                                         && match.StatusId == (int)MatchStatus.Finished
+                                         select match).Select(SelectMatchViewModel(cultureId))
+                                         .OrderByDescending(o => o.MatchDate)
+                                         .Take(topRows)
+                                         .ToList();
+                    break;
+
+                case MatchCompareType.Host:
+                    vm.HostMatches = (from match in UnitOfWork.Matches
+                                      where
+                                      match.HomeTeamId == hostTeamId
+                                      && match.StatusId == (int)MatchStatus.Finished
+                                      select match).Select(SelectMatchViewModel(cultureId))
+                                       .OrderByDescending(o => o.MatchDate)
+                                       .Take(topRows)
+                                       .ToList();
+
+                    vm.BetweenMatches = (from match in UnitOfWork.Matches
+                                         where
+                                         (match.HomeTeamId == hostTeamId && match.AwayTeamId == visitorTeamId) &&
+                                         match.StatusId == (int)MatchStatus.Finished
+                                         select match).Select(SelectMatchViewModel(cultureId))
+                                      .OrderByDescending(o => o.MatchDate)
+                                      .Take(topRows)
+                                      .ToList();
+                    break;
+
+                case MatchCompareType.Visitor:
+                    vm.VisitorMatches = (from match in UnitOfWork.Matches
+                                         where
+                                         match.AwayTeamId == visitorTeamId
+                                         && match.StatusId == (int)MatchStatus.Finished
+                                         select match).Select(SelectMatchViewModel(cultureId))
+                                       .OrderByDescending(o => o.MatchDate)
+                                       .Take(topRows)
+                                       .ToList();
+
+                    vm.BetweenMatches = (from match in UnitOfWork.Matches
+                                         where
+                                         (match.HomeTeamId == hostTeamId && match.AwayTeamId == visitorTeamId) &&
+                                         match.StatusId == (int)MatchStatus.Finished
+                                         select match).Select(SelectMatchViewModel(cultureId))
+                                      .OrderByDescending(o => o.MatchDate)
+                                      .Take(topRows)
+                                      .ToList();
+                    break;
+            }
+
+            return vm;
         }
     }
 }

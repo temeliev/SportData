@@ -1,0 +1,67 @@
+﻿@using SportData.Web.Models
+@using System.Web.Mvc.Html
+@using SportData.Web.Helpers;
+@model FootballTeamsCompareInfoViewModel
+
+@{
+    ViewBag.Title = "FootballTeamsCompareInfo";
+}
+
+<div class="col-lg-12" style="padding-top: 15px">
+    @Html.Partial("_SideBarMenuCountries", (List<LocationViewModel>)@ViewBag.Countries)
+    <div class="col-lg-8">
+        <table class="table-h2h">
+            <tbody>
+                <tr>
+                    <td class="col-lg-2 emblem-right">
+                        @Html.Image(Model.HostTeamEmblemUrl, "no image", new { @width = "60", @height = "60" })
+                    </td> 
+                    <td class="col-lg-8 content-lg">
+                        <table class="table-h2h">
+                            <tbody>
+                                <tr>
+                                    <td class="team-right">
+                                        <span>
+                                            @Html.DisplayFor(modelItem => Model.HostTeamName)
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span>
+                                            @Html.DisplayFor(modelItem => Model.Score)
+                                        </span>
+                                    </td>
+                                    <td class="team-left">
+                                        <span>
+                                            @Html.DisplayFor(modelItem => Model.VisitorTeamName)
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">@Html.DisplayFor(modelItem => Model.LongMatchDate)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">@Html.DisplayFor(modelItem => Model.MatchStatus)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td class="col-lg-2 emblem-left">
+                        @Html.Image(Model.VisitorTeamEmblemUrl, "no image", new { @width = "60", @height = "60" })
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-8">
+        <div id="tab-compare-teams-container">
+            <ul>
+                <li>
+                    <a href="#h2h-type-tabs"> @Resources.Resources.HeadToHeadTabCaption </a>
+                </li>
+            </ul>
+            <div id="h2h-type-tabs">
+                @Html.Partial("_FootballTeamsCompareInfoH2H", Model)
+            </div>
+        </div>
+    </div>
+</div>

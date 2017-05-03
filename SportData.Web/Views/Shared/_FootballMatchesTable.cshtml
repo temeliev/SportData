@@ -21,7 +21,7 @@
 
 <div id= @tabId>
     <div class="table-responsive">
-        <table class="table table-bordered">
+        <table id="test-id" class="table table-bordered">
             <tbody>
                 @foreach (var group in @Model.Matches)
                 {
@@ -33,7 +33,7 @@
                     </tr>
                     foreach (var match in group.Matches)
                     {
-                        <tr>
+                        <tr role="button" data-href= @Url.Action("FootballTeamsCompareInfo", "FootballMatches", new { matchId = match.MatchId })>
                             <td class="col-sm-1 table-col">@Html.DisplayFor(modelItem => match.StartHour)</td>
                             <td class="col-sm-4">
                                 <p class="table-col-right">@Html.DisplayFor(modelItem => match.HomeTeamName)</p>

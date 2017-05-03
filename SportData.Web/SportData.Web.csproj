@@ -56,6 +56,10 @@
       <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="LinqKit, Version=1.1.9.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqKit.1.1.9.0\lib\net45\LinqKit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -234,6 +238,8 @@
     <Compile Include="Models\FootballLeagueRankingInfoViewModel.cs" />
     <Compile Include="Models\FootballLeagueRankingViewModel.cs" />
     <Compile Include="Models\FootballMatchesViewModel.cs" />
+    <Compile Include="Models\FootballTeamsCompareInfoDetailsViewModel.cs" />
+    <Compile Include="Models\FootballTeamsCompareInfoViewModel.cs" />
     <Compile Include="Models\GroupedMatchesViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\LocationViewModel.cs" />
@@ -406,6 +412,7 @@
     <Content Include="Content\Images\Flags\Burnley.png" />
     <Content Include="Content\Images\Flags\chelsea.png" />
     <Content Include="Content\Images\Flags\Crystal Palace.png" />
+    <Content Include="Content\Images\Flags\England.png" />
     <Content Include="Content\Images\Flags\Everton.png" />
     <Content Include="Content\Images\Flags\Hull City.png" />
     <Content Include="Content\Images\Flags\leicester.png" />
@@ -652,6 +659,9 @@
     <Content Include="Views\FootballMatches\FootballLeagueInfo.cshtml" />
     <Content Include="Views\Shared\_FootballLeagueRankingTable.cshtml" />
     <Content Include="Views\Shared\_FootballLeagueRankingInfo.cshtml" />
+    <Content Include="Views\FootballMatches\FootballTeamsCompareInfo.cshtml" />
+    <Content Include="Views\FootballMatches\_FootballTeamsCompareInfoH2H.cshtml" />
+    <Content Include="Views\FootballMatches\_FootballTeamsCompareInfoH2HTables.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

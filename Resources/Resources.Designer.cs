@@ -79,11 +79,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Мачове между тях.
+        /// </summary>
+        public static string HeadToHeadCaption {
+            get {
+                return ResourceManager.GetString("HeadToHeadCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to H2H.
+        /// </summary>
+        public static string HeadToHeadTabCaption {
+            get {
+                return ResourceManager.GetString("HeadToHeadTabCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Основно меню.
         /// </summary>
         public static string IndexTitle {
             get {
                 return ResourceManager.GetString("IndexTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Последни мачове.
+        /// </summary>
+        public static string LastMatchesCaption {
+            get {
+                return ResourceManager.GetString("LastMatchesCaption", resourceCulture);
             }
         }
         

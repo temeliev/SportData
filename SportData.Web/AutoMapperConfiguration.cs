@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using AutoMapper;
 using SportData.Data.Entities;
 using SportData.Web.Models;
@@ -106,6 +106,9 @@ namespace SportData.Web
                 //.ForMember(dst => dst.Id, opt => opt.MapFrom(src => src.LocationId))
                 //.ForMember(x=>x.Competitions, opt => opt.MapFrom(src => src.Location.Competitions));
 
+                //cfg.CreateMap<Match, FootballMatchViewModel>()
+                //    .ForMember(dst => dst.MatchId, opt => opt.MapFrom(src => src.Id))
+                //    .ForMember(dst => dst.MatchStatusName, opt => opt.MapFrom(src => src.Status.Cultures.Fir))
             });
         }
     }

@@ -35,5 +35,7 @@ namespace SportData.Web.Interfaces
         void Remove(int id);
 
         void RemoveRange(IEnumerable<T> entities);
+
+        IQueryable<T> AsExpandable();
     }
 }

@@ -30,7 +30,6 @@ namespace SportData.Web.Controllers
         {
             FootballLeagueRankingInfoViewModel vm = new FootballLeagueRankingInfoViewModel();
             vm.CompetitionId = competitionId;
-            //vm.Ranking = this._homeService.GetRanking(competitionId, type, 1);
 
             return PartialView("_FootballLeagueRankingInfo", vm);
         }
@@ -51,9 +50,24 @@ namespace SportData.Web.Controllers
             vm.LeagueRankingInfo = new FootballLeagueRankingInfoViewModel();
             vm.LeagueRankingInfo.CompetitionId = competitionId;
             vm.Countries = this._homeService.GetLocationsByType(LocationType.Country);
-            
-            
+
             return View(vm);
+        }
+
+        public ActionResult FootballTeamsCompareInfo(long matchId)
+        {
+            this.ViewBag.Countries = this._homeService.GetLocationsByType(LocationType.Country);
+            FootballTeamsCompareInfoViewModel vm = this._homeService.GetFootballCompareInfo(matchId);
+
+            return this.View(vm);
+        }
+
+        public PartialViewResult FootballTeamsCompareInfoDetails(int hostTeamId, int visitorTeamId, MatchCompareType type, int topRows)
+        {
+            FootballTeamsCompareInfoDetailsViewModel vm = this._homeService.GetLastFootballMatches(hostTeamId, visitorTeamId, type, topRows);
+            vm.CompareType = type;
+            
+            return PartialView("_FootballTeamsCompareInfoH2HTables", vm);
         }
     }
 }

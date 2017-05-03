@@ -1,0 +1,32 @@
+﻿@using SportData.Data.Enums
+@model SportData.Web.Models.FootballTeamsCompareInfoViewModel
+
+<ul>
+    <li id="tabH2HOverall">
+        <a href=@Url.Action("FootballTeamsCompareInfoDetails", "FootballMatches", new
+           {
+               hostTeamId = Model.HostTeamId,
+               visitorTeamId = Model.VisitorTeamId,
+               type = MatchCompareType.Overall,
+               topRows = 5
+           })>@Resources.Resources.LeagueRankingTabOverallCaption</a>
+    </li>
+    <li id="tabH2HHome">
+        <a href=@Url.Action("FootballTeamsCompareInfoDetails", "FootballMatches", new
+           {
+               hostTeamId = Model.HostTeamId,
+               visitorTeamId = Model.VisitorTeamId,
+               type = MatchCompareType.Host,
+               topRows = 5
+           })>@string.Format("{0} - {1}", @Model.HostTeamName, @Resources.Resources.LeagueRankingTabHomeCaption)</a>
+    </li>
+    <li id="tabH2HAway">
+        <a href=@Url.Action("FootballTeamsCompareInfoDetails", "FootballMatches", new
+           {
+               hostTeamId = Model.HostTeamId,
+               visitorTeamId = Model.VisitorTeamId,
+               type = MatchCompareType.Visitor,
+               topRows = 5
+           })>@string.Format("{0} - {1}", @Model.VisitorTeamName, @Resources.Resources.LeagueRankingTabAwayCaption)</a>
+    </li>
+</ul>

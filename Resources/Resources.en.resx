@@ -123,8 +123,17 @@
   <data name="CurrentCulture" xml:space="preserve">
     <value>EN</value>
   </data>
+  <data name="HeadToHeadCaption" xml:space="preserve">
+    <value>Head-to-head matches</value>
+  </data>
+  <data name="HeadToHeadTabCaption" xml:space="preserve">
+    <value>H2H</value>
+  </data>
   <data name="IndexTitle" xml:space="preserve">
     <value>Home page</value>
+  </data>
+  <data name="LastMatchesCaption" xml:space="preserve">
+    <value>Last matches</value>
   </data>
   <data name="LeagueRankingCaptionDraws" xml:space="preserve">
     <value>D</value>
