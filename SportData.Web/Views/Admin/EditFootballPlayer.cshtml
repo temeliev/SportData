@@ -2,8 +2,7 @@
 @{
     ViewBag.Title = "Редакция на играч";
 }
-
-<div class="row" Id="test">
+<div class="row" Id="top">
     @Html.Partial("_AdminList")
     <div class="col-lg-8 col-md-8 col-sm-7">
         @using (Html.BeginForm("EditFootballPlayer", "Admin", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
@@ -11,7 +10,7 @@
             @Html.AntiForgeryToken()
             <fieldset>
                 @Html.ValidationSummary(true)
-                @Html.HiddenFor(x=>x.Id)
+                @Html.HiddenFor(x => x.Id)
                 <div class="form-group">
                     @Html.LabelFor(m => m.FirstName, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
@@ -35,7 +34,7 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.DateOfBirth, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        @Html.TextBoxFor(x => x.DateOfBirth, "{0:yyyy-MM-dd}", new {  @class = "form-control", type = "date", @placeholder = "Дата на раждане" })
+                        @Html.TextBoxFor(x => x.DateOfBirth, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", @placeholder = "Дата на раждане" })
                     </div>
                 </div>
                 <div class="form-group">
@@ -52,32 +51,49 @@
                     </div>
                 </div>
                 @Html.ActionLink("Нов запис", "AddFootballPlayerCulture", "Admin", new { footballPlayerId = Model.Id }, new { @class = "btn btn-default btn-sm" })
-                <table class="table table-striped table-hover ">
-                    <thead>
-                        <tr>
-                            <th>Име</th>
-                            <th>Презиме</th>
-                            <th>Фамилия</th>
-                            <th>Език</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.Cultures)
-                        {
-                            <tr>
-                                @Html.HiddenFor(m => item.FootballPlayerId)
-                                <td>@item.FirstName</td>
-                                <td>@item.SecondName</td>
-                                <td>@item.LastName</td>
-                                <td>@item.CultureName</td>
-                                <td>@Html.ActionLink("Редакция", "EditFootballPlayerCulture", "Admin", new { footballPlayerId = @item.FootballPlayerId, cultureId = @item.CultureId }, new { @class = "" }) </td>
-                                <td>@Html.ActionLink("Изтрий", "DeleteFootballPlayerCulture", "Admin", new { footballPlayerId = @item.FootballPlayerId, cultureId = @item.CultureId }, new { @class = "" }) </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                <div class="form-group">
+                    <div class="col-lg-8 col-md-8 col-sm-5">
+                        <div class="panel panel-default" style="margin-top:5px">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Превод</h3>
+                            </div>
+                            <table class="table table-striped table-hover ">
+                                <thead>
+                                    <tr>
+                                        <th class="col-lg-4 table-col-left">Име</th>
+                                        <th class="col-lg-4 table-col-left">Презиме</th>
+                                        <th class="col-lg-4 table-col-left">Фамилия</th>
+                                        <th>Език</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Cultures)
+                                    {
+                                        <tr>
+                                            @Html.HiddenFor(m => item.FootballPlayerId)
+                                            <td class="col-lg-4 table-col-left">@item.FirstName</td>
+                                            <td class="col-lg-4 table-col-left">@item.SecondName</td>
+                                            <td class="col-lg-4 table-col-left">@item.LastName</td>
+                                            <td>@item.CultureName</td>
+                                            <td>
+                                                <a href="@Url.Action("EditFootballPlayerCulture", "Admin", new { footballPlayerId = @item.FootballPlayerId, cultureId = @item.CultureId })" class="btn btn-primary btn-xs" role="button" style="margin:1px">
+                                                    <span class="glyphicon glyphicon-pencil"></span>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("DeleteFootballPlayerCulture", "Admin", new { footballPlayerId = @item.FootballPlayerId, cultureId = @item.CultureId })" class="btn btn-danger btn-xs" role="button" style="margin:1px">
+                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
                         <a href=@Model.PreviousLink class="btn btn-default">Назад</a>
@@ -88,5 +104,4 @@
         }
     </div>
 </div>
-
 

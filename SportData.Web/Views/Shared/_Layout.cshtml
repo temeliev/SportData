@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Football Scores Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -28,14 +28,17 @@
                         @Html.ActionLink("EN", "SetCulture", "Home", new { culture = "en-us" }, new { @class = "navbar-brand" })
                     }
                 }
-                @Html.ActionLink("Sport Info", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @*@Html.ActionLink("Sport Info", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink(@Resources.Resources.NavigationHomeButton, "Index", "Home")</li>
                     <li>@Html.ActionLink(@Resources.Resources.NavigationAboutButton, "About", "Home")</li>
                     <li>@Html.ActionLink(@Resources.Resources.NavigationContactsButton, "Contact", "Home")</li>
-                    <li>@Html.ActionLink(@Resources.Resources.NavigationAdminPanelButton, "Index", "Admin")</li>
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink(@Resources.Resources.NavigationAdminPanelButton, "Index", "Admin")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -45,12 +48,12 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/app")
+    @Scripts.Render("~/bundles/jqueryval")
 </body>
 </html>

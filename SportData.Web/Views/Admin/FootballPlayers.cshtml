@@ -5,17 +5,17 @@
     ViewBag.Title = "Играчи";
 }
 
-<div class="row" Id="test">
+<div class="row" Id="top">
     @Html.Partial("_AdminList")
     <div class="col-lg-8 col-md-8 col-sm-7">
-        @Html.ActionLink("Нов запис", "AddFootballPlayer", "Admin", new { @class = "btn btn-default btn-sm" })
+        @Html.ActionLink("Нов запис", "AddFootballPlayer", "Admin", new { @class = "btn btn-default btn-sm add-item" })
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <th>Име</th>
-                    <th>Презиме</th>
-                    <th>Фамилия</th>
-                    <th>Националност</th>
+                    <th class="col-lg-3 table-col-left">Име</th>
+                    <th class="col-lg-3 table-col-left">Презиме</th>
+                    <th class="col-lg-3 table-col-left">Фамилия</th>
+                    <th class="col-lg-3 table-col">Националност</th>
                     <th>Флаг</th>
                     <th></th>
                     <th></th>
@@ -26,13 +26,21 @@
                 {
                     <tr>
                         @Html.HiddenFor(m => item.Id)
-                        <td>@item.FirstName</td>
-                        <td>@item.SecondName</td>
-                        <td>@item.LastName</td>
-                        <td>@item.LocationName</td>
-                        <td>@Html.Image(item.NationalityImageUrl, "Няма иконка", new { @class = "", @width = "15", @height = "15" })</td>
-                        <td>@Html.ActionLink("Редакция", "EditFootballPlayer", "Admin", new { footballPlayerId = @item.Id }, new { @class = "" }) </td>
-                        <td>@Html.ActionLink("Изтрий", "DeleteFootballPlayer", "Admin", new { footballPlayerId = @item.Id }, new { @class = "" }) </td>
+                        <td class="col-lg-3 table-col-left">@item.FirstName</td>
+                        <td class="col-lg-3 table-col-left">@item.SecondName</td>
+                        <td class="col-lg-3 table-col-left">@item.LastName</td>
+                        <td  class="col-lg-3 table-col">@item.LocationName</td>
+                        <td class="table-col">@Html.Image(item.NationalityImageUrl, "Няма иконка", new { @class = "", @width = "20", @height = "20" })</td>
+                        <td>
+                            <a href="@Url.Action("EditFootballPlayer", "Admin", new { footballPlayerId = @item.Id })" class="btn btn-primary btn-xs" role="button">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("DeleteFootballPlayer", "Admin", new { footballPlayerId = @item.Id })" class="btn btn-danger btn-xs" role="button">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </td>
                     </tr>
                 }
             </tbody>

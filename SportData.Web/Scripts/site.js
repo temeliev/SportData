@@ -44,9 +44,9 @@ $(function () {
     });
 });
 
-$(function () {
-    $("#tabs").tabs();
-});
+//$(function () {
+//    $("#tabs").tabs();
+//});
 
 $(function () {
     $("#tabs").tabs({
@@ -97,13 +97,13 @@ $('#dateDropdown').change(function () {
 
 });
 
-$(function () {
-    $("#tab-container").tabs();
-});
+//$(function () {
+//    $("#tab-container").tabs();
+//});
 
-$(function () {
-    $("#ranking-type-tabs").tabs();
-});
+//$(function () {
+//    $("#ranking-type-tabs").tabs();
+//});
 
 $(function () {
     $("#tab-container").tabs({
@@ -127,13 +127,13 @@ $(function () {
     });
 });
 
-$(function () {
-    $("#tab-compare-teams-container").tabs();
-});
+//$(function () {
+//    $("#tab-compare-teams-container").tabs();
+//});
 
-$(function () {
-    $("#h2h-type-tabs").tabs();
-});
+//$(function () {
+//    $("#h2h-type-tabs").tabs();
+//});
 
 $(function () {
     $("#h2h-type-tabs").tabs({

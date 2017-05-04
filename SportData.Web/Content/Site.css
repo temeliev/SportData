@@ -29,7 +29,7 @@ textarea {
     max-width: 280px;
 }
 
-#test {
+#top {
     margin-top: 15px;
 }
 
@@ -43,11 +43,6 @@ textarea {
     border: 0;
     color: transparent;
 }
-
-
-/*.table > thead > tr > th, .table > thead > tr > td {
-    border: solid 1px;
-}*/
 
 .table > tbody > tr > td {
     padding: 0;
@@ -106,11 +101,6 @@ table {
     padding-left: 5px;
     vertical-align: middle;
 }
-
-
-/*table.table td.test {
-    text-align: right;
-}*/
 
 .table-col,
 .table-col > p {
@@ -212,14 +202,27 @@ td.emblem-left {
 
 .table-h2h {
     width: 100%;
-    line-height:32px;
-    margin:10px 0 10px 0;
+    line-height: 32px;
+    margin: 10px 0 10px 0;
 }
 
-td.team-right{
-    text-align:right;
+td.team-right {
+    text-align: right;
 }
 
-td.team-left{
-    text-align:left;
+td.team-left {
+    text-align: left;
+}
+
+tr td a {
+    text-decoration: none;
+}
+
+.add-item {
+    margin: 5px 0px 5px 2px;
+}
+
+.ttt{
+    margin:0;
+    width:auto;
 }

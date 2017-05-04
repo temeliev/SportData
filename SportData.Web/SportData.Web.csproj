@@ -470,7 +470,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
-    <Content Include="DB Scripts\Locations.sql" />
+    <Content Include="DB Scripts\Initial.sql" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -619,7 +619,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Countries.cshtml" />
-    <Content Include="Views\Shared\_Admin.cshtml" />
     <Content Include="Views\Admin\_AdminList.cshtml" />
     <Content Include="Views\Admin\Competitions.cshtml" />
     <Content Include="Views\Admin\AddCountry.cshtml" />

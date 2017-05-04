@@ -1,20 +1,18 @@
 ﻿@model IEnumerable<SportData.Web.Models.Admin.CountryViewModel>
-
 @{
     ViewBag.Title = "Държави";
 }
-
-<div class="row" Id="test">
+<div class="row" Id="top">
     @Html.Partial("_AdminList")
     <div class="col-lg-8 col-md-8 col-sm-7">
-        @Html.ActionLink("Нов запис", "AddCountry", "Admin", new { @class = "btn btn-default btn-sm" })
+        @Html.ActionLink("Нов запис", "AddCountry", "Admin", new { @class = "btn btn-default btn-sm add-item" })
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <th class="col-lg-5 table-col">Име</th>
-                    <th class="col-lg-5 table-col">Локация</th>
+                    <th class="col-lg-5 table-col-left">Име</th>
+                    <th class="col-lg-5 table-col-left">Локация</th>
                     <th>Съкращение</th>
-                    <th></th> 
+                    <th></th>
                     <th></th>
                 </tr>
             </thead>
@@ -23,11 +21,19 @@
                 {
                     <tr>
                         @Html.HiddenFor(m => item.Id)
-                        <td class="col-lg-5 table-col">@item.Name</td>
-                        <td class="col-lg-5 table-col">@item.LocationName</td>
+                        <td class="col-lg-5 table-col-left">@item.Name</td>
+                        <td class="col-lg-5 table-col-left">@item.LocationName</td>
                         <td class="col-lg-1 table-col">@item.Abbreviation</td>
-                        <td class="col-lg-1 table-col">@Html.ActionLink("Редакция", "EditCountry", "Admin", new { countryId = @item.Id }, new { @class = "" }) </td>
-                        <td class="col-lg-1 table-col">@Html.ActionLink("Изтрий", "DeleteCountry", "Admin", new { countryId = @item.Id }, new { @class = "" }) </td>
+                        <td>
+                            <a href="@Url.Action("EditCountry", "Admin", new { countryId = @item.Id })" class="btn btn-primary btn-xs" role="button">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("DeleteCountry", "Admin", new { countryId = @item.Id })" class="btn btn-danger btn-xs" role="button">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </td>
                     </tr>
                 }
             </tbody>

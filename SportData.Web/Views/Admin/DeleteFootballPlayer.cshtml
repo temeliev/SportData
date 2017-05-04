@@ -2,8 +2,7 @@
 @{
     ViewBag.Title = "Изтриване на играч";
 }
-
-<div class="row" Id="test">
+<div class="row" Id="top">
     @Html.Partial("_AdminList")
     <div class="col-lg-8 col-md-8 col-sm-7">
         @using (Html.BeginForm("DeleteFootballPlayer", "Admin", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
@@ -48,28 +47,37 @@
                         @Html.TextBoxFor(x => x.LocationName, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </div>
-                <table class="table table-striped table-hover ">
-                    <thead>
-                        <tr>
-                            <th>Име</th>
-                            <th>Презиме</th>
-                            <th>Фамилия</th>
-                            <th>Език</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.Cultures)
-                        {
-                            <tr>
-                                @Html.HiddenFor(m => item.FootballPlayerId)
-                                <td>@item.FirstName</td>
-                                <td>@item.SecondName</td>
-                                <td>@item.LastName</td>
-                                <td>@item.CultureName</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                <div class="form-group">
+                    <div class="col-lg-8 col-md-8 col-sm-5">
+                        <div class="panel panel-default ">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Превод</h3>
+                            </div>
+                            <table class="table table-striped table-hover ">
+                                <thead>
+                                    <tr>
+                                        <th>Име</th>
+                                        <th>Презиме</th>
+                                        <th>Фамилия</th>
+                                        <th>Език</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Cultures)
+                                    {
+                                        <tr>
+                                            @Html.HiddenFor(m => item.FootballPlayerId)
+                                            <td>@item.FirstName</td>
+                                            <td>@item.SecondName</td>
+                                            <td>@item.LastName</td>
+                                            <td>@item.CultureName</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
                         <a href=@Model.PreviousLink class="btn btn-default">Назад</a>
@@ -80,5 +88,3 @@
         }
     </div>
 </div>
-
-

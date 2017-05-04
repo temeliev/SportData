@@ -5,16 +5,16 @@
     ViewBag.Title = "Футболни отбори";
 }
 
-<div class="row" Id="test">
+<div class="row" Id="top">
     @Html.Partial("_AdminList")
-    <div class="col-lg-8 col-md-8 col-sm-7">
-        @Html.ActionLink("Нов запис", "AddFootballTeam", "Admin", new { @class = "btn btn-default btn-sm" })
+    <div class="col-lg-7 col-md-7 col-sm-6">
+        @Html.ActionLink("Нов запис", "AddFootballTeam", "Admin", new { @class = "btn btn-default btn-sm add-item" })
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
                     <th>Име</th>
                     <th>Локация</th>
-                    <th>Емблема</th>
+                    <th class="table-col">Емблема</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -24,11 +24,19 @@
                 {
                     <tr>
                         @Html.HiddenFor(m => item.Id)
-                        <td>@item.Name</td>
-                        <td>@item.LocationName</td>
-                        <td>@Html.Image(item.EmblemImageUrl, "Няма иконка", new { @class = "", @width = "15", @height = "15" })</td>
-                        <td>@Html.ActionLink("Редакция", "EditFootballTeam", "Admin", new { footballTeamId = @item.Id }, new { @class = "" }) </td>
-                        <td>@Html.ActionLink("Изтрий", "DeleteFootballTeam", "Admin", new { footballTeamId = @item.Id }, new { @class = "" }) </td>
+                        <td class="col-lg-5 table-col-left">@item.Name</td>
+                        <td class="col-lg-5 table-col-left">@item.LocationName</td>
+                        <td class="col-lg-2 table-col">@Html.Image(item.EmblemImageUrl, "Няма иконка", new { @class = "", @width = "20", @height = "20" })</td>
+                        <td>
+                            <a href="@Url.Action("EditFootballTeam", "Admin", new { footballTeamId = @item.Id })" class="btn btn-primary btn-xs" role="button">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("DeleteFootballTeam", "Admin", new { footballTeamId = @item.Id})" class="btn btn-danger btn-xs" role="button">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </td>
                     </tr>
                 }
             </tbody>

@@ -4,9 +4,9 @@
     ViewBag.Title = "Country";
 }
 
-<div class="row" Id="test">
+<div class="row" Id="top">
     @Html.Partial("_AdminList")
-    <div class="col-lg-8 col-md-8 col-sm-7">
+    <div class="col-lg-8 col-md-8 col-sm-7" style="margin-top:15px">
         @using (Html.BeginForm("AddCountry", "Admin", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()

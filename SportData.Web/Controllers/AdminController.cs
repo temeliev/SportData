@@ -8,6 +8,7 @@ using SportData.Web.Services;
 
 namespace SportData.Web.Controllers
 {
+    [Authorize]
     public class AdminController : BaseController
     {
         private readonly IAdminService _adminService;

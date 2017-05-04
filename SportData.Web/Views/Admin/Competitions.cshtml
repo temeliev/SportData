@@ -1,13 +1,11 @@
 ﻿@model IEnumerable<SportData.Web.Models.Admin.CompetitionViewModel>
-
 @{
     ViewBag.Title = "Състезания";
 }
-
-<div class="row" Id="test">
+<div class="row" Id="top">
     @Html.Partial("_AdminList")
-    <div class="col-lg-8 col-md-8 col-sm-7">
-        @Html.ActionLink("Нов запис", "AddCompetition", "Admin", new { @class = "btn btn-default btn-sm" })
+    <div class="col-lg-6 col-md-6 col-sm-4">
+        @Html.ActionLink("Нов запис", "AddCompetition", "Admin", new { @class = "btn btn-default btn-sm add-item" })
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
@@ -22,10 +20,18 @@
                 {
                     <tr>
                         @Html.HiddenFor(m => item.Id)
-                        <td>@item.Name</td>
-                        <td>@item.LocationName</td>
-                        <td>@Html.ActionLink("Редакция", "EditCompetition", "Admin", new { competitionId = @item.Id }, new { @class = "" }) </td>
-                        <td>@Html.ActionLink("Изтрий", "DeleteCompetition", "Admin", new { competitionId = @item.Id }, new { @class = "" }) </td>
+                        <td class="col-lg-6 table-col-left">@item.Name</td>
+                        <td class="col-lg-6 table-col-left">@item.LocationName</td>
+                        <td>
+                            <a href="@Url.Action("EditCompetition", "Admin", new { competitionId = @item.Id })" class="btn btn-primary btn-xs" role="button">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("DeleteCompetition", "Admin", new { competitionId = @item.Id })" class="btn btn-danger btn-xs" role="button">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </td>
                     </tr>
                 }
             </tbody>
