@@ -126,6 +126,9 @@
   <data name="FinishedGames" xml:space="preserve">
     <value>Finished</value>
   </data>
+  <data name="JumbotronCaption" xml:space="preserve">
+    <value>Online Football Scores</value>
+  </data>
   <data name="UpcomingGames" xml:space="preserve">
     <value>Upcoming</value>
   </data>

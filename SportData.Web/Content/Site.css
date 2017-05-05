@@ -222,7 +222,15 @@ tr td a {
     margin: 5px 0px 5px 2px;
 }
 
-.ttt{
-    margin:0;
-    width:auto;
+.ttt {
+    margin: 0;
+    width: auto;
+}
+
+.jumbo-fit {
+    background-image: url(/Content/Images/front-page.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    color:aliceblue;
 }

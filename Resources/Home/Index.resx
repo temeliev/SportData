@@ -126,6 +126,9 @@
   <data name="FinishedGames" xml:space="preserve">
     <value>Завършили</value>
   </data>
+  <data name="JumbotronCaption" xml:space="preserve">
+    <value>Футболни Резултати</value>
+  </data>
   <data name="UpcomingGames" xml:space="preserve">
     <value>Предстоящи</value>
   </data>

@@ -88,6 +88,15 @@ namespace Resources.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Футболни Резултати.
+        /// </summary>
+        public static string JumbotronCaption {
+            get {
+                return ResourceManager.GetString("JumbotronCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Предстоящи.
         /// </summary>
         public static string UpcomingGames {
