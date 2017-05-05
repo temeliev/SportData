@@ -431,6 +431,7 @@
     <Content Include="Content\Images\Flags\Ingolstadt.png" />
     <Content Include="Content\Images\Flags\leicester.png" />
     <Content Include="Content\Images\Flags\Liverpool.png" />
+    <Content Include="Content\Images\Flags\Ludogorets.png" />
     <Content Include="Content\Images\Flags\Mainz.png" />
     <Content Include="Content\Images\Flags\Manchester City.png" />
     <Content Include="Content\Images\Flags\Manchester United.png" />
@@ -445,7 +446,7 @@
     <Content Include="Content\Images\Flags\West Brom.png" />
     <Content Include="Content\Images\Flags\West Ham.png" />
     <Content Include="Content\Images\Flags\Wolfsburg.png" />
-    <Content Include="Content\Images\front-page.jpeg" />
+    <Content Include="Content\Images\front-page.png" />
     <Content Include="Content\sb-admin.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />

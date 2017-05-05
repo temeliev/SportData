@@ -228,7 +228,8 @@ tr td a {
 }
 
 .jumbo-fit {
-    background-image: url(/Content/Images/front-page.jpeg);
+    /*background-image: url(/Content/Images/front-page.jpeg);*/
+    background-image: url(/Content/Images/front-page.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
